@@ -24,12 +24,19 @@ const generateLetterGrid = (xDim, yDim) => {
     letters[0][0] = 'A';
     letters[0][1] = 'B';
     letters[0][2] = 'C';
-    letters[1][0] = 'D';
-    letters[1][1] = 'E';
-    letters[1][2] = 'F';
-    letters[2][0] = 'G';
-    letters[2][1] = 'H';
-    letters[2][2] = 'I';
+    letters[0][3] = 'D';
+    letters[1][0] = 'E';
+    letters[1][1] = 'F';
+    letters[1][2] = 'G';
+    letters[1][3] = 'H';
+    letters[2][0] = 'I';
+    letters[2][1] = 'J';
+    letters[2][2] = 'K';
+    letters[2][3] = 'L';
+    letters[3][0] = 'M';
+    letters[3][1] = 'N';
+    letters[3][2] = 'O';
+    letters[3][3] = 'P';
     return letters;
 };
 
