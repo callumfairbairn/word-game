@@ -9,7 +9,7 @@ export const Grid = ({xDim, yDim}) => {
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
                         <div className='column' key={x}>
-                            <Square key={[x, y]} selected={false}/>
+                            <Square key={[x, y]} selected={false} letter={'A'} />
                         </div>
                     )}
                 </div>
