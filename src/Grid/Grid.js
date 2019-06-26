@@ -2,10 +2,11 @@ import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
 
-export const Grid = ({xDim, yDim}) => {
+export const Grid = ({xDim, yDim, input}) => {
+    console.log(input);
     const letterGrid = generateLetterGrid(xDim, yDim);
     return (
-        <div className='grid'>
+        <div className='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
