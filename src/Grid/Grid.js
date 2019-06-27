@@ -20,7 +20,7 @@ export const Grid = ({xDim, yDim, input}) => {
 };
 
 const isSelected = (input, letter) => {
-    return input === letter.toLowerCase()
+    return input.includes(letter.toLowerCase())
 };
 
 const generateLetterGrid = (xDim, yDim) => {
