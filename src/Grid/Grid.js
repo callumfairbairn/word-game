@@ -3,7 +3,6 @@ import './Grid.scss'
 import {Square} from "../Square/Square";
 
 export const Grid = ({xDim, yDim, input}) => {
-    console.log(input);
     const letterGrid = generateLetterGrid(xDim, yDim);
     return (
         <div className='grid' key={input} >
@@ -11,13 +10,17 @@ export const Grid = ({xDim, yDim, input}) => {
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
                         <div className='column' key={x}>
-                            <Square key={[x, y]} selected={false} letter={letterGrid[x][y]} />
+                            <Square key={[x, y]} selected={isSelected(input, letterGrid[x][y])} letter={letterGrid[x][y]} />
                         </div>
                     )}
                 </div>
             )}
         </div>
     )
+};
+
+const isSelected = (input, letter) => {
+    return input === letter.toLowerCase()
 };
 
 const generateLetterGrid = (xDim, yDim) => {
