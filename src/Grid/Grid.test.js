@@ -1,25 +1,21 @@
 import {render} from "@testing-library/react";
 import {Grid} from "./Grid";
 import React from "react";
+import '../reactTestSetup'
 
 describe('Grid', () => {
    it('should render a grid of letters', () => {
-       const { getByText } = render(<Grid xDim={4} yDim={4} input={'input'}/>);
-       expect(getByText('A'));
-       expect(getByText('B'));
-       expect(getByText('C'));
-       expect(getByText('D'));
-       expect(getByText('E'));
-       expect(getByText('F'));
-       expect(getByText('G'));
-       expect(getByText('H'));
-       expect(getByText('I'));
-       expect(getByText('J'));
-       expect(getByText('K'));
-       expect(getByText('L'));
-       expect(getByText('M'));
-       expect(getByText('N'));
-       expect(getByText('O'));
-       expect(getByText('P'));
-   })
+       const { getAllByTestId } = render(<Grid xDim={4} yDim={4} input={''}/>);
+       expect(getAllByTestId('square').length).toEqual(16)
+   });
+
+    it('should render five selected letters given an input of length 5', () => {
+        const { getAllByTestId } = render(<Grid xDim={4} yDim={4} input={'knife'}/>);
+        expect(getAllByTestId('square-selected').length).toEqual(5)
+    });
+
+    it('should should not select a letter if that letter is not next to the previous letter', () => {
+        const { getAllByTestId } = render(<Grid xDim={4} yDim={4} input={'abcde'}/>);
+        expect(getAllByTestId('square-selected').length).toEqual(4)
+    })
 });
