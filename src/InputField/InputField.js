@@ -5,7 +5,7 @@ export const InputField = ({onInput}) => {
 
   return (
       <form className={'inputField'}>
-          <input className={'input'} id='input' type="text" ref={inputRef} onChange={() => onInput(inputRef.current.value)} />
+          <input className={'input'} id='input' type="text" ref={inputRef} onChange={() => onInput(inputRef.current.value.toLowerCase())} />
       </form>
   )
 };
