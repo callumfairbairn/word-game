@@ -17,5 +17,10 @@ describe('Grid', () => {
     it('should should not select a letter if that letter is not next to the previous letter', () => {
         const { getAllByTestId } = render(<Grid xDim={4} yDim={4} input={'abcde'}/>);
         expect(getAllByTestId('square-selected').length).toEqual(4)
-    })
+    });
+
+    it('should not select a letter if the last letter has already been selected earlier', () => {
+        const { getAllByTestId } = render(<Grid xDim={4} yDim={4} input={'olpok'}/>);
+        expect(getAllByTestId('square-selected').length).toEqual(3)
+    });
 });

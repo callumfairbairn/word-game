@@ -49,10 +49,11 @@ const calculateSelectedLetters = (letters, input, xDim, yDim) => {
                         letters[x][y].inputIndex = 0
                     }
                 }
-                if (letters[x][y].letter.toLowerCase() === input[i]) {
-                    if (isLastIndexAdjacent(letters, {x: x, y: y}, xDim, yDim, i-1)) {
-                        letters[x][y].inputIndex = i;
-                    }
+                if (letters[x][y].letter.toLowerCase() === input[i] &&
+                    letters[x][y].inputIndex === null &&
+                    isLastIndexAdjacent(letters, {x: x, y: y}, xDim, yDim, i-1)
+                ) {
+                    letters[x][y].inputIndex = i;
                 }
             }
         }
