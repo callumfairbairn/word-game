@@ -10,7 +10,7 @@ export const Grid = ({xDim, yDim, input}) => {
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
                         <div className='column' key={x}>
-                            <Square key={[x, y]} selected={!(letterGrid[x][y].inputIndex === null)} letter={letterGrid[x][y].letter} />
+                            <Square key={[x, y]} status={!(letterGrid[x][y].inputIndex === null) ? 'selected' : ''} letter={letterGrid[x][y].letter} />
                         </div>
                     )}
                 </div>
