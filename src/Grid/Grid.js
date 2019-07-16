@@ -4,6 +4,7 @@ import {Square} from "../Square/Square";
 import {xDim, yDim} from "../general";
 
 export const Grid = ({letterGrid, input}) => {
+    //TODO: Stop duplicate letters from being highlighted if they don't touch the letter after them in the input
     const grid = calculateSelectedLetters(letterGrid, input);
     return (
         <div className='grid' key={input} >
