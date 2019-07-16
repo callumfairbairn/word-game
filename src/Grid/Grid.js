@@ -2,15 +2,15 @@ import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
 
-export const Grid = ({xDim, yDim, input}) => {
-    const letterGrid = generateLetterGrid(xDim, yDim, input);
+export const Grid = ({xDim, yDim, letterGrid, input}) => {
+    const newLetterGrid = calculateSelectedLetters(letterGrid, input, xDim, yDim);
     return (
         <div className='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
                         <div className='column' key={x}>
-                            <Square key={[x, y]} status={!(letterGrid[x][y].inputIndex === null) ? 'selected' : ''} letter={letterGrid[x][y].letter} />
+                            <Square key={[x, y]} status={!(newLetterGrid[x][y].inputIndex === null) ? 'selected' : ''} letter={newLetterGrid[x][y].letter} />
                         </div>
                     )}
                 </div>
@@ -41,6 +41,7 @@ const generateLetterGrid = (xDim, yDim, input) => {
 };
 
 const calculateSelectedLetters = (letters, input, xDim, yDim) => {
+    console.log(input);
     for (let i = 0; i < input.length; i++) {
         for (let x = 0; x < xDim; x++) {
             for (let y = 0; y < yDim; y++) {
