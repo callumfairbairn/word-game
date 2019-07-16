@@ -5,12 +5,10 @@ export const generateRandomLetter = () => {
 };
 
 export const generateRandomGrid = (xDim, yDim) => {
-    return Array.from(Array(xDim), (_,x) => {
-
+    return Array.from(Array(xDim), () => {
         return Array.from(Array(yDim), () => {
             return {
                 letter: generateRandomLetter(),
-                inputIndex: null
             }
         })
     });
