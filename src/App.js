@@ -5,18 +5,17 @@ import {InputField} from "./InputField/InputField";
 import {generateRandomGrid} from "./general";
 
 function App() {
-    const xDim = 4, yDim = 4;
-    const letterGrid = generateRandomGrid(xDim, yDim);
+    const letterGrid = generateRandomGrid();
     return (
-        <GridWrapper xDim={4} yDim={4} letterGrid={letterGrid}/>
+        <GridWrapper letterGrid={letterGrid}/>
     );
 }
 
-const GridWrapper = ({xDim, yDim, letterGrid}) => {
+const GridWrapper = ({letterGrid}) => {
     const [input, setInput] = useState('');
     return (
         <div className="App">
-            <Grid xDim={xDim} yDim={yDim} letterGrid={letterGrid} input={input} />
+            <Grid letterGrid={letterGrid} input={input} />
             <InputField onInput={setInput}/>
         </div>
     );

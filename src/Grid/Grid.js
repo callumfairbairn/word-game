@@ -1,9 +1,10 @@
 import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
+import {xDim, yDim} from "../general";
 
-export const Grid = ({xDim, yDim, letterGrid, input}) => {
-    const grid = calculateSelectedLetters(letterGrid, input, xDim, yDim);
+export const Grid = ({letterGrid, input}) => {
+    const grid = calculateSelectedLetters(letterGrid, input);
     return (
         <div className='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
@@ -19,7 +20,7 @@ export const Grid = ({xDim, yDim, letterGrid, input}) => {
     )
 };
 
-const calculateSelectedLetters = (letterGrid, input, xDim, yDim) => {
+const calculateSelectedLetters = (letterGrid, input) => {
     let newGrid = Array.from(Array(xDim), (_,x) => {
         return Array.from(Array(yDim), (_,y) => {
             return {
@@ -38,7 +39,7 @@ const calculateSelectedLetters = (letterGrid, input, xDim, yDim) => {
                 }
                 if (newGrid[x][y].letter.toLowerCase() === input[i] &&
                     newGrid[x][y].inputIndex === null &&
-                    isLastIndexAdjacent(newGrid, {x: x, y: y}, xDim, yDim, i-1)
+                    isLastIndexAdjacent(newGrid, {x: x, y: y}, i-1)
                 ) {
                     newGrid[x][y].inputIndex = i;
                 }
@@ -48,7 +49,7 @@ const calculateSelectedLetters = (letterGrid, input, xDim, yDim) => {
     return newGrid;
 };
 
-const isLastIndexAdjacent = (letters, location, xDim, yDim, lastIndex) => {
+const isLastIndexAdjacent = (letters, location, lastIndex) => {
     for (let m = -1; m < 2; m++) {
         for (let n = -1; n < 2; n++) {
             if (0 <= location.x+m  && location.x+m <= xDim-1 && 0 <= location.y+n  && location.y+n <= yDim-1) {
