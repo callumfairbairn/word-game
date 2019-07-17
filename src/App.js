@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import {Grid} from "./Grid/Grid";
 import {InputField} from "./InputField/InputField";
-import {generateRandomLetterGrid} from "./general";
+import {generateRandomLetterGrid} from "./common/functions";
 
 function App() {
     const letterGrid = generateRandomLetterGrid();

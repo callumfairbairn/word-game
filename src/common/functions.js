@@ -1,6 +1,4 @@
-const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-const defaultLetterList = ["A", "E", "I", "M", "B", "F", "J", "N", "C", "G", "K", "O", "D", "H", "L", "P"];
-export const xDim = 4, yDim = 4;
+import {alphabetString, defaultLetterList, xDim, yDim} from "./constants";
 
 export const generateRandomLetter = () => {
     return alphabetString[Math.floor(Math.random()*26)]
@@ -25,4 +23,3 @@ export const generateLetterGrid = (letters = defaultLetterList) => {
         })
     });
 };
-

@@ -1,7 +1,7 @@
 import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
-import {xDim, yDim} from "../general";
+import {xDim, yDim} from "../common/constants";
 
 export const Grid = ({letterGrid, input}) => {
     //TODO: Stop duplicate letters from being highlighted if they don't touch the letter after them in the input

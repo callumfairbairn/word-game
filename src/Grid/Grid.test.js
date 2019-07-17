@@ -2,7 +2,7 @@ import {render} from "@testing-library/react";
 import {Grid} from "./Grid";
 import React from "react";
 import '../reactTestSetup'
-import {generateLetterGrid} from "../general";
+import {generateLetterGrid} from "../common/functions";
 
 describe('Grid', () => {
    it('should render a grid of letters', () => {
