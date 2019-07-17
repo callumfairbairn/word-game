@@ -2,20 +2,20 @@ import React, { useState } from 'react';
 import './App.css';
 import {Grid} from "./Grid/Grid";
 import {InputField} from "./InputField/InputField";
-import {generateRandomLetterGrid} from "./common/functions";
+import {generateRandomLetterList} from "./common/functions";
 
 function App() {
-    const letterGrid = generateRandomLetterGrid();
+    const letterList = generateRandomLetterList();
     return (
-        <GridWrapper letterGrid={letterGrid}/>
+        <GridWrapper letterList={letterList}/>
     );
 }
 
-const GridWrapper = ({letterGrid}) => {
+const GridWrapper = ({letterList}) => {
     const [input, setInput] = useState('');
     return (
         <div className="App">
-            <Grid letterGrid={letterGrid} input={input} />
+            <Grid letterList={letterList} input={input} />
             <InputField onInput={setInput}/>
         </div>
     );
