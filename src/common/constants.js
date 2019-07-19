@@ -1,3 +1,3 @@
 export const alphabetString = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-export const defaultLetterList = ["A", "E", "I", "M", "B", "F", "J", "N", "C", "G", "K", "O", "D", "H", "L", "P"];
+export const defaultLetterList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P"];
 export const xDim = 4, yDim = 4;
