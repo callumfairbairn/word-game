@@ -35,10 +35,8 @@ const calculateSelectedLetters = (grid, input, i, x, y) => {
 const isIndexAdjacent = (grid, x, y, index) => {
     for (let m = -1; m < 2; m++) {
         for (let n = -1; n < 2; n++) {
-            if (0 <= x+m  && x+m <= xDim-1 && 0 <= y+n  && y+n <= yDim-1) {
-                if (grid[x+m][y+n].inputIndex === index) {
-                    return true;
-                }
+            if (0 <= x+m  && x+m <= xDim-1 && 0 <= y+n  && y+n <= yDim-1 && grid[x+m][y+n].inputIndex === index) {
+                return true;
             }
         }
     }
