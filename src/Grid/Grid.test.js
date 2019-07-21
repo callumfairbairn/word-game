@@ -20,7 +20,7 @@ describe('Grid', () => {
         expect(queryAllByTestId('square-selected').length).toEqual(0)
     });
 
-    it('should not select a letter if the last letter has already been selected earlier', () => {
+    it('should not select a letter if it has already been selected earlier', () => {
         const { queryAllByTestId } = render(<Grid letterList={defaultLetterList} input={'olpok'}/>);
         expect(queryAllByTestId('square-selected').length).toEqual(0)
     });
