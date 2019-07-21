@@ -24,14 +24,9 @@ export const Grid = ({letterList, input}) => {
 };
 
 const calculateSelectedLetters = (grid, input, i, x, y) => {
-    if (i === 0) {
-        if (grid[x][y].letter.toLowerCase() === input[0]) {
-            grid[x][y].inputIndex = 0;
-        }
-    }
     if (grid[x][y].letter.toLowerCase() === input[i] &&
         grid[x][y].inputIndex === null &&
-        isIndexAdjacent(grid, {x: x, y: y}, i-1)
+        ((i === 0) ? true : isIndexAdjacent(grid, {x: x, y: y}, i-1))
     ) {
         grid[x][y].inputIndex = i;
     }
