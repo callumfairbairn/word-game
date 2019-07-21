@@ -2,12 +2,12 @@ import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
-import {generateGrid} from "../common/functions";
+import {forInputAndGridExecuteFunction, generateGrid} from "../common/functions";
 
 export const Grid = ({letterList, input}) => {
     const grid = generateGrid(letterList);
-    calculateSelectedLetters(grid, input);
-    getRidOfLoneSelectedLetters(grid, input);
+    forInputAndGridExecuteFunction(grid, input, calculateSelectedLetters);
+    forInputAndGridExecuteFunction(grid, input, getRidOfLoneSelectedLetters);
     return (
         <div className='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
@@ -23,23 +23,17 @@ export const Grid = ({letterList, input}) => {
     )
 };
 
-const calculateSelectedLetters = (grid, input) => {
-    for (let i = 0; i < input.length; i++) {
-        for (let x = 0; x < xDim; x++) {
-            for (let y = 0; y < yDim; y++) {
-                if (i === 0) {
-                    if (grid[x][y].letter.toLowerCase() === input[0]) {
-                        grid[x][y].inputIndex = 0;
-                    }
-                }
-                if (grid[x][y].letter.toLowerCase() === input[i] &&
-                    grid[x][y].inputIndex === null &&
-                    isIndexAdjacent(grid, {x: x, y: y}, i-1)
-                ) {
-                    grid[x][y].inputIndex = i;
-                }
-            }
+const calculateSelectedLetters = (grid, input, i, x, y) => {
+    if (i === 0) {
+        if (grid[x][y].letter.toLowerCase() === input[0]) {
+            grid[x][y].inputIndex = 0;
         }
+    }
+    if (grid[x][y].letter.toLowerCase() === input[i] &&
+        grid[x][y].inputIndex === null &&
+        isIndexAdjacent(grid, {x: x, y: y}, i-1)
+    ) {
+        grid[x][y].inputIndex = i;
     }
 };
 
@@ -56,15 +50,10 @@ const isIndexAdjacent = (grid, location, index) => {
     return false;
 };
 
-const getRidOfLoneSelectedLetters = (grid, input) => {
-    for (let i = 0; i < input.length; i++) {
-        for (let x = 0; x < xDim; x++) {
-            for (let y = 0; y < yDim; y++) {
-                if (grid[x][y].inputIndex < input.length-1 &&
-                    !isIndexAdjacent(grid, {x, y}, grid[x][y].inputIndex+1)) {
-                    grid[x][y].inputIndex = null
-                }
-            }
-        }
+const getRidOfLoneSelectedLetters = (grid, input, i, x, y) => {
+    if (grid[x][y].inputIndex < input.length-1 &&
+        !isIndexAdjacent(grid, {x, y}, grid[x][y].inputIndex+1)) {
+        grid[x][y].inputIndex = null
     }
 };
+

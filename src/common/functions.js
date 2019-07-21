@@ -22,3 +22,13 @@ export const generateGrid = (letterList = defaultLetterList) => {
         })
     });
 };
+
+export const forInputAndGridExecuteFunction = (grid, input, func) => {
+    for (let i = 0; i < input.length; i++) {
+        for (let x = 0; x < xDim; x++) {
+            for (let y = 0; y < yDim; y++) {
+                func(grid, input, i, x, y)
+            }
+        }
+    }
+};
