@@ -17,7 +17,8 @@ describe('Square', () => {
     it('displays a selected square', () => {
         const { getByTestId } = render(<Square letter='A' status={'selected'} />);
         expect(getByTestId('square-selected'))
-    })
+    });
+
     it('displays a green square when a word is correct', () => {
         const { getByTestId } = render(<Square letter='A' status={'correct'} />);
         expect(getByTestId('square-correct'))
