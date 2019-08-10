@@ -56,3 +56,28 @@ const getRidOfLoneSelectedLetters = (grid, input, i, x, y) => {
     }
 };
 
+export const returnPositionsOfAdjacentGivenLetters = (grid, x, y, letter) => {
+    const newListOfPositions = [];
+    if (letter) {
+        for (let m = -1; m < 2; m++) {
+            for (let n = -1; n < 2; n++) {
+                if (0 <= x+m  && x+m <= xDim-1 && 0 <= y+n  && y+n <= yDim-1 && grid[x+m][y+n].letter.toLowerCase() === letter) {
+                    newListOfPositions.push({x: x+m, y: y+n});
+                }
+            }
+        }
+    }
+    return newListOfPositions
+};
+
+export const findLocationsOfLetter = (grid, letter) => {
+    const locationList = [];
+    for (let x = 0; x < xDim; x++) {
+        for (let y = 0; y < yDim; y++) {
+            if (grid[x][y].letter.toLowerCase() === letter.toLowerCase()) {
+                locationList.push({x: x, y: y})
+            }
+        }
+    }
+    return locationList
+};
