@@ -2,12 +2,12 @@ import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
-import {forInputAndGridExecuteFunction, generateGrid} from "../common/functions";
+import {forGridAndInputExecuteFunction, generateGrid} from "../common/functions";
 
 export const Grid = ({letterList, input}) => {
     const grid = generateGrid(letterList);
-    forInputAndGridExecuteFunction(grid, input, calculateSelectedLetters);
-    forInputAndGridExecuteFunction(grid, input, getRidOfLoneSelectedLetters);
+    forGridAndInputExecuteFunction(grid, input, calculateSelectedLetters);
+    forGridAndInputExecuteFunction(grid, input, getRidOfLoneSelectedLetters);
 
     return (
         <div className='grid' key={input} >
@@ -48,7 +48,7 @@ const getRidOfLoneSelectedLetters = (grid, input, i, x, y) => {
     // This gets rid of all selected letters if a wrong letter is typed in because the last letter cannot be placed and
     // therefore no letter can be adjacent to that incorrect letter.
     // Also, if a letter is a valid duplicate, all letters will be unselected because calculateSelectedLetters only
-    // places thee next inputIndex if the letter has a null input index. Therefore, the inputIndex corresponding to the
+    // places the next inputIndex if the letter has a null input index. Therefore, the inputIndex corresponding to the
     // last letter of the input will never be in the grid.
     if (grid[x][y].inputIndex < input.length-1 &&
         !isIndexAdjacent(grid, x, y, grid[x][y].inputIndex+1)) {
