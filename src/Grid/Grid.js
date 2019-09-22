@@ -2,12 +2,12 @@ import React from "react";
 import './Grid.scss'
 import {Square} from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
-import {forGridAndInputExecuteFunction, generateGrid} from "../common/functions";
+import { forGridAndInputExecuteFunction, generateGrid } from "../common/functions";
 
 export const Grid = ({letterList, input}) => {
     const grid = generateGrid(letterList);
-    forGridAndInputExecuteFunction(grid, input, calculateSelectedLetters);
-    forGridAndInputExecuteFunction(grid, input, getRidOfLoneSelectedLetters);
+    calculateSelectedLetters(grid, input);
+    getRidOfLoneSelectedLetters(grid, input);
 
     return (
         <div className='grid' key={input} >
@@ -24,13 +24,16 @@ export const Grid = ({letterList, input}) => {
     )
 };
 
-const calculateSelectedLetters = (grid, input, i, x, y) => {
-    if (grid[x][y].letter.toLowerCase() === input[i] &&
-        grid[x][y].inputIndex === null &&
-        ((i === 0) ? true : isIndexAdjacent(grid,  x ,y, i-1))
-    ) {
-        grid[x][y].inputIndex = i;
-    }
+const calculateSelectedLetters = (grid, input) => {
+    const func = (grid, input, i, x, y) => {
+        if (grid[x][y].letter.toLowerCase() === input[i] &&
+            grid[x][y].inputIndex === null &&
+            ((i === 0) ? true : isIndexAdjacent(grid,  x ,y, i-1))
+        ) {
+            grid[x][y].inputIndex = i;
+        }
+    };
+    forGridAndInputExecuteFunction(grid, input, func)
 };
 
 const isIndexAdjacent = (grid, x, y, index) => {
@@ -44,16 +47,19 @@ const isIndexAdjacent = (grid, x, y, index) => {
     return false;
 };
 
-const getRidOfLoneSelectedLetters = (grid, input, i, x, y) => {
+const getRidOfLoneSelectedLetters = (grid, input) => {
     // This gets rid of all selected letters if a wrong letter is typed in because the last letter cannot be placed and
     // therefore no letter can be adjacent to that incorrect letter.
     // Also, if a letter is a valid duplicate, all letters will be unselected because calculateSelectedLetters only
     // places the next inputIndex if the letter has a null input index. Therefore, the inputIndex corresponding to the
     // last letter of the input will never be in the grid.
-    if (grid[x][y].inputIndex < input.length-1 &&
-        !isIndexAdjacent(grid, x, y, grid[x][y].inputIndex+1)) {
-        grid[x][y].inputIndex = null
-    }
+    const func = (grid, input, i, x, y) => {
+        if (grid[x][y].inputIndex < input.length-1 &&
+            !isIndexAdjacent(grid, x, y, grid[x][y].inputIndex+1)) {
+            grid[x][y].inputIndex = null
+        }
+    };
+    forGridAndInputExecuteFunction(grid, input, func)
 };
 
 export const returnPositionsOfAdjacentGivenLetters = (grid, x, y, letter) => {
