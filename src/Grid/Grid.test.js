@@ -69,7 +69,7 @@ describe('pathFindingAlgorithm', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const input = 'gf';
         expect(pathFindingAlgorithm(grid, input)).toEqual([[{x: 1, y: 2}, {x: 1, y: 1}], [{x: 2, y: 1}, {x: 1, y: 1}]])
-    })
+    });
     it('should return a path of three letters long', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const input = 'gfb';
@@ -79,6 +79,18 @@ describe('pathFindingAlgorithm', () => {
             ],
             [
                 {x: 2, y: 1}, {x: 1, y: 1}, {x: 0, y: 1}
+            ]
+        ])
+    });
+    it('should return a path of four letters long', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+        const input = 'gfba';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([
+            [
+                {x: 1, y: 2}, {x: 1, y: 1}, {x: 0, y: 1}, {x: 0, y: 0}
+            ],
+            [
+                {x: 2, y: 1}, {x: 1, y: 1}, {x: 0, y: 1}, {x: 0, y: 0}
             ]
         ])
     })
@@ -91,7 +103,7 @@ const pathFindingAlgorithm = (grid, input) => {
         const initialLetter = startingPlaces[n];
         const thisPath = [initialLetter];
         for (let i = 0; i < input.length-1; i++) {
-            thisPath.push(...returnPositionsOfAdjacentGivenLetters(grid, thisPath[i].x, initialLetter.y, input[i+1]))
+            thisPath.push(...returnPositionsOfAdjacentGivenLetters(grid, thisPath[i].x, thisPath[i].y, input[i+1]))
         }
         paths.push([...thisPath])
     }
