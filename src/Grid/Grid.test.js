@@ -103,6 +103,15 @@ describe('pathFindingAlgorithm', () => {
             ],
         ])
     });
+    it('should handle for multiple paths with extra letter after', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+        const input = 'okgf';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([
+            [
+                {x: 3, y: 2}, {x: 2, y: 2}, [{x: 1, y: 2}, {x: 2, y: 1}], {x: 1, y: 1}
+            ],
+        ])
+    });
 });
 
 const pathFindingAlgorithm = (grid, input) => {
@@ -112,7 +121,10 @@ const pathFindingAlgorithm = (grid, input) => {
         const initialLetter = startingPlaces[n];
         const thisPath = [initialLetter];
         for (let i = 0; i < input.length-1; i++) {
-            const adjacentLetters = returnPositionsOfAdjacentGivenLetters(grid, thisPath[i].x, thisPath[i].y, input[i+1]);
+            const lastLetter = thisPath[i];
+            const adjacentLetters = Array.isArray(lastLetter)
+                ? returnPositionsOfAdjacentGivenLetters(grid, lastLetter[0].x, lastLetter[0].y, input[i+1])
+                : returnPositionsOfAdjacentGivenLetters(grid, lastLetter.x, lastLetter.y, input[i+1]);
             if (adjacentLetters.length > 1) {
                 thisPath.push(adjacentLetters)
             } else {
