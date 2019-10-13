@@ -87,14 +87,13 @@ describe('pathFindingAlgorithm', () => {
 const pathFindingAlgorithm = (grid, input) => {
     const paths = [];
     const startingPlaces = findLocationsOfLetter(grid, input[0]);
-    for (let i = 0; i < startingPlaces.length; i++) {
-        const initialLetter = startingPlaces[i];
+    for (let n = 0; n < startingPlaces.length; n++) {
+        const initialLetter = startingPlaces[n];
         const thisPath = [initialLetter];
-        const secondLetter = returnPositionsOfAdjacentGivenLetters(grid, initialLetter.x, initialLetter.y, input[1]);
-        const thirdLetter = returnPositionsOfAdjacentGivenLetters(grid, secondLetter[0].x, secondLetter[0].y, input[2]);
-        const nextLetters = [...secondLetter, ...thirdLetter];
-        thisPath.push(...nextLetters);
-        paths.push(thisPath)
+        for (let i = 0; i < input.length-1; i++) {
+            thisPath.push(...returnPositionsOfAdjacentGivenLetters(grid, thisPath[i].x, initialLetter.y, input[i+1]))
+        }
+        paths.push([...thisPath])
     }
     return paths
 };
