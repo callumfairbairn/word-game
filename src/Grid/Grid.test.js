@@ -1,9 +1,8 @@
 import {render} from "@testing-library/react";
-import {findLocationsOfLetter, Grid, returnPositionsOfAdjacentGivenLetters} from "./Grid";
+import {Grid} from "./Grid";
 import React from "react";
 import '../reactTestSetup'
 import {defaultLetterList} from "../common/constants";
-import {generateGrid} from "../common/functions";
 
 describe('Grid', () => {
     it('should render a grid of letters', () => {
@@ -30,31 +29,5 @@ describe('Grid', () => {
         const customLetterList = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "A", "N", "O", "P"];
         const {queryAllByTestId} = render(<Grid letterList={customLetterList} input={'ab'}/>);
         expect(queryAllByTestId('square-selected').length).toEqual(2)
-    })
-});
-
-describe('returnPositionsOfAdjacentGivenLetters', () => {
-    it('should return a location of a given letter surrounding a given location', () => {
-        const grid = generateGrid(defaultLetterList);
-        expect(returnPositionsOfAdjacentGivenLetters(grid, 1, 1, 'g')).toEqual([{x: 1, y: 2}])
-    });
-
-    it('should return a list of the locations of a given letter surrounding a given location', () => {
-        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
-        expect(returnPositionsOfAdjacentGivenLetters(grid, 1, 1, 'g')).toEqual([{x: 1, y: 2}, {x: 2, y: 1}])
-    })
-});
-
-describe('findLocationsOfLetter', () => {
-    it('should return a position for a letter occurring only once', () => {
-        const grid = generateGrid(defaultLetterList);
-        const letter = 'E';
-        expect(findLocationsOfLetter(grid, letter)).toEqual([{x: 1, y: 0}])
-    });
-
-    it('should return a list of positions for letters occuring more than once', () => {
-        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
-        const letter = 'G';
-        expect(findLocationsOfLetter(grid, letter)).toEqual([{x: 1, y: 2}, {x: 2, y: 1}])
     })
 });

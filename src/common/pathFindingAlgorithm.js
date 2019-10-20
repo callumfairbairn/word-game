@@ -1,4 +1,5 @@
-import {findLocationsOfLetter, returnPositionsOfAdjacentGivenLetters} from "../Grid/Grid";
+import returnPositionsOfAdjacentGivenLetters from "./returnPositionsOfAdjacentGivenLetters";
+import findLocationsOfLetter from "./findLocationsOfLetter";
 
 const pathFindingAlgorithm = (grid, input) => {
     const paths = [];
