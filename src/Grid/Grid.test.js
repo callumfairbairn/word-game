@@ -103,7 +103,7 @@ describe('pathFindingAlgorithm', () => {
             ],
         ])
     });
-    it('should handle for multiple paths with extra letter after', () => {
+    it('should handle multiple paths with extra letter after', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const input = 'okgf';
         expect(pathFindingAlgorithm(grid, input)).toEqual([
@@ -112,6 +112,33 @@ describe('pathFindingAlgorithm', () => {
             ],
         ])
     });
+    // it('should not backtrack', () => {
+    //     const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+    //     const input = 'gfg';
+    //     expect(pathFindingAlgorithm(grid, input)).toEqual([
+    //         [
+    //             {x: 1, y: 2}, {x: 1, y: 1}, {x: 2, y: 1}
+    //         ],
+    //         [
+    //             {x: 2, y: 1}, {x: 1, y: 1}, {x: 1, y: 2}
+    //         ]
+    //     ])
+    // });
+
+    // it('should handle for multiple paths with extra letter when that letter is not adjacent to both previous letters', () => {
+    //     const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+    //     const input = 'okgh';
+    //     expect(pathFindingAlgorithm(grid, input)).toEqual([
+    //         [
+    //             {x: 3, y: 2}, {x: 2, y: 2}, {x: 1, y: 2}, {x: 1, y: 3}
+    //         ],
+    //     ])
+    // });
+    it('should return empty array string is not valid', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+        const input = 'oka';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([])
+    })
 });
 
 const pathFindingAlgorithm = (grid, input) => {
@@ -121,10 +148,14 @@ const pathFindingAlgorithm = (grid, input) => {
         const initialLetter = startingPlaces[n];
         const thisPath = [initialLetter];
         for (let i = 0; i < input.length-1; i++) {
-            const lastLetter = thisPath[i];
-            const adjacentLetters = Array.isArray(lastLetter)
-                ? returnPositionsOfAdjacentGivenLetters(grid, lastLetter[0].x, lastLetter[0].y, input[i+1])
-                : returnPositionsOfAdjacentGivenLetters(grid, lastLetter.x, lastLetter.y, input[i+1]);
+            let lastLetter = thisPath[i];
+            lastLetter = Array.isArray(lastLetter) ? lastLetter[0] : lastLetter;
+            const adjacentLetters = returnPositionsOfAdjacentGivenLetters(grid, lastLetter.x, lastLetter.y, input[i+1]);
+
+            if (adjacentLetters.length === 0) {
+                return []
+            }
+
             if (adjacentLetters.length > 1) {
                 thisPath.push(adjacentLetters)
             } else {
