@@ -1,6 +1,7 @@
 import returnPositionsOfAdjacentCharacters from "./returnPositionsOfAdjacentCharacters";
 import findLocationsOfLetter from "./findLocationsOfLetter";
 import fixPreviousEntries from "./fixPreviousEntries";
+import removePreviouslyFoundLetters from "./removePreviouslyFoundLetters";
 
 const pathFindingAlgorithm = (grid, input) => {
     const paths = [];
@@ -13,18 +14,20 @@ const pathFindingAlgorithm = (grid, input) => {
             previousLetters = Array.isArray(previousLetters) ? previousLetters : [previousLetters];
             const adjacentLetters = returnPositionsOfAdjacentCharacters(grid, previousLetters, input[i+1]);
 
-            if (adjacentLetters.length === 0) {
+            const fixedAdjacentLetters = removePreviouslyFoundLetters(adjacentLetters, thisPath);
+
+            if (fixedAdjacentLetters.length === 0) {
                 return []
             }
 
-            if (adjacentLetters.length > 1) {
-                thisPath.push(adjacentLetters)
+            if (fixedAdjacentLetters.length > 1) {
+                thisPath.push(fixedAdjacentLetters)
             } else {
-                thisPath.push(...adjacentLetters)
+                thisPath.push(...fixedAdjacentLetters)
             }
 
 
-            const fixedPreviousEntries = fixPreviousEntries(previousLetters, adjacentLetters);
+            const fixedPreviousEntries = fixPreviousEntries(previousLetters, fixedAdjacentLetters);
 
             if(fixedPreviousEntries.length > 1) {
                 thisPath.splice(i, 1, fixedPreviousEntries);

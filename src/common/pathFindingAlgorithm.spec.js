@@ -50,18 +50,19 @@ describe('pathFindingAlgorithm', () => {
             ],
         ])
     });
-    // it('should not backtrack', () => {
-    //     const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
-    //     const input = 'gfg';
-    //     expect(pathFindingAlgorithm(grid, input)).toEqual([
-    //         [
-    //             {x: 1, y: 2}, {x: 1, y: 1}, {x: 2, y: 1}
-    //         ],
-    //         [
-    //             {x: 2, y: 1}, {x: 1, y: 1}, {x: 1, y: 2}
-    //         ]
-    //     ])
-    // });
+
+    it('should not backtrack', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+        const input = 'gfg';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([
+            [
+                {x: 1, y: 2}, {x: 1, y: 1}, {x: 2, y: 1}
+            ],
+            [
+                {x: 2, y: 1}, {x: 1, y: 1}, {x: 1, y: 2}
+            ]
+        ])
+    });
 
     it('should remove invalid paths', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
