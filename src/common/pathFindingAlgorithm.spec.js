@@ -63,15 +63,15 @@ describe('pathFindingAlgorithm', () => {
     //     ])
     // });
 
-    // it('should remove invalid paths', () => {
-    //     const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
-    //     const input = 'okgh';
-    //     expect(pathFindingAlgorithm(grid, input)).toEqual([
-    //         [
-    //             {x: 3, y: 2}, {x: 2, y: 2}, {x: 1, y: 2}, {x: 1, y: 3}
-    //         ],
-    //     ])
-    // });
+    it('should remove invalid paths', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
+        const input = 'okgh';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([
+            [
+                {x: 3, y: 2}, {x: 2, y: 2}, {x: 1, y: 2}, {x: 1, y: 3}
+            ],
+        ])
+    });
 
     it('should return empty array string is not valid', () => {
         const input = 'oka';
