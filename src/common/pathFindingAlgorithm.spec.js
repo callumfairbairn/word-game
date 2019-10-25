@@ -77,5 +77,37 @@ describe('pathFindingAlgorithm', () => {
     it('should return empty array string is not valid', () => {
         const input = 'oka';
         expect(pathFindingAlgorithm(grid, input)).toEqual([])
+    });
+
+    describe('should hold up to more comprehensive tests', () => {
+        it('should handle 3 letters', () => {
+            const grid = generateGrid(["A", "A", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "G", "O", "P"]);
+            const input = 'okg';
+            expect(pathFindingAlgorithm(grid, input)).toEqual([
+                [
+                    { x: 3 , y: 2 }, { x: 2 , y: 2 }, [ { x: 1 , y: 2 }, { x: 2 , y: 1 }, { x: 3 , y: 1 } ]
+                ]
+            ])
+        });
+
+        it('should drop a g', () => {
+            const grid = generateGrid(["A", "A", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "G", "O", "P"]);
+            const input = 'okgf';
+            expect(pathFindingAlgorithm(grid, input)).toEqual([
+                [
+                    { x: 3 , y: 2 }, { x: 2 , y: 2 }, [ { x: 1 , y: 2 }, { x: 2 , y: 1 }], { x: 1 , y: 1 }
+                ]
+            ])
+        });
+
+        it('should drop highlight each a', () => {
+            const grid = generateGrid(["A", "A", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "G", "O", "P"]);
+            const input = 'okgfa';
+            expect(pathFindingAlgorithm(grid, input)).toEqual([
+                [
+                    { x: 3 , y: 2 }, { x: 2 , y: 2 }, [ { x: 1 , y: 2 }, { x: 2 , y: 1 }], { x: 1 , y: 1 }, [ { x: 0 , y: 0 }, { x: 0 , y: 1 } ]
+                ]
+            ])
+        })
     })
 });
