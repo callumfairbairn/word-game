@@ -4,6 +4,11 @@ import pathFindingAlgorithm from "./pathFindingAlgorithm";
 const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
 
 describe('pathFindingAlgorithm', () => {
+    it('should return [] when input is empty', () => {
+        const input = '';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([])
+    });
+
     it('should find initial locations', () => {
         const input = 'g';
         expect(pathFindingAlgorithm(grid, input)).toEqual([[{x: 1, y: 2}], [{x: 2, y: 1}]])
@@ -52,7 +57,6 @@ describe('pathFindingAlgorithm', () => {
     });
 
     it('should not backtrack', () => {
-        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const input = 'gfg';
         expect(pathFindingAlgorithm(grid, input)).toEqual([
             [
@@ -65,7 +69,6 @@ describe('pathFindingAlgorithm', () => {
     });
 
     it('should remove invalid paths', () => {
-        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const input = 'okgh';
         expect(pathFindingAlgorithm(grid, input)).toEqual([
             [
@@ -77,6 +80,19 @@ describe('pathFindingAlgorithm', () => {
     it('should return empty array string is not valid', () => {
         const input = 'oka';
         expect(pathFindingAlgorithm(grid, input)).toEqual([])
+    });
+
+    it('should not get rid of correct starting letters', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "G", "O", "P"]);
+        const input = 'gf';
+        expect(pathFindingAlgorithm(grid, input)).toEqual([
+            [
+                {x: 1, y: 2}, { x: 1 , y: 1 }
+            ],
+            [
+                {x: 2, y: 1}, { x: 1 , y: 1 }
+            ]
+        ])
     });
 
     describe('should hold up to more comprehensive tests', () => {
