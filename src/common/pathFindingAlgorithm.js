@@ -13,14 +13,6 @@ const pathFindingAlgorithm = (grid, input) => {
             previousLetters = Array.isArray(previousLetters) ? previousLetters : [previousLetters];
             const adjacentLetters = returnPositionsOfAdjacentCharacters(grid, previousLetters, input[i+1]);
 
-            const fixedPreviousEntries = fixPreviousEntries(previousLetters, adjacentLetters);
-
-            if(fixedPreviousEntries.length > 1) {
-                thisPath.splice(i, 1, fixedPreviousEntries);
-            } else {
-                thisPath.splice(i, 1, ...fixedPreviousEntries);
-            }
-
             if (adjacentLetters.length === 0) {
                 return []
             }
@@ -29,6 +21,15 @@ const pathFindingAlgorithm = (grid, input) => {
                 thisPath.push(adjacentLetters)
             } else {
                 thisPath.push(...adjacentLetters)
+            }
+
+
+            const fixedPreviousEntries = fixPreviousEntries(previousLetters, adjacentLetters);
+
+            if(fixedPreviousEntries.length > 1) {
+                thisPath.splice(i, 1, fixedPreviousEntries);
+            } else {
+                thisPath.splice(i, 1, ...fixedPreviousEntries);
             }
         }
         paths.push([...thisPath])
