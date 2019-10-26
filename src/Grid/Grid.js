@@ -4,11 +4,13 @@ import {Square} from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
 import {generateGrid} from "../common/functions";
 import createPaths from "../CreatePaths/createPaths";
+import isInputValid from "../WordValidation/isInputValid";
 
-export const Grid = ({letterList, input}) => {
+export const Grid = ({letterList, input, dict}) => {
     const grid = generateGrid(letterList);
     const paths = createPaths(grid, input);
-    const assignedGrid = assignLetterStatus(grid, paths);
+    const inputValid = isInputValid(input, dict);
+    const assignedGrid = assignLetterStatus(grid, paths, inputValid);
 
     return (
         <div className='grid' key={input} >
