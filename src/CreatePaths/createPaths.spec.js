@@ -104,4 +104,10 @@ describe('pathFindingAlgorithm', () => {
             ]
         ])
     })
+
+    it('should not highlight is this specific situation', () => {
+        const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "J", "A", "N", "O", "P"])
+        const input = 'gkjj';
+        expect(createPaths(grid, input)).toEqual([])
+    })
 });

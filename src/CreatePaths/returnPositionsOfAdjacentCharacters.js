@@ -10,6 +10,7 @@ const returnPositionsOfAdjacentCharacters = (grid, letters, character) => {
                         && letter.x+m <= xDim-1
                         && 0 <= letter.y+n
                         && letter.y+n <= yDim-1
+                        && !(m === 0 && n === 0)
                         && grid[letter.x+m][letter.y+n].letter.toLowerCase() === character) {
                         let notDuplicate = true;
                         for (let i = 0; i < newListOfPositions.length; i++) {
