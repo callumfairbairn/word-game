@@ -1,6 +1,6 @@
 import returnPositionsOfAdjacentCharacters from "./returnPositionsOfAdjacentCharacters";
 import findLocationsOfLetter from "./findLocationsOfLetter";
-import fixPreviousEntries from "./fixPreviousEntries";
+import fixLetter from "./fixLetter";
 import removePreviouslyFoundLetters from "./removePreviouslyFoundLetters";
 
 const createPaths = (grid, input) => {
@@ -29,43 +29,31 @@ const createPaths = (grid, input) => {
                 } else {
                     thisPath.push(...fixedAdjacentLetters)
                 }
-
-
-                const fixedPreviousEntries = fixPreviousEntries(previousLetters, fixedAdjacentLetters);
-
-                if(fixedPreviousEntries.length > 1) {
-                    thisPath.splice(i, 1, fixedPreviousEntries);
-                } else {
-                    thisPath.splice(i, 1, ...fixedPreviousEntries);
-                }
             }
         }
         if (startingLetterValid) {
-            for (let j = input.length-2; j > 0; j--) {
-                if (Array.isArray(thisPath[j])) {
-                    if (Array.isArray(thisPath[j+1])) {
-                        const fixedLetter = fixPreviousEntries(thisPath[j], thisPath[j+1]);
-
-                        if(fixedLetter.length > 1) {
-                            thisPath.splice(j, 1, fixedLetter);
-                        } else {
-                            thisPath.splice(j, 1, ...fixedLetter);
-                        }
-                    } else {
-                        const fixedLetter = fixPreviousEntries(thisPath[j], [thisPath[j+1]]);
-
-                        if(fixedLetter.length > 1) {
-                            thisPath.splice(j, 1, fixedLetter);
-                        } else {
-                            thisPath.splice(j, 1, ...fixedLetter);
-                        }
-                    }
-                }
-            }
-            paths.push([...thisPath])
+            const fixedPath = fixPath(thisPath);
+            paths.push([...fixedPath])
         }
     }
     return paths
+};
+
+const fixPath = path => {
+    for (let j = path.length-2; j > 0; j--) {
+        const thisLetter = path[j];
+        if (Array.isArray(thisLetter)) {
+            const nextLetter = Array.isArray(path[j+1]) ? path[j+1] : [path[j+1]];
+            const fixedLetter = fixLetter(thisLetter, nextLetter);
+
+            if(fixedLetter.length > 1) {
+                path.splice(j, 1, fixedLetter);
+            } else {
+                path.splice(j, 1, ...fixedLetter);
+            }
+        }
+    }
+    return path
 };
 
 export default createPaths;
