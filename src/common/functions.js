@@ -17,7 +17,7 @@ export const generateGrid = (letterList = defaultLetterList) => {
             i++;
             return {
                 letter: letterList[i],
-                inputIndex: null,
+                status: null,
             }
         })
     });

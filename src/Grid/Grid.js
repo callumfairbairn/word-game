@@ -16,7 +16,7 @@ export const Grid = ({letterList, input}) => {
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>
                         <div className='column' key={x}>
-                            <Square key={[x, y]} status={!(assignedGrid[x][y].inputIndex === null) ? 'selected' : ''} letter={assignedGrid[x][y].letter} />
+                            <Square key={[x, y]} status={assignedGrid[x][y].status} letter={assignedGrid[x][y].letter} />
                         </div>
                     )}
                 </div>
@@ -31,10 +31,10 @@ export const assignLetterStatus = (grid, paths) => {
             path.map((letter, i) => {
                 if (Array.isArray(letter)) {
                     letter.map((_, j) => {
-                        grid[letter[j].x][letter[j].y].inputIndex = 1;
+                        grid[letter[j].x][letter[j].y].status = 'selected';
                     })
                 } else {
-                    grid[path[i].x][path[i].y].inputIndex = 1;
+                    grid[path[i].x][path[i].y].status = 'selected';
                 }
             })
         })

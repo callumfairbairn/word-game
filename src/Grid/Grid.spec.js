@@ -35,7 +35,7 @@ describe('assignLetterStatus', () => {
         const result = assignLetterStatus(grid, paths);
         result.map(x => {
             x.map(y => {
-                expect(y.inputIndex).toEqual(null)
+                expect(y.status).toEqual(null)
             })
         })
     });
@@ -44,48 +44,48 @@ describe('assignLetterStatus', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 0 , y: 0 }]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[0][0].inputIndex).toEqual(1)
+        expect(result[0][0].status).toEqual('selected')
     });
 
     it('assigns letter status to a different letter', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 1 , y: 1 }]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[1][1].inputIndex).toEqual(1)
+        expect(result[1][1].status).toEqual('selected')
     });
 
     it('assigns status for two letters', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 1 , y: 1 }, { x: 2 , y: 2 }]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[1][1].inputIndex).toEqual(1);
-        expect(result[2][2].inputIndex).toEqual(1)
+        expect(result[1][1].status).toEqual('selected');
+        expect(result[2][2].status).toEqual('selected')
     });
 
     it('assigns status for a branching path', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 1 , y: 2 }, [ { x: 3 , y: 1 }, { x: 0 , y: 2 }]]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[1][2].inputIndex).toEqual(1);
-        expect(result[3][1].inputIndex).toEqual(1);
-        expect(result[0][2].inputIndex).toEqual(1)
+        expect(result[1][2].status).toEqual('selected');
+        expect(result[3][1].status).toEqual('selected');
+        expect(result[0][2].status).toEqual('selected')
     });
 
     it('assigns status for multiple paths', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 1 , y: 1 }, { x: 2 , y: 1 }], [{ x: 2 , y: 2 }, { x: 2 , y: 3 }]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[1][1].inputIndex).toEqual(1);
-        expect(result[2][1].inputIndex).toEqual(1);
-        expect(result[2][2].inputIndex).toEqual(1)
+        expect(result[1][1].status).toEqual('selected');
+        expect(result[2][1].status).toEqual('selected');
+        expect(result[2][2].status).toEqual('selected')
     });
 
     it('assigns status for multiple paths', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "G", "K", "L", "M", "N", "O", "P"]);
         const paths = [[{ x: 1 , y: 1 }, { x: 2 , y: 1 }], [{ x: 2 , y: 2 }, { x: 2 , y: 3 }]];
         const result = assignLetterStatus(grid, paths);
-        expect(result[1][1].inputIndex).toEqual(1);
-        expect(result[2][1].inputIndex).toEqual(1);
-        expect(result[2][2].inputIndex).toEqual(1)
+        expect(result[1][1].status).toEqual('selected');
+        expect(result[2][1].status).toEqual('selected');
+        expect(result[2][2].status).toEqual('selected')
     });
 });

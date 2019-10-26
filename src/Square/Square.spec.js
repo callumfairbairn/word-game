@@ -5,12 +5,12 @@ import '../reactTestSetup';
 
 describe('Square', () => {
     it('displays a given letter', () => {
-        const { getByText } = render(<Square letter='A' status={''} />);
+        const { getByText } = render(<Square letter='A' status={null} />);
         expect(getByText('A'))
     });
 
     it ('displayes an unselected square', () => {
-        const { getByTestId } = render(<Square letter='A' status={''}/>);
+        const { getByTestId } = render(<Square letter='A' status={null}/>);
         expect(getByTestId('square'))
     });
 
