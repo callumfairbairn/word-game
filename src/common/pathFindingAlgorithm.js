@@ -14,7 +14,7 @@ const pathFindingAlgorithm = (grid, input) => {
         const initialLetters = startingPlaces[n];
         const thisPath = [initialLetters];
         let startingLetterValid = true;
-        for (let i = 0; i < input.length-1; i++) {
+        for (let i = 0; i < input.length-1 && startingLetterValid; i++) {
             let previousLetters = thisPath[i];
             previousLetters = Array.isArray(previousLetters) ? previousLetters : [previousLetters];
             const adjacentLetters = returnPositionsOfAdjacentCharacters(grid, previousLetters, input[i+1]);
@@ -22,7 +22,7 @@ const pathFindingAlgorithm = (grid, input) => {
             const fixedAdjacentLetters = removePreviouslyFoundLetters(adjacentLetters, thisPath);
 
             if (fixedAdjacentLetters.length === 0) {
-                startingLetterValid = false
+                startingLetterValid = false;
             } else {
                 if (fixedAdjacentLetters.length > 1) {
                     thisPath.push(fixedAdjacentLetters)

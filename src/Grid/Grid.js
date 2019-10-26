@@ -31,7 +31,6 @@ export const assignLetterStatus = (grid, paths) => {
             path.map((letter, i) => {
                 if (Array.isArray(letter)) {
                     letter.map((_, j) => {
-                        console.log(letter, paths);
                         grid[letter[j].x][letter[j].y].inputIndex = 1;
                     })
                 } else {
