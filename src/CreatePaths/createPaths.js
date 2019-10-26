@@ -41,6 +41,27 @@ const createPaths = (grid, input) => {
             }
         }
         if (startingLetterValid) {
+            for (let j = input.length-2; j > 0; j--) {
+                if (Array.isArray(thisPath[j])) {
+                    if (Array.isArray(thisPath[j+1])) {
+                        const fixedLetter = fixPreviousEntries(thisPath[j], thisPath[j+1]);
+
+                        if(fixedLetter.length > 1) {
+                            thisPath.splice(j, 1, fixedLetter);
+                        } else {
+                            thisPath.splice(j, 1, ...fixedLetter);
+                        }
+                    } else {
+                        const fixedLetter = fixPreviousEntries(thisPath[j], [thisPath[j+1]]);
+
+                        if(fixedLetter.length > 1) {
+                            thisPath.splice(j, 1, fixedLetter);
+                        } else {
+                            thisPath.splice(j, 1, ...fixedLetter);
+                        }
+                    }
+                }
+            }
             paths.push([...thisPath])
         }
     }

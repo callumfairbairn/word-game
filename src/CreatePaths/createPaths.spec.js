@@ -103,11 +103,19 @@ describe('pathFindingAlgorithm', () => {
                 { x: 2 , y: 1 }, { x: 2 , y: 0 }, { x: 3 , y: 1 }
             ]
         ])
-    })
+    });
 
     it('should not highlight is this specific situation', () => {
         const grid = generateGrid(["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "J", "A", "N", "O", "P"])
         const input = 'gkjj';
         expect(createPaths(grid, input)).toEqual([])
+    });
+
+    it('should remove invalid paths back to source', () => {
+        const grid = generateGrid(["A", "U", "N", "E", "R", "N", "G", "H", "I", "U", "K", "L", "M", "A", "O", "P"])
+        const input = 'rune';
+        expect(createPaths(grid, input)).toEqual([
+            [ { x: 1 , y: 0 }, { x: 0 , y: 1 }, { x: 0 , y: 2 }, { x: 0 , y: 3 }]
+        ])
     })
 });
