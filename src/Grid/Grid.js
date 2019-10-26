@@ -3,11 +3,11 @@ import './Grid.scss'
 import {Square} from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
 import {generateGrid} from "../common/functions";
-import pathFindingAlgorithm from "../common/pathFindingAlgorithm";
+import createPaths from "../CreatePaths/createPaths";
 
 export const Grid = ({letterList, input}) => {
     const grid = generateGrid(letterList);
-    const paths = pathFindingAlgorithm(grid, input);
+    const paths = createPaths(grid, input);
     const assignedGrid = assignLetterStatus(grid, paths);
 
     return (

@@ -1,5 +1,5 @@
-import {generateGrid} from "./functions";
-import {defaultLetterList} from "./constants";
+import {generateGrid} from "../common/functions";
+import {defaultLetterList} from "../common/constants";
 import returnPositionsOfAdjacentCharacters from "./returnPositionsOfAdjacentCharacters";
 
 describe('returnPositionsOfAdjacentChracters', () => {

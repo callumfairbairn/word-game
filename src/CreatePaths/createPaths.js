@@ -3,7 +3,7 @@ import findLocationsOfLetter from "./findLocationsOfLetter";
 import fixPreviousEntries from "./fixPreviousEntries";
 import removePreviouslyFoundLetters from "./removePreviouslyFoundLetters";
 
-const pathFindingAlgorithm = (grid, input) => {
+const createPaths = (grid, input) => {
     if (input.length === 0) {
         return []
     }
@@ -47,4 +47,4 @@ const pathFindingAlgorithm = (grid, input) => {
     return paths
 };
 
-export default pathFindingAlgorithm;
+export default createPaths;
