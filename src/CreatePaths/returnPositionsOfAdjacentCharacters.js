@@ -26,6 +26,7 @@ const returnPositionsOfAdjacentCharacters = (grid, letters, character) => {
                 }
             }
         }
+        return letter
     });
     return newListOfPositions
 };

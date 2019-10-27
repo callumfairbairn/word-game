@@ -33,13 +33,16 @@ export const assignLetterStatus = (grid, paths, inputValid) => {
         paths.map(path => {
             path.map((letter, i) => {
                 if (Array.isArray(letter)) {
-                    letter.map((_, j) => {
+                    letter.map((subletter, j) => {
                         grid[letter[j].x][letter[j].y].status = status;
+                        return subletter
                     })
                 } else {
                     grid[path[i].x][path[i].y].status = status;
                 }
-            })
+                return letter
+            });
+            return path
         })
     }
 
