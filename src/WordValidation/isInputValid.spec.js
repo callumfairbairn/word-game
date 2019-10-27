@@ -5,16 +5,25 @@ const dict = require('../words');
 describe('isInputValid', () => {
     it('returns false for an empty input', () => {
         const input = '';
-        expect(isInputValid(input, dict)).toEqual(false)
+        const foundWords = [''];
+        expect(isInputValid(input, dict, foundWords)).toEqual(false)
     });
 
     it('returns true for a real word', () => {
         const input = 'word';
-        expect(isInputValid(input, dict)).toEqual(true)
+        const foundWords = [''];
+        expect(isInputValid(input, dict, foundWords)).toEqual(true)
     });
 
     it('returns false for a real word smaller than 3 characters long', () => {
         const input = 'to';
-        expect(isInputValid(input, dict)).toEqual(false)
+        const foundWords = [''];
+        expect(isInputValid(input, dict, foundWords)).toEqual(false)
+    });
+
+    it('returns false if word has already been found', () => {
+       const input = 'miasma';
+       const foundWords = ['miasma'];
+       expect(isInputValid(input, dict, foundWords)).toEqual(false)
     })
 });

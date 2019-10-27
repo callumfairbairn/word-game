@@ -14,9 +14,11 @@ function App() {
 
 const GridWrapper = ({letterList, dict}) => {
     const [input, setInput] = useState('');
+    const [foundWords, setFoundWords] = useState([]);
+
     return (
         <div className="App">
-            <Grid letterList={letterList} input={input} dict={dict} />
+            <Grid letterList={letterList} input={input} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
             <InputField onInput={setInput}/>
         </div>
     );

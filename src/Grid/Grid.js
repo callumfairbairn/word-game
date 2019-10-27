@@ -6,13 +6,16 @@ import {generateGrid} from "../common/functions";
 import createPaths from "../CreatePaths/createPaths";
 import isInputValid from "../WordValidation/isInputValid";
 
-export const Grid = ({letterList, input, dict}) => {
+export const Grid = ({letterList, input, dict, foundWords, setFoundWords}) => {
     const grid = generateGrid(letterList);
     const paths = createPaths(grid, input);
-    const inputValid = isInputValid(input, dict);
+    const inputValid = isInputValid(input, dict, foundWords);
     const assignedGrid = assignLetterStatus(grid, paths, inputValid);
 
     if(inputValid) {
+        const newFoundWords = foundWords;
+        newFoundWords.push(input);
+        setFoundWords(newFoundWords);
         document.getElementById('input-form').reset();
     }
 
