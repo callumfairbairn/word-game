@@ -25,4 +25,10 @@
 
 #correct {
   background-color: #23cb34;
+  animation: green-fade 0.65s;
+}
+
+@keyframes green-fade {
+  0% {background-color: #23cb34;}
+  100% {background-color: #ff7030;}
 }
