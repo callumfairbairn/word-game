@@ -12,6 +12,10 @@ export const Grid = ({letterList, input, dict}) => {
     const inputValid = isInputValid(input, dict);
     const assignedGrid = assignLetterStatus(grid, paths, inputValid);
 
+    if(inputValid) {
+        document.getElementById('input-form').reset();
+    }
+
     return (
         <div className='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
