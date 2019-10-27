@@ -10,6 +10,7 @@ export const InputField = ({onInput}) => {
                  type='text'
                  ref={inputRef}
                  onChange={() => onInput(inputRef.current.value.toLowerCase())}
+                 autoFocus
           />
       </form>
   )
