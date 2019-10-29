@@ -16,11 +16,11 @@ export const Grid = ({letterList, input, dict, foundWords, setFoundWords}) => {
         const newFoundWords = foundWords;
         newFoundWords.push(input);
         setFoundWords(newFoundWords);
-        document.getElementById('input-form').reset();
+        document.getElementById('input-field').reset();
     }
 
     return (
-        <div className='grid' key={input} >
+        <div className='grid' data-testid='grid' key={input} >
             {Array.from(Array(yDim), (_,y) =>
                 <div className='row' key={y}>
                     {Array.from(Array(xDim), (_,x) =>

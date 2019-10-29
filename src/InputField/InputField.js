@@ -4,8 +4,8 @@ export const InputField = ({onInput}) => {
     const inputRef = useRef();
 
   return (
-      <form className={'inputField'} id={'input-form'} onSubmit={preventSubmit}>
-          <input className={'input'}
+      <form className='inputField' id='input-field' data-testid='input-field' onSubmit={preventSubmit}>
+          <input className='input'
                  id='input'
                  type='text'
                  ref={inputRef}

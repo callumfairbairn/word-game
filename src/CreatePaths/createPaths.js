@@ -11,8 +11,8 @@ const createPaths = (grid, input) => {
     const paths = [];
     const startingPlaces = findLocationsOfLetter(grid, input[0]);
     for (let n = 0; n < startingPlaces.length; n++) {
-        const initialLetters = startingPlaces[n];
-        const thisPath = [initialLetters];
+        const initialLetter = startingPlaces[n];
+        const thisPath = [initialLetter];
         let startingLetterValid = true;
         for (let i = 0; i < input.length-1 && startingLetterValid; i++) {
             let previousLetters = thisPath[i];
