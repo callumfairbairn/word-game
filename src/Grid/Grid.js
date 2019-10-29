@@ -1,12 +1,12 @@
 import React from "react";
 import './Grid.scss'
-import {Square} from "../Square/Square";
+import { Square } from "../Square/Square";
 import {xDim, yDim} from "../common/constants";
-import {generateGrid} from "../common/functions";
+import { generateGrid } from "../common/functions";
 import createPaths from "../CreatePaths/createPaths";
 import isInputValid from "../WordValidation/isInputValid";
 
-export const Grid = ({letterList, input, dict, foundWords, setFoundWords}) => {
+export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => {
     const grid = generateGrid(letterList);
     const paths = createPaths(grid, input);
     const inputValid = isInputValid(input, dict, foundWords);
@@ -16,7 +16,7 @@ export const Grid = ({letterList, input, dict, foundWords, setFoundWords}) => {
         const newFoundWords = foundWords;
         newFoundWords.push(input);
         setFoundWords(newFoundWords);
-        document.getElementById('input-field').reset();
+        resetInputField();
     }
 
     return (
@@ -54,4 +54,10 @@ export const assignLetterStatus = (grid, paths, inputValid) => {
     }
 
     return grid
+};
+
+const resetInputField = () => {
+    if (document.getElementById('input-field')) {
+        document.getElementById('input-field').reset();
+    }
 };
