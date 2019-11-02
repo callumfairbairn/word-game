@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './App.css';
+import './App.scss';
 import {Grid} from "./Grid/Grid";
 import {InputField} from "./InputField/InputField";
 import {generateRandomLetterList} from "./common/functions";
@@ -19,9 +19,15 @@ const GridWrapper = ({letterList, dict}) => {
 
     return (
         <div className="App">
-            <Grid letterList={letterList} input={input} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
-            <InputField onInput={setInput} />
-            <WordDisplay foundWords={foundWords} />
+            <div className='outer-container'>
+                <div className='container-a'>
+                    <Grid letterList={letterList} input={input} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
+                    <InputField setInput={setInput} />
+                </div>
+                <div className='container-b'>
+                    <WordDisplay foundWords={foundWords} />
+                </div>
+            </div>
         </div>
     );
 };
