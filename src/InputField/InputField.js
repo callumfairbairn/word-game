@@ -1,6 +1,6 @@
 import React, { useRef } from 'react'
 
-export const InputField = ({onInput}) => {
+export const InputField = ({setInput}) => {
     const inputRef = useRef();
 
   return (
@@ -9,7 +9,7 @@ export const InputField = ({onInput}) => {
                  id='input'
                  type='text'
                  ref={inputRef}
-                 onChange={() => onInput(inputRef.current.value.toLowerCase())}
+                 onChange={() => setInput(inputRef.current.value.toLowerCase())}
                  autoFocus
           />
       </form>
