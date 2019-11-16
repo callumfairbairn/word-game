@@ -13,7 +13,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "CI=true react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "lint": "standard \"src/**/*.js\" --fix"
   },
@@ -33,7 +33,9 @@
     ]
   },
   "standard": {
-    "env": [ "jest" ]
+    "env": [
+      "jest"
+    ]
   },
   "devDependencies": {
     "@testing-library/react": "^8.0.4",
