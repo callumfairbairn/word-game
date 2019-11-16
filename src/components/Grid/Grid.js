@@ -1,11 +1,11 @@
 import React from 'react'
 import './Grid.scss'
 import { Square } from '../Square/Square'
-import {generateGrid} from "../../functions/Generation/generation";
-import createPaths from "../../functions/PathCreation/createPaths";
-import isWordInDictionary from "../../functions/WordValidation/isWordInDictionary";
-import {assignLetterStatus} from "../../functions/AssignLetterStatus/assignLetterStatus";
-import {xDim, yDim} from "../../common/constants";
+import { generateGrid } from '../../functions/Generation/generation'
+import createPaths from '../../functions/PathCreation/createPaths'
+import isWordInDictionary from '../../functions/WordValidation/isWordInDictionary'
+import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLetterStatus'
+import { xDim, yDim } from '../../common/constants'
 
 export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => {
   const grid = generateGrid(letterList)
@@ -34,7 +34,6 @@ export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => 
     </div>
   )
 }
-
 
 const resetInputField = () => {
   if (document.getElementById('input-field')) {

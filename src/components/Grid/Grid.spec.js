@@ -1,8 +1,8 @@
-import {render} from '@testing-library/react'
-import {Grid} from './Grid'
+import { render } from '@testing-library/react'
+import { Grid } from './Grid'
 import React from 'react'
 import '../../reactTestSetup'
-import {defaultLetterList} from "../../common/constants";
+import { defaultLetterList } from '../../common/constants'
 
 const dict = require('../../words')
 
