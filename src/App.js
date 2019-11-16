@@ -2,26 +2,41 @@ import React, { useState } from 'react'
 import './App.scss'
 import { Grid } from './components/Grid/Grid'
 import { InputField } from './components/InputField/InputField'
-import { generateRandomLetterList } from './functions/Generation/generation'
+import { generateGrid, generateRandomLetterList } from './functions/Generation/generation'
 import WordDisplay from './components/WordDisplay/WordDisplay'
+import createPaths from './functions/PathCreation/createPaths'
+import isWordInDictionary from './functions/WordValidation/isWordInDictionary'
+import { assignLetterStatus } from './functions/AssignLetterStatus/assignLetterStatus'
 
 function App () {
+  const [foundWords, setFoundWords] = useState([])
   const dict = require('./words')
   const letterList = generateRandomLetterList()
   return (
-    <GridWrapper letterList={letterList} dict={dict} />
+    <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
   )
 }
 
-const GridWrapper = ({ letterList, dict }) => {
+const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   const [input, setInput] = useState('')
-  const [foundWords, setFoundWords] = useState([])
+
+  const grid = generateGrid(letterList)
+  const paths = createPaths(grid, input)
+  const wordInDictionary = isWordInDictionary(input, dict, foundWords)
+  const assignedGrid = assignLetterStatus(grid, paths, wordInDictionary)
+
+  if (wordInDictionary) {
+    const newFoundWords = foundWords
+    newFoundWords.push(input)
+    setFoundWords(newFoundWords)
+    resetInputField()
+  }
 
   return (
     <div className='App'>
       <div className='outer-container'>
         <div className='container-a'>
-          <Grid letterList={letterList} input={input} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
+          <Grid grid={assignedGrid} />
           <InputField setInput={setInput} />
         </div>
         <div className='container-b'>
@@ -30,6 +45,12 @@ const GridWrapper = ({ letterList, dict }) => {
       </div>
     </div>
   )
+}
+
+const resetInputField = () => {
+  if (document.getElementById('input-field')) {
+    document.getElementById('input-field').reset()
+  }
 }
 
 export default App
