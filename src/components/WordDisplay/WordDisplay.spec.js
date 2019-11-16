@@ -2,7 +2,7 @@ import React from 'react'
 import WordDisplay from './WordDisplay'
 import { render } from '@testing-library/react'
 import { within } from '@testing-library/dom'
-import '../reactTestSetup'
+import '../../reactTestSetup'
 
 describe('WordDisplay', () => {
   it('renders an empty display when foundWords is empty', () => {

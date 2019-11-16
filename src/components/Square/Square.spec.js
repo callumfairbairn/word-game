@@ -1,7 +1,7 @@
 import React from 'react'
 import { Square } from './Square'
 import { render } from '@testing-library/react'
-import '../reactTestSetup'
+import '../../reactTestSetup'
 
 describe('Square', () => {
   it('displays a given letter', () => {

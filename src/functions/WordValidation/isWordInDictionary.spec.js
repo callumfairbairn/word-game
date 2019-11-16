@@ -1,6 +1,6 @@
 import isWordInDictionary from './isWordInDictionary'
 
-const dict = require('../words')
+const dict = require('../../words')
 
 describe('isInputValid', () => {
   it('returns false for an empty input', () => {

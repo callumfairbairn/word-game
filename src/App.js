@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react'
 import './App.scss'
-import { Grid } from './Grid/Grid'
-import { InputField } from './InputField/InputField'
-import { generateRandomLetterList } from './common/functions'
-import WordDisplay from './WordDisplay/WordDisplay'
+import { Grid } from './components/Grid/Grid'
+import { InputField } from './components/InputField/InputField'
+import { generateRandomLetterList } from './functions/Generation/generation'
+import WordDisplay from './components/WordDisplay/WordDisplay'
 
 function App () {
   const dict = require('./words')

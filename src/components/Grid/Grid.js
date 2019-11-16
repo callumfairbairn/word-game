@@ -1,10 +1,11 @@
 import React from 'react'
 import './Grid.scss'
 import { Square } from '../Square/Square'
-import { xDim, yDim } from '../common/constants'
-import { generateGrid } from '../common/functions'
-import createPaths from '../CreatePaths/createPaths'
-import isWordInDictionary from '../WordValidation/isWordInDictionary'
+import {generateGrid} from "../../functions/Generation/generation";
+import createPaths from "../../functions/PathCreation/createPaths";
+import isWordInDictionary from "../../functions/WordValidation/isWordInDictionary";
+import {assignLetterStatus} from "../../functions/AssignLetterStatus/assignLetterStatus";
+import {xDim, yDim} from "../../common/constants";
 
 export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => {
   const grid = generateGrid(letterList)
@@ -34,24 +35,6 @@ export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => 
   )
 }
 
-export const assignLetterStatus = (grid, paths, inputValid) => {
-  const status = inputValid ? 'correct' : 'selected'
-  if (paths.length > 0) {
-    paths.map(path => {
-      path.map((letter, i) => {
-        if (Array.isArray(letter)) {
-          letter.map((subletter, j) => {
-            grid[letter[j].x][letter[j].y].status = status
-          })
-        } else {
-          grid[path[i].x][path[i].y].status = status
-        }
-      })
-    })
-  }
-
-  return grid
-}
 
 const resetInputField = () => {
   if (document.getElementById('input-field')) {

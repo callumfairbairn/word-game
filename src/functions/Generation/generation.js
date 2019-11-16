@@ -1,4 +1,4 @@
-import { alphabetString, defaultLetterList, xDim, yDim, vowels } from './constants'
+import { alphabetString, defaultLetterList, xDim, yDim, vowels } from '../../common/constants'
 
 const generateRandomLetter = () => {
   return alphabetString[Math.floor(Math.random() * 26)]

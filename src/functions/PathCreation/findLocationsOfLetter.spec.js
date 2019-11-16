@@ -1,5 +1,5 @@
-import { generateGrid } from '../common/functions'
-import { defaultLetterList } from '../common/constants'
+import { generateGrid } from '../Generation/generation'
+import { defaultLetterList } from '../../common/constants'
 import findLocationsOfLetter from './findLocationsOfLetter'
 
 describe('findLocationsOfLetter', () => {

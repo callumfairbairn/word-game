@@ -1,4 +1,4 @@
-import { xDim, yDim } from '../common/constants'
+import { xDim, yDim } from '../../common/constants'
 
 const returnPositionsOfAdjacentCharacters = (grid, letters, character) => {
   const newListOfPositions = []
