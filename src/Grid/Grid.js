@@ -4,15 +4,15 @@ import { Square } from '../Square/Square'
 import { xDim, yDim } from '../common/constants'
 import { generateGrid } from '../common/functions'
 import createPaths from '../CreatePaths/createPaths'
-import isInputValid from '../WordValidation/isInputValid'
+import isWordInDictionary from '../WordValidation/isWordInDictionary'
 
 export const Grid = ({ letterList, input, dict, foundWords, setFoundWords }) => {
   const grid = generateGrid(letterList)
   const paths = createPaths(grid, input)
-  const inputValid = isInputValid(input, dict, foundWords)
-  const assignedGrid = assignLetterStatus(grid, paths, inputValid)
+  const wordInDictionary = isWordInDictionary(input, dict, foundWords)
+  const assignedGrid = assignLetterStatus(grid, paths, wordInDictionary)
 
-  if (inputValid) {
+  if (wordInDictionary) {
     const newFoundWords = foundWords
     newFoundWords.push(input)
     setFoundWords(newFoundWords)
