@@ -25,7 +25,7 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   const wordInDictionary = isWordInDictionary(input, dict, foundWords)
   const assignedGrid = assignLetterStatus(grid, paths, wordInDictionary)
 
-  if (wordInDictionary) {
+  if (wordInDictionary && paths.length > 0) {
     const newFoundWords = foundWords
     newFoundWords.push(input)
     setFoundWords(newFoundWords)
