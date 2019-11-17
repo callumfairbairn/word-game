@@ -5,7 +5,7 @@ import { InputField } from './components/InputField/InputField'
 import { generateGrid, generateRandomLetterList } from './functions/Generation/generation'
 import WordDisplay from './components/WordDisplay/WordDisplay'
 import createPaths from './functions/PathCreation/createPaths'
-import isWordInDictionary from './functions/WordValidation/isWordInDictionary'
+import calculateWordStatus from './functions/WordValidation/calculateWordStatus'
 import { assignLetterStatus } from './functions/AssignLetterStatus/assignLetterStatus'
 
 function App () {
@@ -22,10 +22,10 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
 
   const grid = generateGrid(letterList)
   const paths = createPaths(grid, input)
-  const wordInDictionary = isWordInDictionary(input, dict, foundWords)
-  const assignedGrid = assignLetterStatus(grid, paths, wordInDictionary)
+  const wordStatus = calculateWordStatus(input, dict, foundWords)
+  const assignedGrid = assignLetterStatus(grid, paths, wordStatus)
 
-  if (wordInDictionary && paths.length > 0) {
+  if (wordStatus === 'correct' && paths.length > 0) {
     const newFoundWords = foundWords
     newFoundWords.push(input)
     setFoundWords(newFoundWords)
