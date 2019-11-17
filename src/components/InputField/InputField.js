@@ -1,7 +1,7 @@
-import React, { useRef } from 'react'
+import React, { createRef } from 'react'
 
 export const InputField = ({ setInput }) => {
-  const inputRef = useRef()
+  const inputRef = createRef()
 
   return (
     <form className='inputField' id='input-field' data-testid='input-field' onSubmit={preventSubmit}>
