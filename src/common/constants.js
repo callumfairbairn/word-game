@@ -3,3 +3,7 @@ export const defaultLetterList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', '
 export const vowels = ['A', 'E', 'I', 'O', 'U']
 export const xDim = 4
 export const yDim = 4
+export const startingTime = {
+  minutes: 2,
+  seconds: 0
+}

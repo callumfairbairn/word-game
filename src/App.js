@@ -7,19 +7,25 @@ import WordDisplay from './components/WordDisplay/WordDisplay'
 import createPaths from './functions/PathCreation/createPaths'
 import calculateWordStatus from './functions/WordValidation/calculateWordStatus'
 import { assignLetterStatus } from './functions/AssignLetterStatus/assignLetterStatus'
+import Timer from './components/Timer/Timer'
+import { startingTime } from './common/constants'
 
 function App () {
   const [foundWords, setFoundWords] = useState([])
   const dict = require('./words')
   const letterList = generateRandomLetterList()
   return (
-    <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
+    <div className='App'>
+      <div className='container-a'>
+        <TimerWrapper />
+        <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
+      </div>
+    </div>
   )
 }
 
 const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   const [input, setInput] = useState('')
-
   const grid = generateGrid(letterList)
   const paths = createPaths(grid, input)
   const wordStatus = calculateWordStatus(input, dict, foundWords)
@@ -33,17 +39,21 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   }
 
   return (
-    <div className='App'>
-      <div className='outer-container'>
-        <div className='container-a'>
-          <Grid grid={assignedGrid} />
-          <InputField setInput={setInput} />
-        </div>
-        <div className='container-b'>
-          <WordDisplay foundWords={foundWords} />
-        </div>
+    <div className='container-b'>
+      <div className='grid-wrapper'>
+        <Grid grid={assignedGrid} />
+        <InputField setInput={setInput} />
       </div>
+      <WordDisplay foundWords={foundWords} />
     </div>
+  )
+}
+
+const TimerWrapper = () => {
+  const [time, setTime] = useState(startingTime)
+
+  return (
+    <Timer time={time} setTime={setTime} />
   )
 }
 

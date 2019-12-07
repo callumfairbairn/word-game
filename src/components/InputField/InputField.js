@@ -4,7 +4,7 @@ export const InputField = ({ setInput }) => {
   const inputRef = createRef()
 
   return (
-    <form className='inputField' id='input-field' data-testid='input-field' onSubmit={preventSubmit}>
+    <form className='input-field' id='input-field' data-testid='input-field' onSubmit={preventSubmit}>
       <input
         className='input'
         id='input'
