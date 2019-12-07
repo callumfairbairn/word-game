@@ -1,9 +1,9 @@
-export const alphabetString = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
-export const defaultLetterList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
-export const vowels = ['A', 'E', 'I', 'O', 'U']
-export const xDim = 4
-export const yDim = 4
-export const startingTime = {
+export const ALPHABET_STRING = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
+export const DEFAULT_LETTER_LIST = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
+export const VOWELS = ['A', 'E', 'I', 'O', 'U']
+export const X_DIM = 4
+export const Y_DIM = 4
+export const STARTING_TIME = {
   minutes: 2,
   seconds: 0
 }

@@ -1,4 +1,4 @@
-import { xDim, yDim } from '../../common/constants'
+import { X_DIM, Y_DIM } from '../../common/constants'
 
 const returnPositionsOfAdjacentCharacters = (grid, letters, character) => {
   const newListOfPositions = []
@@ -7,9 +7,9 @@ const returnPositionsOfAdjacentCharacters = (grid, letters, character) => {
       for (let m = -1; m < 2; m++) {
         for (let n = -1; n < 2; n++) {
           if (letter.x + m >= 0 &&
-                        letter.x + m <= xDim - 1 &&
+                        letter.x + m <= X_DIM - 1 &&
                         letter.y + n >= 0 &&
-                        letter.y + n <= yDim - 1 &&
+                        letter.y + n <= Y_DIM - 1 &&
                         !(m === 0 && n === 0) &&
                         grid[letter.x + m][letter.y + n].letter.toLowerCase() === character) {
             let notDuplicate = true

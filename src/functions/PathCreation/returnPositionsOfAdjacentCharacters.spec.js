@@ -1,10 +1,10 @@
 import { generateGrid } from '../Generation/generation'
-import { defaultLetterList } from '../../common/constants'
+import { DEFAULT_LETTER_LIST } from '../../common/constants'
 import returnPositionsOfAdjacentCharacters from './returnPositionsOfAdjacentCharacters'
 
 describe('returnPositionsOfAdjacentChracters', () => {
   it('should return a location of a given character surrounding a given location', () => {
-    const grid = generateGrid(defaultLetterList)
+    const grid = generateGrid(DEFAULT_LETTER_LIST)
     const input = [{ x: 1, y: 1 }]
     expect(returnPositionsOfAdjacentCharacters(grid, input, 'g')).toEqual([{ x: 1, y: 2 }])
   })

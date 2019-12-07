@@ -2,7 +2,7 @@ import { render } from '@testing-library/react'
 import { Grid } from './Grid'
 import React from 'react'
 import '../../reactTestSetup'
-import { defaultLetterList } from '../../common/constants'
+import { DEFAULT_LETTER_LIST } from '../../common/constants'
 import { generateGrid } from '../../functions/Generation/generation'
 import createPaths from '../../functions/PathCreation/createPaths'
 import calculateWordStatus from '../../functions/WordValidation/calculateWordStatus'
@@ -12,7 +12,7 @@ const dict = require('../../words')
 
 describe('Grid', () => {
   it('should render a grid of letters', () => {
-    const defaultGrid = generateGrid(defaultLetterList)
+    const defaultGrid = generateGrid(DEFAULT_LETTER_LIST)
 
     const { queryAllByTestId } = render(<Grid grid={defaultGrid} />)
 
@@ -20,7 +20,7 @@ describe('Grid', () => {
   })
 
   it('should render five selected letters given an input of length 5', () => {
-    const input = 'knifc'; const foundWords = []; const defaultGrid = generateGrid(defaultLetterList)
+    const input = 'knifc'; const foundWords = []; const defaultGrid = generateGrid(DEFAULT_LETTER_LIST)
     const paths = createPaths(defaultGrid, input)
     const wordInDictionary = calculateWordStatus(input, dict, foundWords)
     const assignedGrid = assignLetterStatus(defaultGrid, paths, wordInDictionary)

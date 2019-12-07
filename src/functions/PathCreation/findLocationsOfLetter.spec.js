@@ -1,10 +1,10 @@
 import { generateGrid } from '../Generation/generation'
-import { defaultLetterList } from '../../common/constants'
+import { DEFAULT_LETTER_LIST } from '../../common/constants'
 import findLocationsOfLetter from './findLocationsOfLetter'
 
 describe('findLocationsOfLetter', () => {
   it('should return a position for a letter occurring only once', () => {
-    const grid = generateGrid(defaultLetterList)
+    const grid = generateGrid(DEFAULT_LETTER_LIST)
     const letter = 'E'
     expect(findLocationsOfLetter(grid, letter)).toEqual([{ x: 1, y: 0 }])
   })

@@ -1,9 +1,9 @@
-import { xDim, yDim } from '../../common/constants'
+import { X_DIM, Y_DIM } from '../../common/constants'
 
 const findLocationsOfLetter = (grid, letter) => {
   const locationList = []
-  for (let x = 0; x < xDim; x++) {
-    for (let y = 0; y < yDim; y++) {
+  for (let x = 0; x < X_DIM; x++) {
+    for (let y = 0; y < Y_DIM; y++) {
       if (grid[x][y].letter.toLowerCase() === letter.toLowerCase()) {
         locationList.push({ x: x, y: y })
       }

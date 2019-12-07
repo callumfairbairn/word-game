@@ -1,18 +1,18 @@
-import { alphabetString, defaultLetterList, xDim, yDim, vowels } from '../../common/constants'
+import { ALPHABET_STRING, DEFAULT_LETTER_LIST, X_DIM, Y_DIM, VOWELS } from '../../common/constants'
 
 const generateRandomLetter = () => {
-  return alphabetString[Math.floor(Math.random() * 26)]
+  return ALPHABET_STRING[Math.floor(Math.random() * 26)]
 }
 
 export const generateRandomLetterList = () => {
   let valid = false
   let letterList
   while (!valid) {
-    letterList = Array.from(Array(xDim * yDim), () => {
+    letterList = Array.from(Array(X_DIM * Y_DIM), () => {
       return generateRandomLetter()
     })
 
-    const vowelNumber = letterList.filter(letter => vowels.indexOf(letter) !== -1).length
+    const vowelNumber = letterList.filter(letter => VOWELS.indexOf(letter) !== -1).length
     if (vowelNumber > 4) {
       valid = true
     }
@@ -21,10 +21,10 @@ export const generateRandomLetterList = () => {
   return letterList
 }
 
-export const generateGrid = (letterList = defaultLetterList) => {
+export const generateGrid = (letterList = DEFAULT_LETTER_LIST) => {
   let i = -1
-  return Array.from(Array(xDim), () => {
-    return Array.from(Array(yDim), () => {
+  return Array.from(Array(X_DIM), () => {
+    return Array.from(Array(Y_DIM), () => {
       i++
       return {
         letter: letterList[i],

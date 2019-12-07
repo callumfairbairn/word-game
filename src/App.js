@@ -8,7 +8,7 @@ import createPaths from './functions/PathCreation/createPaths'
 import calculateWordStatus from './functions/WordValidation/calculateWordStatus'
 import { assignLetterStatus } from './functions/AssignLetterStatus/assignLetterStatus'
 import Timer from './components/Timer/Timer'
-import { startingTime } from './common/constants'
+import { STARTING_TIME } from './common/constants'
 
 function App () {
   const [foundWords, setFoundWords] = useState([])
@@ -50,7 +50,7 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
 }
 
 const TimerWrapper = () => {
-  const [time, setTime] = useState(startingTime)
+  const [time, setTime] = useState(STARTING_TIME)
 
   return (
     <Timer time={time} setTime={setTime} />
