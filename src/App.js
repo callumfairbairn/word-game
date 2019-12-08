@@ -17,7 +17,7 @@ function App () {
   return (
     <div className='App'>
       <div className='container-a'>
-        <TimerWrapper setLetterList={setLetterList} />
+        <TimerWrapper setLetterList={setLetterList} setFoundWords={setFoundWords} />
         <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
       </div>
     </div>
@@ -49,11 +49,12 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   )
 }
 
-const TimerWrapper = ({ setLetterList }) => {
+const TimerWrapper = ({ setLetterList, setFoundWords }) => {
   const [time, setTime] = useState(STARTING_TIME)
   if (time.minutes === -1 && time.seconds === 59) {
     setTime(STARTING_TIME)
     setLetterList(generateRandomLetterList())
+    setFoundWords([])
   }
 
   return (
