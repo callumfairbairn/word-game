@@ -11,13 +11,13 @@ import Timer from './components/Timer/Timer'
 import { STARTING_TIME } from './common/constants'
 
 function App () {
+  const [letterList, setLetterList] = useState(generateRandomLetterList())
   const [foundWords, setFoundWords] = useState([])
   const dict = require('./words')
-  const letterList = generateRandomLetterList()
   return (
     <div className='App'>
       <div className='container-a'>
-        <TimerWrapper />
+        <TimerWrapper setLetterList={setLetterList} />
         <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} />
       </div>
     </div>
@@ -49,8 +49,12 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   )
 }
 
-const TimerWrapper = () => {
+const TimerWrapper = ({ setLetterList }) => {
   const [time, setTime] = useState(STARTING_TIME)
+  if (time.minutes === -1 && time.seconds === 59) {
+    setTime(STARTING_TIME)
+    setLetterList(generateRandomLetterList())
+  }
 
   return (
     <Timer time={time} setTime={setTime} />
