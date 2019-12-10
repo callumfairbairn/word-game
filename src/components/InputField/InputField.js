@@ -1,10 +1,10 @@
 import React, { createRef } from 'react'
 
-export const InputField = ({ setInput }) => {
+export const InputField = ({ setInput, onFormSubmit }) => {
   const inputRef = createRef()
 
   return (
-    <form className='input-field' id='input-field' data-testid='input-field' onSubmit={preventSubmit}>
+    <form className='input-field' id='input-field' data-testid='input-field' onSubmit={onFormSubmit}>
       <input
         className='input'
         id='input'
@@ -15,8 +15,4 @@ export const InputField = ({ setInput }) => {
       />
     </form>
   )
-}
-
-const preventSubmit = (e) => {
-  e.preventDefault()
 }

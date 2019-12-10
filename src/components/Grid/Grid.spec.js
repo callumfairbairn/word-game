@@ -22,8 +22,8 @@ describe('Grid', () => {
   it('should render five selected letters given an input of length 5', () => {
     const input = 'knifc'; const foundWords = []; const defaultGrid = generateGrid(DEFAULT_LETTER_LIST)
     const paths = createPaths(defaultGrid, input)
-    const wordInDictionary = calculateWordStatus(input, dict, foundWords)
-    const assignedGrid = assignLetterStatus(defaultGrid, paths, wordInDictionary)
+    const wordStatus = calculateWordStatus(input, dict, foundWords)
+    const assignedGrid = assignLetterStatus(defaultGrid, paths, wordStatus)
 
     const { queryAllByTestId } = render(<Grid grid={assignedGrid} />)
 
@@ -34,8 +34,8 @@ describe('Grid', () => {
     const customLetterList = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'A', 'N', 'O', 'P']
     const customGrid = generateGrid(customLetterList); const input = 'knife'; const foundWords = []
     const paths = createPaths(customGrid, input)
-    const wordInDictionary = calculateWordStatus(input, dict, foundWords)
-    const assignedGrid = assignLetterStatus(customGrid, paths, wordInDictionary)
+    const wordStatus = calculateWordStatus(input, dict, foundWords, true)
+    const assignedGrid = assignLetterStatus(customGrid, paths, wordStatus)
 
     const { queryAllByTestId } = render(<Grid grid={assignedGrid} />)
     expect(queryAllByTestId('square-correct').length).toEqual(5)

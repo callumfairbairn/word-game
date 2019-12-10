@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import './App.scss'
 import { Grid } from './components/Grid/Grid'
 import { InputField } from './components/InputField/InputField'
@@ -26,23 +26,32 @@ function App () {
 
 const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   const [input, setInput] = useState('')
-  const grid = generateGrid(letterList)
+  const [grid, setGrid] = useState(generateGrid(letterList))
   const paths = createPaths(grid, input)
-  const wordStatus = calculateWordStatus(input, dict, foundWords)
-  const assignedGrid = assignLetterStatus(grid, paths, wordStatus)
+  const wordStatus = calculateWordStatus(input, dict, foundWords, false)
 
-  if (wordStatus === 'correct' && paths.length > 0) {
-    const newFoundWords = foundWords
-    newFoundWords.push(input)
-    setFoundWords(newFoundWords)
-    resetInputField()
+  useEffect(() => {
+    setGrid(assignLetterStatus(generateGrid(letterList), paths, wordStatus))
+  }, [input])
+
+  const onFormSubmit = (event) => {
+    event.preventDefault()
+    const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
+    setGrid(assignLetterStatus(generateGrid(letterList), paths, newWordStatus))
+
+    if (newWordStatus === 'correct' && paths.length > 0) {
+      const newFoundWords = foundWords
+      newFoundWords.push(input)
+      setFoundWords(newFoundWords)
+      resetInputField()
+    }
   }
 
   return (
     <div className='container-b'>
       <div className='grid-wrapper'>
-        <Grid grid={assignedGrid} />
-        <InputField setInput={setInput} />
+        <Grid grid={grid} />
+        <InputField setInput={setInput} onFormSubmit={onFormSubmit} />
       </div>
       <WordDisplay foundWords={foundWords} />
     </div>
