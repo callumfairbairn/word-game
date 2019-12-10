@@ -32,7 +32,7 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
 
   useEffect(() => {
     setGrid(assignLetterStatus(generateGrid(letterList), paths, wordStatus))
-  }, [input])
+  }, [input, letterList])
 
   const onFormSubmit = (event) => {
     event.preventDefault()
