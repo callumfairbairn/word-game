@@ -32,6 +32,11 @@
   animation: opacity-fade 0.5s forwards;
 }
 
+#wrong-mask {
+  background-color: red;
+  animation: opacity-fade 0.5s forwards;
+}
+
 #null-mask, #selected-mask, #found-mask {
   opacity: 0;
 }

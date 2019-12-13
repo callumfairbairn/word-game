@@ -31,8 +31,11 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
     event.preventDefault()
     const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
 
-    if (newWordStatus === 'correct' && paths.length > 0) {
+    if (paths.length > 0) {
       setGridMask(assignLetterStatus(blankGrid, paths, newWordStatus))
+    }
+
+    if (newWordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
       setInput('')
       resetInputField()
