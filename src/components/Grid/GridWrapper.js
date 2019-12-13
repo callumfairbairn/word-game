@@ -7,8 +7,7 @@ import { InputField } from '../InputField/InputField'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import React, { useState, useEffect } from 'react'
 
-const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
-  const [input, setInput] = useState('')
+const GridWrapper = ({ letterList, dict, foundWords, setFoundWords, input, setInput, resetInputField }) => {
   const [grid, setGrid] = useState(generateGrid(letterList))
   const [gridMask, setGridMask] = useState(grid)
   const paths = createPaths(grid, input)
@@ -47,12 +46,6 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
       <WordDisplay foundWords={foundWords} />
     </div>
   )
-}
-
-const resetInputField = () => {
-  if (document.getElementById('input-field')) {
-    document.getElementById('input-field').reset()
-  }
 }
 
 export default GridWrapper
