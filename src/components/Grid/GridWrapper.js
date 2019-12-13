@@ -12,14 +12,15 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
   const [foundWords, setFoundWords] = foundWordsHook
   const [input, setInput] = inputHook
 
-  const [grid, setGrid] = useState(generateGrid(letterList))
-  const [gridMask, setGridMask] = useState(grid)
+  const blankGrid = generateGrid(letterList)
+  const [grid, setGrid] = useState(blankGrid)
+  const [gridMask, setGridMask] = useState(blankGrid)
 
-  const paths = createPaths(grid, input)
-  const wordStatus = calculateWordStatus(input, dict, foundWords, false)
+  const paths = createPaths(blankGrid, input)
 
   useEffect(() => {
-    setGrid(assignLetterStatus(generateGrid(letterList), paths, wordStatus))
+    const wordStatus = calculateWordStatus(input, dict, foundWords, false)
+    setGrid(assignLetterStatus(blankGrid, paths, wordStatus))
     if (input.length > 2) {
       setGridMask(generateGrid((letterList)))
     }
@@ -30,7 +31,7 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
     const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
 
     if (newWordStatus === 'correct' && paths.length > 0) {
-      setGridMask(assignLetterStatus(generateGrid(letterList), paths, newWordStatus))
+      setGridMask(assignLetterStatus(blankGrid, paths, newWordStatus))
       const newFoundWords = foundWords
       newFoundWords.push(input)
       setFoundWords(newFoundWords)
