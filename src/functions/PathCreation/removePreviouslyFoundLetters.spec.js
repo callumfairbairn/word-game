@@ -30,4 +30,14 @@ describe('removePreviouslyFoundLetters', () => {
     const thisPath = [{ x: 1, y: 1 }, { x: 2, y: 2 }, { x: 4, y: 4 }]
     expect(removePreviouslyFoundLetters(input, thisPath)).toEqual([{ x: 3, y: 3 }])
   })
+
+  it('should work for letters next to each other', () => {
+    const input = [{ x: 0, y: 1 }, { x: 0, y: 2 }]
+    const thisPath = [{ x: 0, y: 0 }, [{ x: 0, y: 1 }, { x: 0, y: 2 }]]
+    expect(removePreviouslyFoundLetters(input, thisPath)).toEqual([{ x: 0, y: 1 }, { x: 0, y: 2 }])
+
+    const input2 = [{ x: 0, y: 1 }, { x: 0, y: 2 }]
+    const thisPath2 = [{ x: 0, y: 0 }, [{ x: 0, y: 1 }, { x: 0, y: 2 }], [{ x: 0, y: 2 }, { x: 0, y: 1 }]]
+    expect(removePreviouslyFoundLetters(input2, thisPath2)).toEqual([])
+  })
 })
