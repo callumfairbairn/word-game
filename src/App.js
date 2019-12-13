@@ -41,9 +41,9 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
   const onFormSubmit = (event) => {
     event.preventDefault()
     const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
-    setGridMask(assignLetterStatus(generateGrid(letterList), paths, newWordStatus))
 
     if (newWordStatus === 'correct' && paths.length > 0) {
+      setGridMask(assignLetterStatus(generateGrid(letterList), paths, newWordStatus))
       const newFoundWords = foundWords
       newFoundWords.push(input)
       setFoundWords(newFoundWords)
@@ -69,9 +69,7 @@ const GridWrapper = ({ letterList, dict, foundWords, setFoundWords }) => {
 const TimerWrapper = ({ setLetterList, setFoundWords }) => {
   const [time, setTime] = useState(STARTING_TIME)
   if (time.minutes === -1 && time.seconds === 59) {
-    setTime(STARTING_TIME)
-    setLetterList(generateRandomLetterList())
-    setFoundWords([])
+    resetGrid(setTime, setLetterList, setFoundWords)
   }
 
   return (
@@ -83,6 +81,12 @@ const resetInputField = () => {
   if (document.getElementById('input-field')) {
     document.getElementById('input-field').reset()
   }
+}
+
+const resetGrid = (setTime, setLetterList, setFoundWords) => {
+  setTime(STARTING_TIME)
+  setLetterList(generateRandomLetterList())
+  setFoundWords([])
 }
 
 export default App
