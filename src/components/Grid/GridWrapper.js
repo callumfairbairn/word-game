@@ -22,7 +22,7 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
     const wordStatus = calculateWordStatus(input, dict, foundWords, false)
     setGrid(assignLetterStatus(blankGrid, paths, wordStatus))
 
-    if (input.length > 2) {
+    if (input.length > 0) {
       setGridMask(generateGrid((letterList)))
     }
   }, [input, letterList])
