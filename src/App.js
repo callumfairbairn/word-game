@@ -5,15 +5,15 @@ import TimerWrapper from './components/Timer/TimerWrapper'
 import GridWrapper from './components/Grid/GridWrapper'
 
 function App () {
-  const [letterList, setLetterList] = useState(generateRandomLetterList())
-  const [foundWords, setFoundWords] = useState([])
-  const [input, setInput] = useState('')
+  const letterListHook = useState(generateRandomLetterList())
+  const foundWordsHook = useState([])
+  const inputHook = useState('')
   const dict = require('./words')
   return (
     <div className='App'>
       <div className='container-a'>
-        <TimerWrapper setLetterList={setLetterList} setFoundWords={setFoundWords} setInput={setInput} resetInputField={resetInputField} />
-        <GridWrapper letterList={letterList} dict={dict} foundWords={foundWords} setFoundWords={setFoundWords} input={input} setInput={setInput} resetInputField={resetInputField} />
+        <TimerWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} resetInputField={resetInputField} />
+        <GridWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} dict={dict} resetInputField={resetInputField} />
       </div>
     </div>
   )
