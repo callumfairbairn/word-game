@@ -21,6 +21,7 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
   useEffect(() => {
     const wordStatus = calculateWordStatus(input, dict, foundWords, false)
     setGrid(assignLetterStatus(blankGrid, paths, wordStatus))
+
     if (input.length > 2) {
       setGridMask(generateGrid((letterList)))
     }
@@ -32,11 +33,9 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
 
     if (newWordStatus === 'correct' && paths.length > 0) {
       setGridMask(assignLetterStatus(blankGrid, paths, newWordStatus))
-      const newFoundWords = foundWords
-      newFoundWords.push(input)
-      setFoundWords(newFoundWords)
-      resetInputField()
+      updateFoundWords(foundWords, setFoundWords, input)
       setInput('')
+      resetInputField()
     }
   }
 
@@ -52,6 +51,12 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
       <WordDisplay foundWords={foundWords} />
     </div>
   )
+}
+
+const updateFoundWords = (foundWords, setFoundWords, input) => {
+  const newFoundWords = foundWords
+  newFoundWords.push(input)
+  setFoundWords(newFoundWords)
 }
 
 export default GridWrapper
