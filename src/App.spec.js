@@ -4,9 +4,9 @@ import React from 'react'
 import './reactTestSetup'
 
 describe('App', () => {
-  it('should render a grid', () => {
-    const { getByTestId } = render(<App />)
-    expect(getByTestId('grid'))
+  it('should render a normal grid and a mask grid grid', () => {
+    const { getAllByTestId } = render(<App />)
+    expect(getAllByTestId('grid').length).toEqual(2)
   })
 
   it('should render an input field', () => {

@@ -23,6 +23,17 @@
       .word-display {
         width: 100px;
       }
+
+      .grid-wrapper {
+        .grid-container {
+          display: grid;
+
+          .grid {
+            grid-column: 1;
+            grid-row: 1;
+          }
+        }
+      }
     }
   }
 }

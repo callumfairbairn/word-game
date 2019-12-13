@@ -9,7 +9,7 @@ describe('Square', () => {
     expect(getByText('A'))
   })
 
-  it('displayes an unselected square', () => {
+  it('displays an unselected square', () => {
     const { getByTestId } = render(<Square letter='A' status={null} />)
     expect(getByTestId('square'))
   })

@@ -27,13 +27,17 @@
   background-color: rgba(255,196,0,0.64);
 }
 
-#correct {
+#correct-mask {
   background-color: #23cb34;
-  animation: green-fade 0.5s forwards;
+  animation: opacity-fade 0.5s forwards;
 }
 
-@keyframes green-fade {
-  0% {background-color: #23cb34;}
-  25% {background-color: #23cb34;}
-  100% {background-color: #ff7030;}
+#null-mask, #selected-mask, #found-mask {
+  opacity: 0;
+}
+
+@keyframes opacity-fade {
+  0% {opacity: 1;}
+  25% {opacity: 0.75;}
+  100% {opacity: 0;}
 }
