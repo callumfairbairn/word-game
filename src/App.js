@@ -1,8 +1,8 @@
 import React, { useState } from 'react'
 import './App.scss'
-import { generateRandomLetterList } from './functions/Generation/generation'
 import TimerWrapper from './components/Timer/TimerWrapper'
 import GridWrapper from './components/Grid/GridWrapper'
+import { generateRandomLetterList } from './functions/LetterListGeneration/generateRandomLetterList'
 
 function App () {
   const letterListHook = useState(generateRandomLetterList())

@@ -1,7 +1,7 @@
 import { STARTING_TIME } from '../../common/constants'
 import Timer from './Timer'
 import React, { useState } from 'react'
-import { generateRandomLetterList } from '../../functions/Generation/generation'
+import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
 
 const TimerWrapper = ({ letterListHook, foundWordsHook, inputHook, resetInputField }) => {
   const [, setLetterList] = letterListHook
