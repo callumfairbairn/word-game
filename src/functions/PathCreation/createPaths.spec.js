@@ -1,4 +1,4 @@
-import { generateGrid } from '../Generation/generation'
+import { generateGrid } from '../GridGeneration/generateGrid'
 import createPaths from './createPaths'
 
 const grid = generateGrid(['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'G', 'K', 'L', 'M', 'N', 'O', 'P'])

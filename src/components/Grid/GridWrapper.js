@@ -1,4 +1,4 @@
-import { generateGrid } from '../../functions/Generation/generation'
+import { generateGrid } from '../../functions/GridGeneration/generateGrid'
 import createPaths from '../../functions/PathCreation/createPaths'
 import calculateWordStatus from '../../functions/WordValidation/calculateWordStatus'
 import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLetterStatus'

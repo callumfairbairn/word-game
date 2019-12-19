@@ -1,4 +1,4 @@
-import { generateGrid } from '../Generation/generation'
+import { generateGrid } from '../GridGeneration/generateGrid'
 import { DEFAULT_LETTER_LIST } from '../../common/constants'
 import returnPositionsOfAdjacentCharacters from './returnPositionsOfAdjacentCharacters'
 

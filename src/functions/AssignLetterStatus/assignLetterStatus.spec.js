@@ -1,5 +1,5 @@
 import { assignLetterStatus } from './assignLetterStatus'
-import { generateGrid } from '../Generation/generation'
+import { generateGrid } from '../GridGeneration/generateGrid'
 
 describe('assignLetterStatus', () => {
   it('assigns no letters status if path is []', () => {
