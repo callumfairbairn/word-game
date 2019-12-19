@@ -8,6 +8,7 @@ import {
   Y_DIM
 } from '../../common/constants'
 import { fixLetters } from './fixLetters'
+import { ensureConsonantsTouchAtLeastOneVowel } from './EnsureConsonantsTouchAtLeastOneVowel/ensureConsonantsTouchAtLeastOneVowel'
 
 export const generateRandomLetterList = () => {
   const letterList = Array.from(Array(X_DIM * Y_DIM), () => {
@@ -16,6 +17,7 @@ export const generateRandomLetterList = () => {
 
   fixLetters(letterList, MIN_NUMBER_OF_VOWELS, VOWELS)
   fixLetters(letterList, MAX_NUMBER_OF_HARD_LETTERS, HARD_LETTERS)
+  ensureConsonantsTouchAtLeastOneVowel(letterList)
   return letterList
 }
 

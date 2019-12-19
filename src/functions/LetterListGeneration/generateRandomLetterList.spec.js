@@ -7,12 +7,7 @@ import {
   Y_DIM
 } from '../../common/constants'
 import { generateRandomLetterList } from './generateRandomLetterList'
-
-const runAssertionOneHundredTimes = (assertion) => {
-  for (let x = 0; x < 100; x++) {
-    assertion()
-  }
-}
+import { runAssertionOneHundredTimes } from '../RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
 
 describe('generateRandomLetterList', () => {
   it('generates a random list of letters of length equal to X_DIM * Y_DIM', () => {
