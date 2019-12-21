@@ -1,4 +1,4 @@
-import { HARD_LETTERS, VOWELS } from '../../common/constants'
+import { HARD_LETTERS, VOWELS } from '../../../common/constants'
 import { addLetterFromSet, takeAwayLetterFromSet } from './addAndTakeAwayLetterFromSet'
 import { returnNumberOfTimesSetAppearsInList } from './returnNumberOfTimesSetAppearsInList'
 

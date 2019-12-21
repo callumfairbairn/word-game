@@ -1,4 +1,4 @@
-import { ALPHABET_SET } from '../../common/constants'
+import { ALPHABET_SET } from '../../../common/constants'
 
 export const addLetterFromSet = (letterList, set) => {
   let successfullyAddedLetter = false

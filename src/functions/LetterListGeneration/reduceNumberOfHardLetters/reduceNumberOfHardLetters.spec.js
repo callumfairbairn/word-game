@@ -1,5 +1,5 @@
 import { HARD_LETTERS, MAX_NUMBER_OF_HARD_LETTERS } from '../../../common/constants'
-import { returnNumberOfTimesSetAppearsInList } from '../returnNumberOfTimesSetAppearsInList'
+import { returnNumberOfTimesSetAppearsInList } from '../common/returnNumberOfTimesSetAppearsInList'
 import { reduceNumberOfHardLetters } from './reduceNumberOfHardLetters'
 
 describe('reduceNumberOfHardLetters', () => {

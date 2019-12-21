@@ -1,5 +1,5 @@
 import { MIN_NUMBER_OF_VOWELS, VOWELS } from '../../../common/constants'
-import { returnNumberOfTimesSetAppearsInList } from '../returnNumberOfTimesSetAppearsInList'
+import { returnNumberOfTimesSetAppearsInList } from '../common/returnNumberOfTimesSetAppearsInList'
 import { increaseNumberOfVowels } from './increaseNumberOfVowels'
 
 describe('increaseNumberOfVowels', () => {

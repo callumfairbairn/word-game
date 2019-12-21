@@ -1,5 +1,5 @@
-import { returnNumberOfTimesSetAppearsInList } from '../returnNumberOfTimesSetAppearsInList'
-import { takeAwayLetterFromSet } from '../addAndTakeAwayLetterFromSet'
+import { returnNumberOfTimesSetAppearsInList } from '../common/returnNumberOfTimesSetAppearsInList'
+import { takeAwayLetterFromSet } from '../common/addAndTakeAwayLetterFromSet'
 import { HARD_LETTERS, MAX_NUMBER_OF_HARD_LETTERS } from '../../../common/constants'
 
 export const reduceNumberOfHardLetters = (letterList) => {

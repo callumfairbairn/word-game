@@ -1,5 +1,5 @@
-import { returnNumberOfTimesSetAppearsInList } from '../returnNumberOfTimesSetAppearsInList'
-import { addLetterFromSet } from '../addAndTakeAwayLetterFromSet'
+import { returnNumberOfTimesSetAppearsInList } from '../common/returnNumberOfTimesSetAppearsInList'
+import { addLetterFromSet } from '../common/addAndTakeAwayLetterFromSet'
 import { MIN_NUMBER_OF_VOWELS, VOWELS } from '../../../common/constants'
 
 export const increaseNumberOfVowels = (letterList) => {

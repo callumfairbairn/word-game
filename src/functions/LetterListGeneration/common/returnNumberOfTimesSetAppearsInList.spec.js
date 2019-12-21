@@ -1,4 +1,4 @@
-import { HARD_LETTERS, VOWELS } from '../../common/constants'
+import { HARD_LETTERS, VOWELS } from '../../../common/constants'
 import { returnNumberOfTimesSetAppearsInList } from './returnNumberOfTimesSetAppearsInList'
 
 describe('returnNumberOfTimesSetAppearsInList', () => {

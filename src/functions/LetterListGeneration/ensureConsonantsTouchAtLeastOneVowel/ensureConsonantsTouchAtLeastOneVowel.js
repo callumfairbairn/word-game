@@ -1,5 +1,5 @@
 import { CONSONANTS, VOWELS } from '../../../common/constants'
-import { addLetterFromSet } from '../addAndTakeAwayLetterFromSet'
+import { addLetterFromSet } from '../common/addAndTakeAwayLetterFromSet'
 
 export const ensureConsonantsTouchAtLeastOneVowel = (letterList) => {
   letterList.map((letter, position) => {
