@@ -1,14 +1,7 @@
-import {
-  ALPHABET_STRING,
-  HARD_LETTERS,
-  MAX_NUMBER_OF_HARD_LETTERS,
-  MIN_NUMBER_OF_VOWELS,
-  VOWELS,
-  X_DIM,
-  Y_DIM
-} from '../../common/constants'
+import { ALPHABET_STRING, MIN_NUMBER_OF_VOWELS, VOWELS, X_DIM, Y_DIM } from '../../common/constants'
 import { fixLetters } from './fixLetters'
 import { ensureConsonantsTouchAtLeastOneVowel } from './EnsureConsonantsTouchAtLeastOneVowel/ensureConsonantsTouchAtLeastOneVowel'
+import { reduceNumberOfHardLetters } from './reduceNumberOfHardLetters/reduceNumberOfHardLetters'
 
 export const generateRandomLetterList = () => {
   const letterList = Array.from(Array(X_DIM * Y_DIM), () => {
@@ -16,7 +9,7 @@ export const generateRandomLetterList = () => {
   })
 
   fixLetters(letterList, MIN_NUMBER_OF_VOWELS, VOWELS)
-  fixLetters(letterList, MAX_NUMBER_OF_HARD_LETTERS, HARD_LETTERS)
+  reduceNumberOfHardLetters(letterList)
   ensureConsonantsTouchAtLeastOneVowel(letterList)
   return letterList
 }

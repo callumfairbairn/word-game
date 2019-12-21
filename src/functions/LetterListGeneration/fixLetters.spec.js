@@ -1,4 +1,4 @@
-import { HARD_LETTERS, VOWELS } from '../../common/constants'
+import { VOWELS } from '../../common/constants'
 import { fixLetters } from './fixLetters'
 import { returnNumberOfTimesSetAppearsInList } from './returnNumberOfTimesSetAppearsInList'
 
@@ -18,24 +18,6 @@ describe('fixLetters', () => {
       const set = VOWELS
       fixLetters(letterList, correctNumberOfVowels, set)
       expect(returnNumberOfTimesSetAppearsInList(letterList, set)).toEqual(3)
-    })
-  })
-
-  describe('HARD_LETTERS', () => {
-    it('does not change letter list when correct number of hard letters is passed in', () => {
-      const letterList = ['J', 'K', 'Z']
-      const maximumNumberOfHardLetters = 2
-      const set = HARD_LETTERS
-      fixLetters(letterList, maximumNumberOfHardLetters, set)
-      expect(returnNumberOfTimesSetAppearsInList(letterList, set)).toEqual(maximumNumberOfHardLetters)
-    })
-
-    it('takes away hard letters up to the correct number of hard letters', () => {
-      const letterList = ['J', 'A', 'Z', 'X']
-      const maximumNumberOfHardLetters = 2
-      const set = HARD_LETTERS
-      fixLetters(letterList, maximumNumberOfHardLetters, set)
-      expect(returnNumberOfTimesSetAppearsInList(letterList, set)).toEqual(2)
     })
   })
 })
