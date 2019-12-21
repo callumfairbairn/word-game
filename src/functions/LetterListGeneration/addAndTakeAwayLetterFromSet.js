@@ -1,4 +1,4 @@
-import { ALPHABET_SET, HARD_LETTERS } from '../../common/constants'
+import { ALPHABET_SET } from '../../common/constants'
 
 export const addLetterFromSet = (letterList, set) => {
   let successfullyAddedLetter = false
@@ -20,7 +20,7 @@ export const takeAwayLetterFromSet = (letterList, set) => {
     const randomPosition = Math.floor(Math.random() * letterList.length)
 
     if (set.includes(letterList[randomPosition])) {
-      letterList[randomPosition] = randomLetterFromSet(ALPHABET_SET.filter(letter => !HARD_LETTERS.includes(letter)))
+      letterList[randomPosition] = randomLetterFromSet(ALPHABET_SET.filter(letter => !set.includes(letter)))
       successfullyTakenAwayLetter = true
     }
   }
