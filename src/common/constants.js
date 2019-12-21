@@ -11,6 +11,7 @@ export const CONSONANTS = ['B', 'C', 'D', 'F', 'G', 'H', 'J', 'K', 'L', 'M', 'N'
 export const HARD_LETTERS = ['J', 'Q', 'X', 'Z']
 export const MIN_NUMBER_OF_VOWELS = 6
 export const MAX_NUMBER_OF_HARD_LETTERS = 3
+export const MIN_AND_MAX_OCCURANCES_OF_S = { min: 1, max: 3 }
 
 // Set time on timer at start of game
 export const STARTING_TIME = {
