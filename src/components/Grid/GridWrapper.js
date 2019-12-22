@@ -29,6 +29,8 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
 
   const onFormSubmit = (event) => {
     event.preventDefault()
+    setInput('')
+    resetInputField()
     const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
 
     if (paths.length > 0) {
@@ -37,8 +39,6 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
 
     if (newWordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
-      setInput('')
-      resetInputField()
     }
   }
 

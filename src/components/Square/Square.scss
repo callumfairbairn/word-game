@@ -37,6 +37,11 @@
   animation: opacity-fade 0.5s forwards;
 }
 
+#found-mask {
+  background-color: rgba(255,196,0,0.64);
+  animation: opacity-fade 0.5s forwards;
+}
+
 #null-mask, #selected-mask, #found-mask {
   opacity: 0;
 }
