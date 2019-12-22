@@ -20,4 +20,10 @@ describe('WordDisplay', () => {
     expect(within(wordDisplay).queryByText('three')).toBeTruthy()
     expect(within(wordDisplay).queryByText('four')).toBeTruthy()
   })
+
+  it('shows how many words have been found', () => {
+    const foundWords = ['one', 'two', 'three', 'four']
+    const { getByText } = render(<WordDisplay foundWords={foundWords} />)
+    expect(getByText('4'))
+  })
 })
