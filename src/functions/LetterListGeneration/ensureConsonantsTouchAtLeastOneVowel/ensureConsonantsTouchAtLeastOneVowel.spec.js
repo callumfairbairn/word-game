@@ -1,9 +1,5 @@
 import { DEFAULT_LETTER_LIST, VOWELS } from '../../../common/constants'
-import {
-  doesListContainVowel,
-  ensureConsonantsTouchAtLeastOneVowel,
-  putSetOfAdjacentLettersBackIn
-} from './ensureConsonantsTouchAtLeastOneVowel'
+import { doesListContainVowel, ensureConsonantsTouchAtLeastOneVowel } from './ensureConsonantsTouchAtLeastOneVowel'
 import { runAssertionOneHundredTimes } from '../../RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
 import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
 
@@ -32,17 +28,5 @@ describe('doesListContainVowel', () => {
   it('returns true for a list containing a vowel', () => {
     const letterList = ['X', 'O', 'Z']
     expect(doesListContainVowel(letterList)).toEqual(true)
-  })
-})
-
-describe('putSetOfAdjacentLettersBackIn', () => {
-  it('changes the original letterList', () => {
-    const letterList = DEFAULT_LETTER_LIST
-    const position = 0
-    const adjacentLetters = [{ letter: 'X', direction: 'right' }, { letter: 'Y', direction: 'down' }]
-
-    putSetOfAdjacentLettersBackIn(adjacentLetters, position, letterList)
-
-    expect(letterList).toEqual(['A', 'X', 'C', 'D', 'Y', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'])
   })
 })
