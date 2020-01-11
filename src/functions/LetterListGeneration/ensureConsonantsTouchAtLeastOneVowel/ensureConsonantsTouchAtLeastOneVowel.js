@@ -1,10 +1,11 @@
 import { CONSONANTS, VOWELS } from '../../../common/constants'
 import { addLetterFromSet } from '../common/addAndTakeAwayLetterFromSet'
+import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
 
 export const ensureConsonantsTouchAtLeastOneVowel = (letterList) => {
   letterList.map((letter, position) => {
     if (CONSONANTS.includes(letter)) {
-      const adjacentLetters = returnAdjacentLettersInList(letterList, position)
+      const adjacentLetters = returnAdjacentLetters(letterList, position)
       const adjacentLettersWithoutDirection = adjacentLetters.map(adjacentLetter => adjacentLetter.letter)
 
       if (!doesListContainVowel(adjacentLettersWithoutDirection)) {
@@ -18,43 +19,6 @@ export const ensureConsonantsTouchAtLeastOneVowel = (letterList) => {
       }
     }
   })
-}
-
-export const returnAdjacentLettersInList = (letterList, position) => {
-  const adjacentLetters = []
-  if (letterList[position - 4]) {
-    adjacentLetters.push(
-      {
-        letter: letterList[position - 4],
-        direction: 'up'
-      }
-    )
-  }
-  if (position % 4 < (position + 1) % 4) {
-    adjacentLetters.push(
-      {
-        letter: letterList[position + 1],
-        direction: 'right'
-      }
-    )
-  }
-  if (letterList[position + 4]) {
-    adjacentLetters.push(
-      {
-        letter: letterList[position + 4],
-        direction: 'down'
-      }
-    )
-  }
-  if (position % 4 !== 0) {
-    adjacentLetters.push(
-      {
-        letter: letterList[position - 1],
-        direction: 'left'
-      }
-    )
-  }
-  return adjacentLetters
 }
 
 export const doesListContainVowel = (letterList) => {
