@@ -1,9 +1,10 @@
 import { ensureQHasAdjacentU } from './ensureQHasAdjacentU'
 import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
+import { DEFAULT_LETTER_LIST } from '../../../common/constants'
 
 describe('ensureQHasAdjacentU', () => {
   it('does not change the board if q is not present', () => {
-    const letterList = ['A', 'C', 'B', 'E', 'A', 'I', 'O', 'U']
+    const letterList = DEFAULT_LETTER_LIST
     const oldLetterList = [...letterList]
 
     ensureQHasAdjacentU(letterList)
@@ -12,7 +13,7 @@ describe('ensureQHasAdjacentU', () => {
   })
 
   it('adds a U if there is a Q', () => {
-    const letterList = ['Q', 'B', 'C', 'E', 'A', 'I', 'O', 'L']
+    const letterList = ['Q', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
 
     ensureQHasAdjacentU(letterList)
 
@@ -20,7 +21,7 @@ describe('ensureQHasAdjacentU', () => {
   })
 
   it('adds a U adjacent to the Q', () => {
-    const letterList = ['Q', 'B', 'C', 'E', 'A', 'I', 'O', 'L']
+    const letterList = ['Q', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']
 
     ensureQHasAdjacentU(letterList)
     const adjacentLettersToQ = returnAdjacentLetters(letterList, 0).map(object => object.letter)

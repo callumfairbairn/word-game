@@ -84,4 +84,10 @@ describe('returnAdjacentLetters', () => {
       { letter: 'M', direction: 'left' }
     ])
   })
+
+  it('doesnt work if you try to use a list not of length 16', () => {
+    const letterList = ['A', 'B', 'C', 'D', 'E', 'F', 'G']
+    const position = 0
+    expect(() => returnAdjacentLetters(letterList, position)).toThrow(Error)
+  })
 })

@@ -1,5 +1,8 @@
 export const returnAdjacentLetters = (letterList, position) => {
-  // TODO: Add check to make sure that letterList is 16 characters long
+  if (letterList.length !== 16) {
+    throw new Error('letterList not 16 letters long')
+  }
+
   const adjacentLetters = []
 
   if (isNotOnLeftEdge(position) && isNotOnTopEdge(position)) {
