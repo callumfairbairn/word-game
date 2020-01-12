@@ -11,4 +11,23 @@ describe('putSetOfAdjacentLettersBackIn', () => {
 
     expect(letterList).toEqual(['A', 'X', 'C', 'D', 'Y', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'])
   })
+
+  it('works with diagonal letters', () => {
+    const letterList = DEFAULT_LETTER_LIST
+    const position = 5
+    const adjacentLetters = [
+      { letter: 'S', direction: 'up-left' },
+      { letter: 'T', direction: 'up' },
+      { letter: 'U', direction: 'up-right' },
+      { letter: 'V', direction: 'right' },
+      { letter: 'W', direction: 'down-right' },
+      { letter: 'X', direction: 'down' },
+      { letter: 'Y', direction: 'down-left' },
+      { letter: 'Z', direction: 'left' }
+    ]
+
+    putSetOfAdjacentLettersBackIn(adjacentLetters, position, letterList)
+
+    expect(letterList).toEqual(['S', 'T', 'U', 'D', 'Z', 'F', 'V', 'H', 'Y', 'X', 'W', 'L', 'M', 'N', 'O', 'P'])
+  })
 })
