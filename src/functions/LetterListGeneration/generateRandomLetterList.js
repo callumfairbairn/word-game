@@ -11,8 +11,8 @@ export const generateRandomLetterList = () => {
   const letterList = generateBaseList()
 
   reduceNumberOfHardLetters(letterList)
-  ensureConsonantsTouchAtLeastOneVowel(letterList)
   increaseOccurrencesOfS(letterList)
+  ensureConsonantsTouchAtLeastOneVowel(letterList)
   ensureQHasAdjacentU(letterList)
   increaseNumberOfVowels(letterList)
   return letterList
