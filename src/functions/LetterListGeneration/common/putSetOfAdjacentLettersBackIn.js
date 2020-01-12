@@ -1,4 +1,8 @@
 export const putSetOfAdjacentLettersBackIn = (adjacentLetters, position, letterList) => {
+  if (letterList.length !== 16) {
+    throw new Error('letterList not 16 letters long')
+  }
+
   adjacentLetters.map((adjacentLetter) => {
     if (adjacentLetter.direction === 'up-left') {
       letterList[position - 5] = adjacentLetter.letter

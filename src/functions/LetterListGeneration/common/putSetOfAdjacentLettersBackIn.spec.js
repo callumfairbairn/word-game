@@ -30,4 +30,10 @@ describe('putSetOfAdjacentLettersBackIn', () => {
 
     expect(letterList).toEqual(['S', 'T', 'U', 'D', 'Z', 'F', 'V', 'H', 'Y', 'X', 'W', 'L', 'M', 'N', 'O', 'P'])
   })
+
+  it('throws error if letterList is not 16 letters long', () => {
+    const letterList = ['A', 'B', 'C']
+
+    expect(() => putSetOfAdjacentLettersBackIn([], 0, letterList)).toThrow(Error)
+  })
 })
