@@ -1,4 +1,5 @@
 import React from 'react'
+import './ScoreDisplay.scss'
 
 export const ScoreDisplay = ({ score = 0 }) => {
   return (
