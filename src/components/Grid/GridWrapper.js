@@ -9,15 +9,15 @@ import React, { useState, useEffect } from 'react'
 import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
 
-const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInputField }) => {
+const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, scoreHook, dict, resetInputField }) => {
   const [letterList] = letterListHook
   const [foundWords, setFoundWords] = foundWordsHook
   const [input, setInput] = inputHook
+  const [score, setScore] = scoreHook
 
   const blankGrid = generateGrid(letterList)
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
-  const [score, setScore] = useState(0)
 
   const paths = createPaths(blankGrid, input)
 

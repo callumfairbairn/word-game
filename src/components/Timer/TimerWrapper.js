@@ -3,16 +3,18 @@ import Timer from './Timer'
 import React, { useState } from 'react'
 import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
 
-const TimerWrapper = ({ letterListHook, foundWordsHook, inputHook, resetInputField }) => {
+const TimerWrapper = ({ letterListHook, foundWordsHook, inputHook, scoreHook, resetInputField }) => {
   const [, setLetterList] = letterListHook
   const [, setFoundWords] = foundWordsHook
   const [, setInput] = inputHook
+  const [, setScore] = scoreHook
 
   const resetGrid = () => {
     setTime(STARTING_TIME)
     setLetterList(generateRandomLetterList())
     setFoundWords([])
     setInput('')
+    setScore(0)
     resetInputField()
   }
 

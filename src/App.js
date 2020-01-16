@@ -8,12 +8,15 @@ function App () {
   const letterListHook = useState(generateRandomLetterList())
   const foundWordsHook = useState([])
   const inputHook = useState('')
+  const scoreHook = useState(0)
+
   const dict = require('./words')
+
   return (
     <div className='App'>
       <div className='container-a'>
-        <TimerWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} resetInputField={resetInputField} />
-        <GridWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} dict={dict} resetInputField={resetInputField} />
+        <TimerWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} resetInputField={resetInputField} />
+        <GridWrapper letterListHook={letterListHook} foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} dict={dict} resetInputField={resetInputField} />
       </div>
     </div>
   )
