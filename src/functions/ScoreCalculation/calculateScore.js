@@ -1,4 +1,4 @@
-import {letterValues} from "../../common/letterScores";
+import { letterValues } from '../../common/letterScores'
 
 export const calculateScore = (word) => {
   let score = 0;

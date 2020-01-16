@@ -1,4 +1,4 @@
-import {calculateScore} from "./calculateScore";
+import { calculateScore } from './calculateScore'
 
 describe('calculateScore', () => {
   it('returns the sum of the values of each letter', () => {

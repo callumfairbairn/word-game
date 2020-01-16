@@ -6,6 +6,8 @@ import { Grid } from './Grid'
 import { InputField } from '../InputField/InputField'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import React, { useState, useEffect } from 'react'
+import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
+import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
 
 const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInputField }) => {
   const [letterList] = letterListHook
@@ -15,6 +17,7 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
   const blankGrid = generateGrid(letterList)
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
+  const [score, setScore] = useState(0)
 
   const paths = createPaths(blankGrid, input)
 
@@ -39,11 +42,13 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, dict, resetInp
 
     if (newWordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
+      updateScore(score, setScore, input)
     }
   }
 
   return (
     <div className='container-b'>
+      <ScoreDisplay score={score} />
       <div className='grid-wrapper'>
         <div className='grid-container'>
           <Grid grid={grid} />
@@ -60,6 +65,10 @@ const updateFoundWords = (foundWords, setFoundWords, input) => {
   const newFoundWords = foundWords
   newFoundWords.push(input)
   setFoundWords(newFoundWords)
+}
+
+const updateScore = (score, setScore, input) => {
+  setScore(score + calculateScore(input))
 }
 
 export default GridWrapper
