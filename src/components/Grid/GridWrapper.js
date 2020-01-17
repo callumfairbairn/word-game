@@ -4,13 +4,12 @@ import calculateWordStatus from '../../functions/WordValidation/calculateWordSta
 import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLetterStatus'
 import { Grid } from './Grid'
 import { InputField } from '../InputField/InputField'
-import WordDisplay from '../WordDisplay/WordDisplay'
 import React, { useState, useEffect } from 'react'
-import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
 
-const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, scoreHook, dict, resetInputField }) => {
-  const [letterList] = letterListHook
+const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, resetInputField }) => {
+  const dict = require('../../words')
+
   const [foundWords, setFoundWords] = foundWordsHook
   const [input, setInput] = inputHook
   const [score, setScore] = scoreHook
@@ -47,16 +46,12 @@ const GridWrapper = ({ letterListHook, foundWordsHook, inputHook, scoreHook, dic
   }
 
   return (
-    <div className='container-b'>
-      <ScoreDisplay score={score} />
-      <div className='grid-wrapper'>
-        <div className='grid-container'>
-          <Grid grid={grid} />
-          <Grid grid={gridMask} mask />
-        </div>
-        <InputField setInput={setInput} onFormSubmit={onFormSubmit} />
+    <div className='grid-wrapper'>
+      <div className='grid-container'>
+        <Grid grid={grid} />
+        <Grid grid={gridMask} mask />
       </div>
-      <WordDisplay foundWords={foundWords} />
+      <InputField setInput={setInput} onFormSubmit={onFormSubmit} />
     </div>
   )
 }
