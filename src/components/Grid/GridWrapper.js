@@ -5,7 +5,7 @@ import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLet
 import { Grid } from './Grid'
 import { InputField } from '../InputField/InputField'
 import React, { useState, useEffect } from 'react'
-import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
+import { resetGridMask, resetInput, updateFoundWords, updateScore } from './GridWrapperHelperFunctions'
 
 const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, resetInputField }) => {
   const dict = require('../../words')
@@ -15,35 +15,34 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, resetIn
   const [score, setScore] = scoreHook
 
   const blankGrid = generateGrid(letterList)
+  const paths = createPaths(blankGrid, input)
+
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
 
-  const paths = createPaths(blankGrid, input)
+  const returnWordStatus = (userHasPressedReturn) => {
+    return calculateWordStatus(input, dict, foundWords, userHasPressedReturn)
+  }
 
-  useEffect(() => {
-    const wordStatus = calculateWordStatus(input, dict, foundWords, false)
-    setGrid(assignLetterStatus(blankGrid, paths, wordStatus))
+  const drawPathsOnGrid = (gridSetterFunction, wordStatus) => {
+    gridSetterFunction(assignLetterStatus(blankGrid, paths, wordStatus))
 
-    if (input.length > 0) {
-      setGridMask(generateGrid((letterList)))
-    }
-  }, [input, letterList])
-
-  const onFormSubmit = (event) => {
-    event.preventDefault()
-    setInput('')
-    resetInputField()
-    const newWordStatus = calculateWordStatus(input, dict, foundWords, true)
-
-    if (paths.length > 0) {
-      setGridMask(assignLetterStatus(blankGrid, paths, newWordStatus))
-    }
-
-    if (newWordStatus === 'correct' && paths.length > 0) {
+    if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
       updateScore(score, setScore, input)
     }
   }
+
+  const onFormSubmit = (event) => {
+    event.preventDefault()
+    resetInput(setInput, resetInputField)
+    drawPathsOnGrid(setGridMask, returnWordStatus(true))
+  }
+
+  useEffect(() => {
+    resetGridMask(input, setGridMask, blankGrid)
+    drawPathsOnGrid(setGrid, returnWordStatus(false))
+  }, [input, letterList])
 
   return (
     <div className='grid-wrapper'>
@@ -54,16 +53,6 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, resetIn
       <InputField setInput={setInput} onFormSubmit={onFormSubmit} />
     </div>
   )
-}
-
-const updateFoundWords = (foundWords, setFoundWords, input) => {
-  const newFoundWords = foundWords
-  newFoundWords.push(input)
-  setFoundWords(newFoundWords)
-}
-
-const updateScore = (score, setScore, input) => {
-  setScore(score + calculateScore(input))
 }
 
 export default GridWrapper
