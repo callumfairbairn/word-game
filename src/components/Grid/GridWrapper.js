@@ -5,9 +5,9 @@ import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLet
 import { Grid } from './Grid'
 import { InputField } from '../InputField/InputField'
 import React, { useState, useEffect } from 'react'
-import { resetGridMask, resetInput, updateFoundWords, updateScore } from './GridWrapperHelperFunctions'
+import { resetGridMask, resetInput, resetInputField, updateFoundWords, updateScore } from './GridWrapperHelperFunctions'
 
-const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, resetInputField }) => {
+const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList }) => {
   const dict = require('../../words')
 
   const [foundWords, setFoundWords] = foundWordsHook

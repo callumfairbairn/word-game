@@ -3,38 +3,29 @@ import TimerWrapper from '../Timer/TimerWrapper'
 import GridWrapper from '../Grid/GridWrapper'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
-import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
+import { resetInputField } from '../Grid/GridWrapperHelperFunctions'
 
-export const Game = ({ letterListHook, foundWordsHook, scoreHook }) => {
+export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning }) => {
   const inputHook = useState('')
 
   const [, setInput] = inputHook
-  const [letterList, setLetterList] = letterListHook
-  const [foundWords, setFoundWords] = foundWordsHook
-  const [score, setScore] = scoreHook
+  const [foundWords] = foundWordsHook
+  const [score] = scoreHook
 
-  const resetGame = () => {
-    setLetterList(generateRandomLetterList())
-    setFoundWords([])
+  const stopGame = () => {
     setInput('')
-    setScore(0)
     resetInputField()
+    setGameRunning(false)
   }
 
   return (
     <div className='game'>
-      <TimerWrapper resetGame={resetGame} />
+      <TimerWrapper endTimerFunction={stopGame} />
       <div className='container-b'>
         <ScoreDisplay score={score} />
-        <GridWrapper foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} letterList={letterList} resetInputField={resetInputField} />
+        <GridWrapper foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} letterList={letterList} />
         <WordDisplay foundWords={foundWords} />
       </div>
     </div>
   )
-}
-
-const resetInputField = () => {
-  if (document.getElementById('input-field')) {
-    document.getElementById('input-field').reset()
-  }
 }

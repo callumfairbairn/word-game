@@ -11,6 +11,12 @@ export const resetInput = (setInput, resetInputField) => {
   resetInputField()
 }
 
+export const resetInputField = () => {
+  if (document.getElementById('input-field')) {
+    document.getElementById('input-field').reset()
+  }
+}
+
 export const updateFoundWords = (foundWords, setFoundWords, input) => {
   const newFoundWords = foundWords
   newFoundWords.push(input)
