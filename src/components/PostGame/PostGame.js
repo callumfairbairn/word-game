@@ -3,11 +3,12 @@ import TimerWrapper from '../Timer/TimerWrapper'
 import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import './PostGame.scss'
+import { POST_GAME_STARTING_TIME } from '../../common/constants'
 
 export const PostGame = ({ startGame, score, foundWords }) => {
   return (
     <div className='post-game' data-testid='post-game'>
-      <TimerWrapper endTimerFunction={startGame} />
+      <TimerWrapper endTimerFunction={startGame} startingTime={POST_GAME_STARTING_TIME} />
       <div className='container-b'>
         <ScoreDisplay score={score} />
         <WordDisplay foundWords={foundWords} />

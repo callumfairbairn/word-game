@@ -1,11 +1,10 @@
-import { STARTING_TIME } from '../../common/constants'
 import Timer from './Timer'
 import React, { useState } from 'react'
 
-const TimerWrapper = ({ endTimerFunction }) => {
-  const [time, setTime] = useState(STARTING_TIME)
+const TimerWrapper = ({ endTimerFunction, startingTime }) => {
+  const [time, setTime] = useState(startingTime)
   if (time.minutes === -1 && time.seconds === 59) {
-    setTime(STARTING_TIME)
+    setTime(startingTime)
     endTimerFunction()
   }
 
