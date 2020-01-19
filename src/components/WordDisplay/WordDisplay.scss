@@ -2,7 +2,11 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 150px;
+  width: 180px;
+
+  .title {
+    font-size: xx-large;
+  }
 
   .number-of-words {
     display: flex;

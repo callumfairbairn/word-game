@@ -4,6 +4,9 @@ import './WordDisplay.scss'
 const WordDisplay = ({ foundWords }) => {
   return (
     <div className='word-display' data-testid='word-display'>
+      <div className='title'>
+        Found words
+      </div>
       <div className='number-of-words'>
         <div>
           {foundWords.length}
