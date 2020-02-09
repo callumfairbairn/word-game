@@ -1,4 +1,5 @@
 import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
+import { calculateNewUsedLetters } from '../../functions/UsedLetters/calculateNewUsedLetters'
 
 export const resetGridMask = (input, setGridMask, blankGrid) => {
   if (input.length > 0) {
@@ -25,4 +26,10 @@ export const updateFoundWords = (foundWords, setFoundWords, input) => {
 
 export const updateScore = (score, setScore, input) => {
   setScore(score + calculateScore(input))
+}
+
+export const updateUsedLetters = (usedLettersHook, paths) => {
+  const [usedLetters, setUsedLetters] = usedLettersHook
+
+  setUsedLetters(calculateNewUsedLetters(usedLetters, paths))
 }

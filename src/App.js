@@ -3,6 +3,7 @@ import './App.scss'
 import { generateRandomLetterList } from './functions/LetterListGeneration/generateRandomLetterList'
 import { Game } from './components/Game/Game'
 import { PostGame } from './components/PostGame/PostGame'
+import { generateFreshUsedLettersArray } from './functions/UsedLetters/generateFreshUsedLettersArray'
 
 const App = () => {
   const [letterList, setLetterList] = useState(generateRandomLetterList())
@@ -10,6 +11,7 @@ const App = () => {
 
   const foundWordsHook = useState([])
   const scoreHook = useState(0)
+  const usedLettersHook = useState(generateFreshUsedLettersArray())
 
   const [foundWords, setFoundWords] = foundWordsHook
   const [score, setScore] = scoreHook
@@ -24,7 +26,7 @@ const App = () => {
   return (
     <div className='App'>
       {
-        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} />
+        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} usedLettersHook={usedLettersHook} />
           : <PostGame startGame={startGame} score={score} foundWords={foundWords} />
       }
     </div>
