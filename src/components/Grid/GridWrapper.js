@@ -57,8 +57,8 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, usedLet
   return (
     <div className='grid-wrapper'>
       <div className='grid-container'>
-        <Grid grid={grid} />
-        <Grid grid={gridMask} mask />
+        <Grid grid={grid} gridType='default' />
+        <Grid grid={gridMask} gridType='mask' />
       </div>
       <InputField setInput={setInput} onFormSubmit={onFormSubmit} />
     </div>
