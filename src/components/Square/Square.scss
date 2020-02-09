@@ -46,6 +46,12 @@
   opacity: 0;
 }
 
+#a-heatmap {
+  .letter {
+    color: #000000
+  }
+}
+
 @keyframes opacity-fade {
   0% {opacity: 1;}
   25% {opacity: 0.75;}

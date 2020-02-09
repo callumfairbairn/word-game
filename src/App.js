@@ -15,6 +15,7 @@ const App = () => {
 
   const [foundWords, setFoundWords] = foundWordsHook
   const [score, setScore] = scoreHook
+  const [usedLetters] = usedLettersHook
 
   const startGame = () => {
     setLetterList(generateRandomLetterList())
@@ -27,7 +28,7 @@ const App = () => {
     <div className='App'>
       {
         gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} usedLettersHook={usedLettersHook} />
-          : <PostGame startGame={startGame} score={score} foundWords={foundWords} />
+          : <PostGame startGame={startGame} score={score} foundWords={foundWords} letterList={letterList} usedLetters={usedLetters} />
       }
     </div>
   )

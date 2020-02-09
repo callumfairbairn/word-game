@@ -1,5 +1,5 @@
 export const calculateNewUsedLetters = (usedLetters, paths) => {
-  const newUsedLetters = usedLetters.map((row) => row.slice())
+  const newUsedLetters = usedLetters.map(row => row.slice())
   const alreadySelectedLetters = []
 
   paths.forEach(letter => {
