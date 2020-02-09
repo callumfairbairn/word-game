@@ -1,5 +1,5 @@
 export const assignLetterStatus = (grid, paths, wordStatus) => {
-  const newGrid = grid.map(row => row.slice())
+  const newGrid = JSON.parse(JSON.stringify(grid))
   if (paths.length > 0) {
     paths.map(path => {
       path.map((letter, i) => {
