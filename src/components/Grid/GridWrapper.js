@@ -26,17 +26,19 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList }) => {
 
   const drawPathsOnGrid = (gridSetterFunction, wordStatus) => {
     gridSetterFunction(assignLetterStatus(blankGrid, paths, wordStatus))
+  }
+
+  const onFormSubmit = (event) => {
+    const wordStatus = returnWordStatus(true)
+
+    event.preventDefault()
+    resetInput(setInput, resetInputField)
+    drawPathsOnGrid(setGridMask, wordStatus)
 
     if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
       updateScore(score, setScore, input)
     }
-  }
-
-  const onFormSubmit = (event) => {
-    event.preventDefault()
-    resetInput(setInput, resetInputField)
-    drawPathsOnGrid(setGridMask, returnWordStatus(true))
   }
 
   useEffect(() => {
