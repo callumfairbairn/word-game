@@ -1,5 +1,5 @@
 import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
-import { calculateNewUsedLetters } from '../../functions/UsedLetters/calculateNewUsedLetters'
+import { calculateNewHeatMap } from '../../functions/calculateHeatMap/calculateNewHeatMap'
 
 export const resetGridMask = (input, setGridMask, blankGrid) => {
   if (input.length > 0) {
@@ -28,8 +28,8 @@ export const updateScore = (score, setScore, input) => {
   setScore(score + calculateScore(input))
 }
 
-export const updateUsedLetters = (usedLettersHook, paths) => {
-  const [usedLetters, setUsedLetters] = usedLettersHook
+export const updateHeatMap = (heatMeapHook, paths) => {
+  const [heatMap, setHeatMap] = heatMeapHook
 
-  setUsedLetters(calculateNewUsedLetters(usedLetters, paths))
+  setHeatMap(calculateNewHeatMap(heatMap, paths))
 }

@@ -11,10 +11,10 @@ import {
   resetInputField,
   updateFoundWords,
   updateScore,
-  updateUsedLetters
+  updateHeatMap
 } from './GridWrapperHelperFunctions'
 
-const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, usedLettersHook }) => {
+const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMeapHook }) => {
   const dict = require('../../words')
 
   const [foundWords, setFoundWords] = foundWordsHook
@@ -45,7 +45,7 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, usedLet
     if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
       updateScore(score, setScore, input)
-      updateUsedLetters(usedLettersHook, paths)
+      updateHeatMap(heatMeapHook, paths)
     }
   }
 

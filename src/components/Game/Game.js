@@ -6,7 +6,7 @@ import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import { resetInputField } from '../Grid/GridWrapperHelperFunctions'
 import { GAME_STARTING_TIME } from '../../common/constants'
 
-export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning, usedLettersHook }) => {
+export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning, heatMeapHook }) => {
   const inputHook = useState('')
 
   const [, setInput] = inputHook
@@ -24,7 +24,7 @@ export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning, us
       <TimerWrapper endTimerFunction={stopGame} startingTime={GAME_STARTING_TIME} />
       <div className='container-b'>
         <ScoreDisplay score={score} />
-        <GridWrapper foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} letterList={letterList} usedLettersHook={usedLettersHook} />
+        <GridWrapper foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} letterList={letterList} heatMeapHook={heatMeapHook} />
         <WordDisplay foundWords={foundWords} />
       </div>
     </div>

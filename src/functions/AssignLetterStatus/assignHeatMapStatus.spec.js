@@ -1,14 +1,14 @@
 import { generateGrid } from '../GridGeneration/generateGrid'
 import { generateRandomLetterList } from '../LetterListGeneration/generateRandomLetterList'
-import { generateFreshUsedLettersArray } from '../UsedLetters/generateFreshUsedLettersArray'
+import { generateFreshHeatMapArray } from '../calculateHeatMap/generateFreshHeatMapArray'
 import { assignHeatMapStatus } from './assignHeatMapStatus'
-import { calculateNewUsedLetters } from '../UsedLetters/calculateNewUsedLetters'
+import { calculateNewHeatMap } from '../calculateHeatMap/calculateNewHeatMap'
 
 describe('assignHeatMapStatus', () => {
-  it('assigns 0.1 status is usedLetters is fresh', () => {
+  it('assigns 0.1 status is heatMap is fresh', () => {
     const grid = generateGrid(generateRandomLetterList())
-    const usedLetters = generateFreshUsedLettersArray()
-    const assignedGrid = assignHeatMapStatus(grid, usedLetters)
+    const heatMap = generateFreshHeatMapArray()
+    const assignedGrid = assignHeatMapStatus(grid, heatMap)
 
     assignedGrid.map(x => {
       x.map(y => {
@@ -17,12 +17,12 @@ describe('assignHeatMapStatus', () => {
     })
   })
 
-  it('assigns 0.9 for the case where max number in usedLetters is 1', () => {
+  it('assigns 0.9 for the case where max number in heatMap is 1', () => {
     const grid = generateGrid(generateRandomLetterList())
     const paths = [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }]
-    const usedLetters = calculateNewUsedLetters(generateFreshUsedLettersArray(), paths)
+    const heatMap = calculateNewHeatMap(generateFreshHeatMapArray(), paths)
 
-    const assignedGrid = assignHeatMapStatus(grid, usedLetters)
+    const assignedGrid = assignHeatMapStatus(grid, heatMap)
 
     expect(assignedGrid[0][0].status).toEqual(0.9)
     expect(assignedGrid[0][1].status).toEqual(0.9)
@@ -45,12 +45,12 @@ describe('assignHeatMapStatus', () => {
   it('assigns 0.5 for the case where a number is half of the max number', () => {
     const grid = generateGrid(generateRandomLetterList())
     const path1 = [{ x: 0, y: 0 }, { x: 0, y: 1 }, { x: 0, y: 2 }]
-    const usedLetters1 = calculateNewUsedLetters(generateFreshUsedLettersArray(), path1)
+    const heatMap1 = calculateNewHeatMap(generateFreshHeatMapArray(), path1)
 
     const path2 = [{ x: 0, y: 0 }, { x: 1, y: 1 }, { x: 1, y: 2 }]
-    const usedLetters2 = calculateNewUsedLetters(usedLetters1, path2)
+    const heatMap2 = calculateNewHeatMap(heatMap1, path2)
 
-    const assignedGrid = assignHeatMapStatus(grid, usedLetters2)
+    const assignedGrid = assignHeatMapStatus(grid, heatMap2)
 
     expect(assignedGrid[0][0].status).toEqual(0.9)
     expect(assignedGrid[0][1].status).toEqual(0.5)

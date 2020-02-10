@@ -1,5 +1,5 @@
-export const calculateNewUsedLetters = (usedLetters, paths) => {
-  const newUsedLetters = usedLetters.map(row => row.slice())
+export const calculateNewHeatMap = (heatMap, paths) => {
+  const newHeatMap = heatMap.map(row => row.slice())
   const alreadySelectedLetters = []
 
   paths.forEach(letter => {
@@ -7,23 +7,23 @@ export const calculateNewUsedLetters = (usedLetters, paths) => {
       letter.forEach(subLetter => {
         if (Array.isArray(subLetter)) {
           subLetter.forEach(subSubLetter => {
-            dealWithLetter(newUsedLetters, alreadySelectedLetters, subSubLetter)
+            dealWithLetter(newHeatMap, alreadySelectedLetters, subSubLetter)
           })
         } else {
-          dealWithLetter(newUsedLetters, alreadySelectedLetters, subLetter)
+          dealWithLetter(newHeatMap, alreadySelectedLetters, subLetter)
         }
       })
     } else {
-      dealWithLetter(newUsedLetters, alreadySelectedLetters, letter)
+      dealWithLetter(newHeatMap, alreadySelectedLetters, letter)
     }
   })
 
-  return newUsedLetters
+  return newHeatMap
 }
 
-const dealWithLetter = (newUsedLetters, alreadySelectedLetters, letter) => {
+const dealWithLetter = (newHeatMap, alreadySelectedLetters, letter) => {
   if (!letterHasAlreadyBeenSelected(alreadySelectedLetters, letter)) {
-    newUsedLetters[letter.x][letter.y]++
+    newHeatMap[letter.x][letter.y]++
     alreadySelectedLetters.push(letter)
   }
 }
