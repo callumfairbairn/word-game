@@ -11,8 +11,8 @@ export const PostGame = ({ startGame, score, foundWords, letterList, heatMap }) 
     <div className='post-game' data-testid='post-game'>
       <TimerWrapper endTimerFunction={startGame} startingTime={POST_GAME_STARTING_TIME} />
       <div className='container-b'>
-        <HeatMap letterList={letterList} heatMap={heatMap} />
         <ScoreDisplay score={score} />
+        <HeatMap letterList={letterList} heatMap={heatMap} />
         <WordDisplay foundWords={foundWords} />
       </div>
     </div>

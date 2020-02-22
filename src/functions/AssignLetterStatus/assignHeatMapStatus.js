@@ -7,7 +7,6 @@ export const assignHeatMapStatus = (grid, heatMap) => {
     if (value > max) {
       max = value
     }
-
   }))
 
   return grid.map((row, x) => row.map((letter, y) => {
