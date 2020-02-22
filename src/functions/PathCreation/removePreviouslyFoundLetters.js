@@ -4,9 +4,9 @@ const removePreviouslyFoundLetters = (letters, thisPath) => {
     return letters.filter(letter => {
       let maybeFound = 0
       let definitelyFound = 0
-      thisPath.map(pathLetter => {
+      thisPath.forEach(pathLetter => {
         if (Array.isArray(pathLetter)) {
-          pathLetter.map(subLetter => {
+          pathLetter.forEach(subLetter => {
             if (!hasLetterAppearedBefore(letter, subLetter)) { maybeFound++ }
           })
         } else {

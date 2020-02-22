@@ -1,6 +1,6 @@
 export const returnNumberOfTimesSetAppearsInList = (letterList, set) => {
   let vowelCounter = 0
-  letterList.map(letter => {
+  letterList.forEach(letter => {
     if (set.includes(letter)) {
       vowelCounter++
     }

@@ -4,7 +4,7 @@ import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
 import { putSetOfAdjacentLettersBackIn } from '../common/putSetOfAdjacentLettersBackIn'
 
 export const ensureQHasAdjacentU = (letterList) => {
-  letterList.map((letter, position) => {
+  letterList.forEach((letter, position) => {
     if (letter === 'Q') {
       const adjacentLetters = returnAdjacentLetters(letterList, position)
       const adjacentLettersWithoutDirection = adjacentLetters.map(adjacentLetter => adjacentLetter.letter)
@@ -12,7 +12,7 @@ export const ensureQHasAdjacentU = (letterList) => {
       if (!adjacentLettersWithoutDirection.includes('U')) {
         addLetterFromSet(adjacentLettersWithoutDirection, ['U'])
 
-        adjacentLettersWithoutDirection.map((adjacentLetter, adjacentLetterPosition) => {
+        adjacentLettersWithoutDirection.forEach((adjacentLetter, adjacentLetterPosition) => {
           adjacentLetters[adjacentLetterPosition].letter = adjacentLetter
         })
 

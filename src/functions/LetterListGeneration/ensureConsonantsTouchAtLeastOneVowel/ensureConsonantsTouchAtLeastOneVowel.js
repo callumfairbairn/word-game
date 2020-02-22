@@ -4,7 +4,7 @@ import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
 import { putSetOfAdjacentLettersBackIn } from '../common/putSetOfAdjacentLettersBackIn'
 
 export const ensureConsonantsTouchAtLeastOneVowel = (letterList) => {
-  letterList.map((letter, position) => {
+  letterList.forEach((letter, position) => {
     if (CONSONANTS.includes(letter)) {
       const adjacentLetters = returnAdjacentLetters(letterList, position)
       const adjacentLettersWithoutDirection = adjacentLetters.map(adjacentLetter => adjacentLetter.letter)
@@ -12,7 +12,7 @@ export const ensureConsonantsTouchAtLeastOneVowel = (letterList) => {
       if (!doesListContainVowel(adjacentLettersWithoutDirection)) {
         addLetterFromSet(adjacentLettersWithoutDirection, VOWELS)
 
-        adjacentLettersWithoutDirection.map((adjacentLetter, adjacentLetterPosition) => {
+        adjacentLettersWithoutDirection.forEach((adjacentLetter, adjacentLetterPosition) => {
           adjacentLetters[adjacentLetterPosition].letter = adjacentLetter
         })
 
