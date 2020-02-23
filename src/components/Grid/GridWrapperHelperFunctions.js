@@ -28,8 +28,8 @@ export const updateScore = (score, setScore, input) => {
   setScore(score + calculateScore(input))
 }
 
-export const updateHeatMap = (heatMeapHook, paths) => {
-  const [heatMap, setHeatMap] = heatMeapHook
+export const updateHeatMap = (heatMapHook, paths) => {
+  const [heatMap, setHeatMap] = heatMapHook
 
   setHeatMap(calculateNewHeatMap(heatMap, paths))
 }

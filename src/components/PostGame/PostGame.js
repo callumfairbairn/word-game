@@ -7,6 +7,7 @@ import { POST_GAME_STARTING_TIME } from '../../common/constants'
 import { HeatMap } from '../HeatMap/HeatMap'
 
 export const PostGame = ({ startGame, score, foundWords, letterList, heatMap }) => {
+  console.log(heatMap)
   return (
     <div className='post-game' data-testid='post-game'>
       <TimerWrapper endTimerFunction={startGame} startingTime={POST_GAME_STARTING_TIME} />

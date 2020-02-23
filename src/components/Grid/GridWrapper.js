@@ -14,7 +14,7 @@ import {
   updateHeatMap
 } from './GridWrapperHelperFunctions'
 
-const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMeapHook }) => {
+const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMapHook }) => {
   const dict = require('../../words')
 
   const [foundWords, setFoundWords] = foundWordsHook
@@ -45,7 +45,7 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMea
     if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
       updateScore(score, setScore, input)
-      updateHeatMap(heatMeapHook, paths)
+      updateHeatMap(heatMapHook, paths)
     }
   }
 

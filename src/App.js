@@ -11,11 +11,12 @@ const App = () => {
 
   const foundWordsHook = useState([])
   const scoreHook = useState(0)
-  const heatMeapHook = useState(generateFreshHeatMapArray())
+  const heatMapHook = useState(generateFreshHeatMapArray())
 
   const [foundWords, setFoundWords] = foundWordsHook
   const [score, setScore] = scoreHook
-  const [heatMap] = heatMeapHook
+  const [heatMap] = heatMapHook
+  console.log(heatMap)
 
   const startGame = () => {
     setLetterList(generateRandomLetterList())
@@ -27,8 +28,8 @@ const App = () => {
   return (
     <div className='App'>
       {
-        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} heatMeapHook={heatMeapHook} />
-          : <PostGame startGame={startGame} score={score} foundWords={foundWords} letterList={letterList} heatMeap={heatMap} />
+        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} heatMapHook={heatMapHook} />
+          : <PostGame startGame={startGame} score={score} foundWords={foundWords} letterList={letterList} heatMap={heatMap} />
       }
     </div>
   )
