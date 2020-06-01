@@ -1,35 +1,27 @@
 import React, { useState } from 'react'
 import './App.scss'
 import { generateRandomLetterList } from './functions/LetterListGeneration/generateRandomLetterList'
-import { Game } from './components/Game/Game'
-import { PostGame } from './components/PostGame/PostGame'
-import { generateFreshHeatMapArray } from './functions/calculateHeatMap/generateFreshHeatMapArray'
+import { generateGrid } from './functions/GridGeneration/generateGrid'
+import { findWords } from './functions/FindWords/findWords'
+import { SharedStateLayer } from './components/SharedStateLayer/SharedStateLayer'
 
 const App = () => {
+  const dict = require('./words')
+
   const [letterList, setLetterList] = useState(generateRandomLetterList())
   const [gameRunning, setGameRunning] = useState(true)
 
-  const foundWordsHook = useState([])
-  const scoreHook = useState(0)
-  const heatMapHook = useState(generateFreshHeatMapArray())
-
-  const [foundWords, setFoundWords] = foundWordsHook
-  const [score, setScore] = scoreHook
-  const [heatMap] = heatMapHook
-
-  const startGame = () => {
-    setLetterList(generateRandomLetterList())
-    setGameRunning(true)
-    setFoundWords([])
-    setScore(0)
-  }
+  const possibleWords = findWords(generateGrid(letterList), dict)
 
   return (
     <div className='App'>
-      {
-        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} heatMapHook={heatMapHook} />
-          : <PostGame startGame={startGame} score={score} foundWords={foundWords} letterList={letterList} heatMap={heatMap} />
-      }
+      <SharedStateLayer
+        letterList={letterList}
+        setLetterList={setLetterList}
+        gameRunning={gameRunning}
+        setGameRunning={setGameRunning}
+        possibleWords={possibleWords}
+      />
     </div>
   )
 }

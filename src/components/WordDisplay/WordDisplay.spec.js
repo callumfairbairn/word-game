@@ -6,14 +6,14 @@ import '../../reactTestSetup'
 
 describe('WordDisplay', () => {
   it('renders an empty display when foundWords is empty', () => {
-    const { queryByTestId } = render(<WordDisplay foundWords={[]} />)
+    const { queryByTestId } = render(<WordDisplay foundWords={[]} possibleWords={[]} />)
     const wordDisplay = queryByTestId('word-display')
     expect(wordDisplay).toBeTruthy()
   })
 
   it('renders the contents of foundWords', () => {
     const foundWords = ['one', 'two', 'three', 'four']
-    const { queryByTestId } = render(<WordDisplay foundWords={foundWords} />)
+    const { queryByTestId } = render(<WordDisplay foundWords={foundWords} possibleWords={[]} />)
     const wordDisplay = queryByTestId('word-display')
     expect(within(wordDisplay).queryByText('one')).toBeTruthy()
     expect(within(wordDisplay).queryByText('two')).toBeTruthy()
@@ -21,9 +21,10 @@ describe('WordDisplay', () => {
     expect(within(wordDisplay).queryByText('four')).toBeTruthy()
   })
 
-  it('shows how many words have been found', () => {
-    const foundWords = ['one', 'two', 'three', 'four']
-    const { getByText } = render(<WordDisplay foundWords={foundWords} />)
-    expect(getByText('4'))
+  it('displays the number of found words and the number of possible found words', () => {
+    const foundWords = ['one', 'two']
+    const possibleWords = ['one', 'two', 'three']
+    const { getByText } = render(<WordDisplay foundWords={foundWords} possibleWords={possibleWords} />)
+    expect(getByText('2/3'))
   })
 })

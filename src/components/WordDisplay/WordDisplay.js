@@ -1,7 +1,7 @@
 import React from 'react'
 import './WordDisplay.scss'
 
-const WordDisplay = ({ foundWords }) => {
+const WordDisplay = ({ foundWords, possibleWords }) => {
   return (
     <div className='word-display' data-testid='word-display'>
       <div className='title'>
@@ -9,7 +9,7 @@ const WordDisplay = ({ foundWords }) => {
       </div>
       <div className='number-of-words'>
         <div>
-          {foundWords.length}
+          {foundWords.length}/{possibleWords.length}
         </div>
       </div>
       <div className='found-words'>

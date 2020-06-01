@@ -8,7 +8,7 @@ export const generateGrid = (letterList = DEFAULT_LETTER_LIST) => {
       return {
         letter: letterList[i],
         status: null,
-        location: { x: x , y: y }
+        location: { x: x, y: y }
       }
     })
   })

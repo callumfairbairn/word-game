@@ -1,5 +1,5 @@
-import { recursivelyFindWords } from "./recursivelyFindWords";
-import { nextDirectionMap } from "./nextDirectionMap";
+import { recursivelyFindWords } from './recursivelyFindWords'
+import { nextDirectionMap } from './nextDirectionMap'
 
 export const findWords = (grid, dict) => {
   const foundWords = []
