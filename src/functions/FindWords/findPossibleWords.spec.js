@@ -1,5 +1,5 @@
-import {findPossibleWords} from "./findPossibleWords";
-import {expectArrayToContainInAnyOrder} from "../../testHelpers/ExpectArrayToContainInAnyOrder/expectArrayToContainInAnyOrder";
+import { findPossibleWords } from './findPossibleWords'
+import { expectArrayToContainInAnyOrder } from '../../testHelpers/ExpectArrayToContainInAnyOrder/expectArrayToContainInAnyOrder'
 
 const dict = require('../../words')
 

@@ -1,4 +1,4 @@
-import {arrayToString} from "./arrayToString";
+import { arrayToString } from './arrayToString'
 
 describe('arrayToString', () => {
   it('returns empty string given sn empty array', () => {

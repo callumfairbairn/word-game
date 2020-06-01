@@ -16,7 +16,6 @@ const App = () => {
   const [foundWords, setFoundWords] = foundWordsHook
   const [score, setScore] = scoreHook
   const [heatMap] = heatMapHook
-  console.log(heatMap)
 
   const startGame = () => {
     setLetterList(generateRandomLetterList())
