@@ -1,3 +1,3 @@
-export const findPossibleWords = (input, dict) => {
-  return dict.words.filter(word => { return word.startsWith(input) })
+export const findPossibleWords = (input, possibleWords) => {
+  return possibleWords.filter(word => { return word.startsWith(input) })
 }

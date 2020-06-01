@@ -1,6 +1,10 @@
 export const nextDirectionMap = {
-  right: 'down',
-  down: 'left',
-  left: 'up',
-  up: 'right'
+  right: 'downright',
+  downright: 'down',
+  down: 'downleft',
+  downleft: 'left',
+  left: 'upleft',
+  upleft: 'up',
+  up: 'upright',
+  upright: 'right'
 }

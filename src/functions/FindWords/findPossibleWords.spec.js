@@ -1,7 +1,7 @@
 import { findPossibleWords } from './findPossibleWords'
 import { expectArrayToContainInAnyOrder } from '../../testHelpers/ExpectArrayToContainInAnyOrder/expectArrayToContainInAnyOrder'
 
-const dict = require('../../words')
+const dict = require('../../words').words
 
 describe('findPossibleWords', () => {
   it('returns empty string if input is not the start of any word', () => {

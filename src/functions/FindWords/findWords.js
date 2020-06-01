@@ -1,5 +1,6 @@
 import { recursivelyFindWords } from './recursivelyFindWords'
 import { nextDirectionMap } from './nextDirectionMap'
+import { findPossibleWords } from './findPossibleWords'
 
 export const findWords = (grid, dict) => {
   const foundWords = []
@@ -8,7 +9,8 @@ export const findWords = (grid, dict) => {
     row.forEach((startingLetter) => {
       let newDirection = 'right'
       do {
-        recursivelyFindWords([startingLetter], foundWords, newDirection, grid, dict)
+        const possibleWords = findPossibleWords(startingLetter.letter.toLowerCase(), dict.words)
+        recursivelyFindWords([startingLetter], foundWords, possibleWords, newDirection, grid)
         newDirection = nextDirectionMap[newDirection]
       } while (newDirection !== 'up')
     })
