@@ -18,4 +18,9 @@ describe('findPossibleWords', () => {
     const startOfWord = 'catamaran'
     expectArrayToContainInAnyOrder(findPossibleWords(startOfWord, dict), ['catamaran', 'catamarans'])
   })
+
+  it('does not returns words that do not start with the input string', () => {
+    const startOfWord = 'purposed'
+    expectArrayToContainInAnyOrder(findPossibleWords(startOfWord, dict), ['purposed'])
+  })
 })
