@@ -1,6 +1,6 @@
 import { DEFAULT_LETTER_LIST, VOWELS } from '../../../common/constants'
 import { doesListContainVowel, ensureConsonantsTouchAtLeastOneVowel } from './ensureConsonantsTouchAtLeastOneVowel'
-import { runAssertionOneHundredTimes } from '../../RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
+import { runAssertionOneHundredTimes } from '../../../testHelpers/RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
 import { returnAdjacentLetters } from '../common/returnAdjacentLetters'
 
 describe('ensureConsonantsTouchAtLeastOneVowel', () => {

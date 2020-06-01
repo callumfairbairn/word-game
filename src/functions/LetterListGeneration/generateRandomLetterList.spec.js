@@ -7,7 +7,7 @@ import {
   Y_DIM
 } from '../../common/constants'
 import { generateRandomLetterList } from './generateRandomLetterList'
-import { runAssertionOneHundredTimes } from '../RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
+import { runAssertionOneHundredTimes } from '../../testHelpers/RunAssertionOneHundredTimes/runAssertionOneHundredTimes'
 
 describe('generateRandomLetterList', () => {
   it('generates a random list of letters of length equal to X_DIM * Y_DIM', () => {
