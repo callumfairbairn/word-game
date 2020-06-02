@@ -4,11 +4,12 @@ import { Game } from '../Game/Game'
 import { PostGame } from '../PostGame/PostGame'
 import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
 
-export const SharedStateLayer = ({ letterList, setLetterList, gameRunning, setGameRunning, possibleWords }) => {
+export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) => {
   const foundWordsHook = useState([])
   const scoreHook = useState(0)
   const heatMapHook = useState(generateFreshHeatMapArray())
 
+  const [gameRunning, setGameRunning] = useState(true)
   const [foundWords, setFoundWords] = foundWordsHook
   const [score, setScore] = scoreHook
   const [heatMap] = heatMapHook

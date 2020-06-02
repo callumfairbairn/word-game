@@ -9,7 +9,6 @@ const App = () => {
   const dict = require('./words')
 
   const [letterList, setLetterList] = useState(generateRandomLetterList())
-  const [gameRunning, setGameRunning] = useState(true)
 
   const possibleWords = findWords(generateGrid(letterList), dict)
 
@@ -18,8 +17,6 @@ const App = () => {
       <SharedStateLayer
         letterList={letterList}
         setLetterList={setLetterList}
-        gameRunning={gameRunning}
-        setGameRunning={setGameRunning}
         possibleWords={possibleWords}
       />
     </div>
