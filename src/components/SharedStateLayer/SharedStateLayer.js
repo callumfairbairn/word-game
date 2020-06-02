@@ -23,8 +23,25 @@ export const SharedStateLayer = ({ letterList, setLetterList, gameRunning, setGa
   return (
     <div>
       {
-        gameRunning ? <Game foundWordsHook={foundWordsHook} scoreHook={scoreHook} letterList={letterList} setGameRunning={setGameRunning} heatMapHook={heatMapHook} possibleWords={possibleWords} />
-          : <PostGame startGame={startGame} score={score} foundWords={foundWords} letterList={letterList} heatMap={heatMap} />
+        gameRunning ? (
+          <Game
+            foundWordsHook={foundWordsHook}
+            scoreHook={scoreHook}
+            letterList={letterList}
+            setGameRunning={setGameRunning}
+            heatMapHook={heatMapHook}
+            possibleWords={possibleWords}
+          />
+        ) : (
+          <PostGame
+            startGame={startGame}
+            score={score}
+            foundWords={foundWords}
+            letterList={letterList}
+            heatMap={heatMap}
+            possibleWords={possibleWords}
+          />
+        )
       }
     </div>
   )

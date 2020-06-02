@@ -1,0 +1,10 @@
+.possible-words-display {
+  .title {
+    font-size: xx-large;
+  }
+
+  .missed-words {
+    overflow: scroll;
+    max-height: 60vh;
+  }
+}
