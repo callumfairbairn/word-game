@@ -8,21 +8,18 @@ import {
   resetGridMask,
   resetInput,
   resetInputField,
-  updateFoundWords,
-  updateHeatMap,
+  updateFoundWords, updateHeatMap,
   updateScore
 } from './GridWrapperHelperFunctions'
 
-const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, blankGrid, heatMapHook }) => {
+const GridWrapper = ({ foundWords, setFoundWords, score, setScore, heatMap, setHeatMap, inputHook, blankGrid }) => {
   const dict = require('../../words')
 
-  const [foundWords, setFoundWords] = foundWordsHook
   const [input, setInput] = inputHook
-
-  const paths = createPaths(blankGrid, input)
-
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
+
+  const paths = createPaths(blankGrid, input)
 
   const onFormSubmit = (event) => {
     const wordStatus = calculateWordStatus(input, dict, foundWords, true)
@@ -33,8 +30,8 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, blankGrid, heatMapH
 
     if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
-      updateScore(scoreHook, input)
-      updateHeatMap(heatMapHook, paths)
+      updateScore(score, setScore, input)
+      updateHeatMap(heatMap, setHeatMap, paths)
     }
   }
 

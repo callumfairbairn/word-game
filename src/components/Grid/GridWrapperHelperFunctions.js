@@ -25,14 +25,11 @@ export const updateFoundWords = (foundWords, setFoundWords, input) => {
   setFoundWords(newFoundWords)
 }
 
-export const updateScore = (scoreHook, input) => {
-  const [score, setScore] = scoreHook
+export const updateScore = (score, setScore, input) => {
   setScore(score + calculateScore(input))
 }
 
-export const updateHeatMap = (heatMapHook, paths) => {
-  const [heatMap, setHeatMap] = heatMapHook
-
+export const updateHeatMap = (heatMap, setHeatMap, paths) => {
   setHeatMap(calculateNewHeatMap(heatMap, paths))
 }
 

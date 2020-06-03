@@ -11,14 +11,10 @@ import { PossibleWordsDisplay } from '../PossibleWordsDisplay/PossibleWordsDispl
 import { generateGrid } from '../../functions/GridGeneration/generateGrid'
 
 export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) => {
-  const foundWordsHook = useState([])
-  const scoreHook = useState(0)
-  const heatMapHook = useState(generateFreshHeatMapArray())
-
+  const [foundWords, setFoundWords] = useState([])
+  const [score, setScore] = useState(0)
   const [gameRunning, setGameRunning] = useState(true)
-  const [foundWords, setFoundWords] = foundWordsHook
-  const [score, setScore] = scoreHook
-  const [heatMap] = heatMapHook
+  const [heatMap, setHeatMap] = useState(generateFreshHeatMapArray())
 
   const restartGame = () => {
     setLetterList(generateRandomLetterList())
@@ -33,20 +29,22 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
     <div>
       {
         gameRunning ? (
-          <Game setGameRunning={setGameRunning} >
+          <Game setGameRunning={setGameRunning}>
             {(inputHook) =>
               <>
                 <ScoreDisplay score={score} />
                 <GridWrapper
-                  foundWordsHook={foundWordsHook}
-                  scoreHook={scoreHook}
-                  heatMapHook={heatMapHook}
+                  foundWords={foundWords}
+                  setFoundWords={setFoundWords}
+                  score={score}
+                  setScore={setScore}
+                  heatMap={heatMap}
+                  setHeatMap={setHeatMap}
                   inputHook={inputHook}
                   blankGrid={blankGrid}
                 />
                 <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
-              </>
-            }
+              </>}
           </Game>
         ) : (
           <PostGame restartGame={restartGame}>
