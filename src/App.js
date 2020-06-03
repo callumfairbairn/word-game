@@ -3,7 +3,7 @@ import './App.scss'
 import { generateRandomLetterList } from './functions/LetterListGeneration/generateRandomLetterList'
 import { generateGrid } from './functions/GridGeneration/generateGrid'
 import { findWords } from './functions/FindWords/findWords'
-import { SharedStateLayer } from './components/SharedStateLayer/SharedStateLayer'
+import { Game } from './components/Game/Game'
 
 const App = () => {
   const dict = require('./words')
@@ -14,7 +14,7 @@ const App = () => {
 
   return (
     <div className='App'>
-      <SharedStateLayer
+      <Game
         letterList={letterList}
         setLetterList={setLetterList}
         possibleWords={possibleWords}

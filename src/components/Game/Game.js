@@ -10,7 +10,7 @@ import { generateGrid } from '../../functions/GridGeneration/generateGrid'
 import { resetInputField } from '../Grid/GridWrapperHelperFunctions'
 import TimerWrapper from '../Timer/TimerWrapper'
 
-export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) => {
+export const Game = ({ letterList, setLetterList, possibleWords }) => {
   const [foundWords, setFoundWords] = useState([])
   const [score, setScore] = useState(0)
   const [gameRunning, setGameRunning] = useState(true)
