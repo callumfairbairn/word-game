@@ -1,8 +1,7 @@
 import { Grid } from './Grid'
-import { InputField } from '../InputField/InputField'
 import React, { useEffect, useState } from 'react'
 
-const GridWrapper = ({ setInput, blankGrid, handleSubmittedInput, handleAnyInput }) => {
+const GridWrapper = ({ blankGrid, handleSubmittedInput, handleAnyInput, children }) => {
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
 
@@ -16,7 +15,7 @@ const GridWrapper = ({ setInput, blankGrid, handleSubmittedInput, handleAnyInput
         <Grid grid={grid} gridType='default' />
         <Grid grid={gridMask} gridType='mask' />
       </div>
-      <InputField setInput={setInput} onFormSubmit={handleSubmittedInput(setGridMask)} />
+      {children(handleSubmittedInput(setGridMask))}
     </div>
   )
 }

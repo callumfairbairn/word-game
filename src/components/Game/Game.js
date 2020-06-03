@@ -13,10 +13,11 @@ import {
   resetInputField,
   updateFoundWords, updateHeatMap,
   updateScore
-} from '../Grid/GridWrapperHelperFunctions'
+} from './GameHelperFunctions'
 import TimerWrapper from '../Timer/TimerWrapper'
 import calculateWordStatus from '../../functions/WordValidation/calculateWordStatus'
 import createPaths from '../../functions/PathCreation/createPaths'
+import { InputField } from '../InputField/InputField'
 
 export const Game = ({ letterList, setLetterList, possibleWords }) => {
   const dict = require('../../words')
@@ -76,7 +77,9 @@ export const Game = ({ letterList, setLetterList, possibleWords }) => {
                 blankGrid={blankGrid}
                 handleSubmittedInput={handleSubmittedInput}
                 handleAnyInput={handleAnyInput}
-              />
+              >
+                {onFormSubmit => <InputField setInput={setInput} onFormSubmit={onFormSubmit} />}
+              </GridWrapper>
               <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
             </div>
           </div>
