@@ -19,7 +19,6 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMap
 
   const [foundWords, setFoundWords] = foundWordsHook
   const [input, setInput] = inputHook
-  const [score, setScore] = scoreHook
 
   const blankGrid = generateGrid(letterList)
   const paths = createPaths(blankGrid, input)
@@ -44,7 +43,7 @@ const GridWrapper = ({ foundWordsHook, inputHook, scoreHook, letterList, heatMap
 
     if (wordStatus === 'correct' && paths.length > 0) {
       updateFoundWords(foundWords, setFoundWords, input)
-      updateScore(score, setScore, input)
+      updateScore(scoreHook, input)
       updateHeatMap(heatMapHook, paths)
     }
   }

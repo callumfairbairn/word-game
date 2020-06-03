@@ -24,7 +24,8 @@ export const updateFoundWords = (foundWords, setFoundWords, input) => {
   setFoundWords(newFoundWords)
 }
 
-export const updateScore = (score, setScore, input) => {
+export const updateScore = (scoreHook, input) => {
+  const [score, setScore] = scoreHook
   setScore(score + calculateScore(input))
 }
 

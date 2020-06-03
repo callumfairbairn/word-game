@@ -1,17 +1,12 @@
 import React, { useState } from 'react'
 import TimerWrapper from '../Timer/TimerWrapper'
-import GridWrapper from '../Grid/GridWrapper'
-import WordDisplay from '../WordDisplay/WordDisplay'
-import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import { resetInputField } from '../Grid/GridWrapperHelperFunctions'
 import { GAME_STARTING_TIME } from '../../common/constants'
 
-export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning, heatMapHook, possibleWords }) => {
+export const Game = ({ setGameRunning, children }) => {
   const inputHook = useState('')
 
   const [, setInput] = inputHook
-  const [foundWords] = foundWordsHook
-  const [score] = scoreHook
 
   const stopGame = () => {
     setInput('')
@@ -23,9 +18,7 @@ export const Game = ({ foundWordsHook, scoreHook, letterList, setGameRunning, he
     <div className='game'>
       <TimerWrapper endTimerFunction={stopGame} startingTime={GAME_STARTING_TIME} />
       <div className='container-b'>
-        <ScoreDisplay score={score} />
-        <GridWrapper foundWordsHook={foundWordsHook} inputHook={inputHook} scoreHook={scoreHook} letterList={letterList} heatMapHook={heatMapHook} />
-        <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
+        {children(inputHook)}
       </div>
     </div>
   )

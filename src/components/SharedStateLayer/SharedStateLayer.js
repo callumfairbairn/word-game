@@ -3,6 +3,11 @@ import React, { useState } from 'react'
 import { Game } from '../Game/Game'
 import { PostGame } from '../PostGame/PostGame'
 import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
+import WordDisplay from '../WordDisplay/WordDisplay'
+import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
+import GridWrapper from '../Grid/GridWrapper'
+import { HeatMap } from '../HeatMap/HeatMap'
+import { PossibleWordsDisplay } from '../PossibleWordsDisplay/PossibleWordsDisplay'
 
 export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) => {
   const foundWordsHook = useState([])
@@ -14,7 +19,7 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
   const [score, setScore] = scoreHook
   const [heatMap] = heatMapHook
 
-  const startGame = () => {
+  const restartGame = () => {
     setLetterList(generateRandomLetterList())
     setGameRunning(true)
     setFoundWords([])
@@ -25,23 +30,28 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
     <div>
       {
         gameRunning ? (
-          <Game
-            foundWordsHook={foundWordsHook}
-            scoreHook={scoreHook}
-            letterList={letterList}
-            setGameRunning={setGameRunning}
-            heatMapHook={heatMapHook}
-            possibleWords={possibleWords}
-          />
+          <Game setGameRunning={setGameRunning} >
+            {(inputHook) =>
+              <>
+                <ScoreDisplay score={score} />
+                <GridWrapper
+                  foundWordsHook={foundWordsHook}
+                  scoreHook={scoreHook}
+                  heatMapHook={heatMapHook}
+                  inputHook={inputHook}
+                  letterList={letterList}
+                />
+                <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
+              </>
+            }
+          </Game>
         ) : (
-          <PostGame
-            startGame={startGame}
-            score={score}
-            foundWords={foundWords}
-            letterList={letterList}
-            heatMap={heatMap}
-            possibleWords={possibleWords}
-          />
+          <PostGame restartGame={restartGame}>
+            <ScoreDisplay score={score} />
+            <HeatMap letterList={letterList} heatMap={heatMap} />
+            <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
+            <PossibleWordsDisplay foundWords={foundWords} possibleWords={possibleWords} />
+          </PostGame>
         )
       }
     </div>
