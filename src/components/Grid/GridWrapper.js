@@ -12,10 +12,9 @@ import {
   updateScore
 } from './GridWrapperHelperFunctions'
 
-const GridWrapper = ({ foundWords, setFoundWords, score, setScore, heatMap, setHeatMap, inputHook, blankGrid }) => {
+const GridWrapper = ({ foundWords, setFoundWords, score, setScore, heatMap, setHeatMap, input, setInput, blankGrid }) => {
   const dict = require('../../words')
 
-  const [input, setInput] = inputHook
   const [grid, setGrid] = useState(blankGrid)
   const [gridMask, setGridMask] = useState(blankGrid)
 

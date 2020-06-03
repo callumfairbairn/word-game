@@ -15,6 +15,7 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
   const [score, setScore] = useState(0)
   const [gameRunning, setGameRunning] = useState(true)
   const [heatMap, setHeatMap] = useState(generateFreshHeatMapArray())
+  const [input, setInput] = useState('')
 
   const restartGame = () => {
     setLetterList(generateRandomLetterList())
@@ -30,21 +31,19 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
       {
         gameRunning ? (
           <Game setGameRunning={setGameRunning}>
-            {(inputHook) =>
-              <>
-                <ScoreDisplay score={score} />
-                <GridWrapper
-                  foundWords={foundWords}
-                  setFoundWords={setFoundWords}
-                  score={score}
-                  setScore={setScore}
-                  heatMap={heatMap}
-                  setHeatMap={setHeatMap}
-                  inputHook={inputHook}
-                  blankGrid={blankGrid}
-                />
-                <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
-              </>}
+            <ScoreDisplay score={score} />
+            <GridWrapper
+              foundWords={foundWords}
+              setFoundWords={setFoundWords}
+              score={score}
+              setScore={setScore}
+              heatMap={heatMap}
+              setHeatMap={setHeatMap}
+              input={input}
+              setInput={setInput}
+              blankGrid={blankGrid}
+            />
+            <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
           </Game>
         ) : (
           <PostGame restartGame={restartGame}>
