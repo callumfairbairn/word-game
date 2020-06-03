@@ -30,7 +30,7 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
     <div>
       {
         gameRunning ? (
-          <Game setGameRunning={setGameRunning}>
+          <Game setGameRunning={setGameRunning} setInput={setInput}>
             <ScoreDisplay score={score} />
             <GridWrapper
               foundWords={foundWords}

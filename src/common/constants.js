@@ -15,8 +15,8 @@ export const MIN_AND_MAX_OCCURANCES_OF_S = { min: 1, max: 3 }
 
 // Set time on timer at start of game
 export const GAME_STARTING_TIME = {
-  minutes: 2,
-  seconds: 0
+  minutes: 0,
+  seconds: 5
 }
 
 export const POST_GAME_STARTING_TIME = {
