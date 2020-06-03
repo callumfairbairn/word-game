@@ -1,5 +1,6 @@
 import { calculateScore } from '../../functions/ScoreCalculation/calculateScore'
 import { calculateNewHeatMap } from '../../functions/calculateHeatMap/calculateNewHeatMap'
+import { assignLetterStatus } from '../../functions/AssignLetterStatus/assignLetterStatus'
 
 export const resetGridMask = (input, setGridMask, blankGrid) => {
   if (input.length > 0) {
@@ -33,4 +34,8 @@ export const updateHeatMap = (heatMapHook, paths) => {
   const [heatMap, setHeatMap] = heatMapHook
 
   setHeatMap(calculateNewHeatMap(heatMap, paths))
+}
+
+export const drawPathsOnGrid = (gridSetterFunction, blankGrid, paths, wordStatus) => {
+  gridSetterFunction(assignLetterStatus(blankGrid, paths, wordStatus))
 }
