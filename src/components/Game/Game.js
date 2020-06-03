@@ -13,7 +13,7 @@ import {
   resetInputField,
   updateFoundWords, updateHeatMap,
   updateScore
-} from './GameHelperFunctions'
+} from './gameHelperFunctions'
 import TimerWrapper from '../Timer/TimerWrapper'
 import calculateWordStatus from '../../functions/WordValidation/calculateWordStatus'
 import createPaths from '../../functions/PathCreation/createPaths'
