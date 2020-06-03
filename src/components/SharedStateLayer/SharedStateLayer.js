@@ -1,7 +1,5 @@
 import { generateFreshHeatMapArray } from '../../functions/calculateHeatMap/generateFreshHeatMapArray'
 import React, { useState } from 'react'
-import { Game } from '../Game/Game'
-import { PostGame } from '../PostGame/PostGame'
 import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
@@ -9,6 +7,8 @@ import GridWrapper from '../Grid/GridWrapper'
 import { HeatMap } from '../HeatMap/HeatMap'
 import { PossibleWordsDisplay } from '../PossibleWordsDisplay/PossibleWordsDisplay'
 import { generateGrid } from '../../functions/GridGeneration/generateGrid'
+import { resetInputField } from '../Grid/GridWrapperHelperFunctions'
+import TimerWrapper from '../Timer/TimerWrapper'
 
 export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) => {
   const [foundWords, setFoundWords] = useState([])
@@ -19,9 +19,15 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
 
   const restartGame = () => {
     setLetterList(generateRandomLetterList())
-    setGameRunning(true)
     setFoundWords([])
     setScore(0)
+    setGameRunning(true)
+  }
+
+  const stopGame = () => {
+    setInput('')
+    resetInputField()
+    setGameRunning(false)
   }
 
   const blankGrid = generateGrid(letterList)
@@ -30,28 +36,34 @@ export const SharedStateLayer = ({ letterList, setLetterList, possibleWords }) =
     <div>
       {
         gameRunning ? (
-          <Game setGameRunning={setGameRunning} setInput={setInput}>
-            <ScoreDisplay score={score} />
-            <GridWrapper
-              foundWords={foundWords}
-              setFoundWords={setFoundWords}
-              score={score}
-              setScore={setScore}
-              heatMap={heatMap}
-              setHeatMap={setHeatMap}
-              input={input}
-              setInput={setInput}
-              blankGrid={blankGrid}
-            />
-            <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
-          </Game>
+          <div className='game'>
+            <TimerWrapper endTimerFunction={stopGame} gameRunning={gameRunning} />
+            <div className='container-b'>
+              <ScoreDisplay score={score} />
+              <GridWrapper
+                foundWords={foundWords}
+                setFoundWords={setFoundWords}
+                score={score}
+                setScore={setScore}
+                heatMap={heatMap}
+                setHeatMap={setHeatMap}
+                input={input}
+                setInput={setInput}
+                blankGrid={blankGrid}
+              />
+              <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
+            </div>
+          </div>
         ) : (
-          <PostGame restartGame={restartGame}>
-            <ScoreDisplay score={score} />
-            <HeatMap blankGrid={blankGrid} heatMap={heatMap} />
-            <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
-            <PossibleWordsDisplay foundWords={foundWords} possibleWords={possibleWords} />
-          </PostGame>
+          <div className='post-game' data-testid='post-game'>
+            <TimerWrapper endTimerFunction={restartGame} gameRunning={gameRunning} />
+            <div className='container-b'>
+              <ScoreDisplay score={score} />
+              <HeatMap blankGrid={blankGrid} heatMap={heatMap} />
+              <WordDisplay foundWords={foundWords} possibleWords={possibleWords} />
+              <PossibleWordsDisplay foundWords={foundWords} possibleWords={possibleWords} />
+            </div>
+          </div>
         )
       }
     </div>
