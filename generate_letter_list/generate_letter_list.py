@@ -2,6 +2,8 @@ import json
 import logging
 import os
 
+from generation.generate import generate
+
 
 def setup_logging() -> logging.Logger:
     logging.basicConfig(format='[%(asctime)s]:%(message)s')
@@ -34,7 +36,7 @@ def main():
     output_path = '../generated/letter_list.json'
 
     create_folder(folder_path)
-    output = {'letter_list': ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P']}
+    output = {'letter_list': generate()}
     write_output(output_path, output)
 
 
