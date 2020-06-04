@@ -1,4 +1,6 @@
+from constants import DEFAULT_LETTER_LIST
 from generation.generate import generate
+from test_helpers import run_assertion_100_times
 
 
 def is_string(item: str) -> bool:
@@ -35,5 +37,11 @@ class TestGenerate:
         letter_list = generate()
         assert len(letter_list) == 16
         assert all(fits_specification(item) for item in letter_list)
+
+    def test_list_contains_random_letters(self):
+        def assertion():
+            assert generate() != DEFAULT_LETTER_LIST
+
+        run_assertion_100_times(assertion)
 
 
