@@ -26,14 +26,14 @@ def create_folder(folder_path: str):
 
 def write_output(output_path: str, output: dict):
     with open(output_path, 'w') as output_file:
-        logger.info('outputting %s to %s', output, output_path)
+        logger.info(f'outputting letter list to {output_path}')
         json.dump(output, output_file)
         output_file.close()
 
 
 def main():
-    folder_path = '../generated'
-    output_path = '../generated/letter_list.json'
+    folder_path = 'generated'
+    output_path = 'generated/letter_list.json'
 
     create_folder(folder_path)
     output = {'letter_list': generate()}
