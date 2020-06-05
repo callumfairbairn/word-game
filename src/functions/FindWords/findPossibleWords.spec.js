@@ -4,7 +4,7 @@ import { expectArrayToContainInAnyOrder } from '../../testHelpers/ExpectArrayToC
 const dict = require('../../words').words
 
 describe('findPossibleWords', () => {
-  it('returns empty string if input is not the start of any word', () => {
+  it('returns empty list if input is not the start of any word', () => {
     const startOfWord = 'ljkhsdf'
     expectArrayToContainInAnyOrder(findPossibleWords(startOfWord, dict), [])
   })
