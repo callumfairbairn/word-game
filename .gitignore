@@ -29,3 +29,4 @@ generated
 
 # python
 venv
+*.pyc
