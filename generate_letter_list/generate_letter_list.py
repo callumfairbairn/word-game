@@ -3,6 +3,7 @@ import logging
 import os
 
 from generation.generate import generate
+from word_finding.find_words import find_words
 
 
 def setup_logging() -> logging.Logger:
@@ -36,7 +37,12 @@ def main():
     output_path = 'generated/letter_list.json'
 
     create_folder(folder_path)
-    output = {'letter_list': generate()}
+
+    letter_list = generate()
+    dictionary = json.load(open('src/words.json', 'r'))['words']
+    logger.info('Words found in grid: %s', find_words(letter_list, dictionary))
+
+    output = {'letter_list': letter_list}
     write_output(output_path, output)
 
 
