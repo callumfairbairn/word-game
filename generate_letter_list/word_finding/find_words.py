@@ -1,8 +1,11 @@
+import logging
+
 from word_finding.direction_funnction_map import direction_function_map
 from word_finding.find_possible_words import find_possible_words
 
 
-def find_words(letter_list: list, dictionary: list) -> list:
+def find_words(letter_list: list, dictionary: list, logger: logging.Logger) -> list:
+    logger.info('Finding possible words...')
     grid = create_grid(letter_list)
 
     found_words = []
