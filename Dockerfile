@@ -1,10 +1,11 @@
-FROM node:alpine as build
+FROM mhart/alpine-node:11 AS builder
 WORKDIR /app
-COPY package*.json ./
-RUN npm install
 COPY . .
-RUN npm run build
+RUN npm install node-sass@latest
+RUN yarn run build
 
-FROM nginx
-EXPOSE 80
-COPY --from=build /app/build /usr/share/nginx/html
+FROM mhart/alpine-node
+RUN yarn global add serve
+WORKDIR /app
+COPY --from=builder /app/build .
+CMD ["serve", "-p", "80", "-s", "."]
