@@ -8,10 +8,10 @@ format:
 
 test:
 	npm test
-    pytest --ignore=node_modules
+	pytest --ignore=node_modules
 
 docker-build:
-    docker build -t word-game .
+	docker build -t word-game .
 
 docker-run:
-    docker run -it -p 8080:80 word-game
+	docker run -it -p 8080:80 word-game
