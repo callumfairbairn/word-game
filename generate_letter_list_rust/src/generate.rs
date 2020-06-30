@@ -1,7 +1,7 @@
 use crate::constants::{X_DIM, Y_DIM, ALPHABET};
 use rand::Rng;
 
-fn generate_letter_list() -> Vec<char> {
+pub(crate) fn generate_letter_list() -> Vec<char> {
     let mut rng = rand::thread_rng();
     c![ALPHABET[rng.gen_range(0, 26) as usize], for x in 0..(X_DIM * Y_DIM)]
 }
