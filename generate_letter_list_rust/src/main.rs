@@ -1,5 +1,6 @@
 mod std_ext;
 mod generate;
+mod find_words;
 pub mod constants;
 
 #[macro_use(c)]
