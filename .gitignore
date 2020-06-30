@@ -30,3 +30,6 @@ generated
 # python
 venv
 *.pyc
+
+# rust
+generate_letter_list_rust/target
