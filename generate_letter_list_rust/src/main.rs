@@ -1,3 +1,4 @@
+mod create_grid;
 mod std_ext;
 mod generate;
 mod find_words;
@@ -13,6 +14,7 @@ use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
+use crate::generate::generate_letter_list;
 
 #[derive(Deserialize, Debug)]
 struct Dictionary {
@@ -27,6 +29,7 @@ fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<
 }
 
 fn main() {
+    let letter_list = generate_letter_list();
     let dictionary = read_dictionary_from_file("../src/words.json").unwrap();
 
     println!("{:?}", dictionary);
