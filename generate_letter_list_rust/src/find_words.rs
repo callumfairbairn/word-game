@@ -1,40 +1,61 @@
-fn find_possible_words<'a>(start_of_word: &'a str, possible_words: Vec<&'a str>) -> Vec<&'a str> {
-    c![possible_word, for possible_word in possible_words, if possible_word.starts_with(start_of_word)]
+use crate::direction_function_map::{DIRECTIONS, Callback, get_direction_function_map};
+use crate::find_possible_words::find_possible_words;
+use std::collections::HashMap;
+use crate::structs::{Grid, Letter};
+
+fn find_words<'a>(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<&'a str> {
+    let direction_function_map: HashMap<&str, Callback> = get_direction_function_map();
+    let grid: Grid = Grid::new(letter_list);
+    let found_words: Vec<&str> = vec![];
+
+    for row in grid.iter() {
+        for starting_letter in row.iter() {
+            for direction in DIRECTIONS.iter() {
+                let possible_words: Vec<&String> = find_possible_words(&starting_letter.character.to_string()[..], &dictionary);
+                recursively_find_words(vec![starting_letter], &found_words, &possible_words, direction, &grid, &direction_function_map)
+            }
+        }
+    }
+
+    found_words
 }
 
+fn recursively_find_words(
+    current_chain: Vec<&Letter>,
+    found_words: &Vec<&str>,
+    possible_words: &Vec<&String>,
+    direction: &str,
+    grid: &Grid,
+    direction_function_map: &HashMap<&str, Callback>
+) {
+    let current_letter: &&Letter = current_chain.last().unwrap();
+    let next_letter: Option<Letter> = direction_function_map[direction](&current_letter.location, grid);
+    // if next_Letter.is_some() {
+        // if current_chain.contains(next_letter.unwrap()) {
+        //
+        // }
+    // }
+
+}
+
+
 #[cfg(test)]
-mod find_possible_words_tests {
-    use crate::find_words::find_possible_words;
+mod find_words_tests {
+    use crate::find_words::find_words;
 
     #[test]
-    fn returns_empty_if_input_is_not_start_of_any_word() {
-        let start_of_word: &str = "mnkjboj";
-        let possible_words: Vec<&str> = vec!["kafwa"];
+    fn finds_no_words_in_a_letter_list_that_contains_no_words() {
+        let letter_list: Vec<char> = vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+        let dictionary: Vec<String> = vec!["one".to_string(), "two".to_string(), "three".to_string()];
         let expected: Vec<&str> = vec![];
-        assert_eq!(expected, find_possible_words(start_of_word, possible_words))
+        assert_eq!(expected, find_words(letter_list, dictionary))
     }
 
     #[test]
-    fn returns_input_if_input_is_in_list_of_possible_words() {
-        let start_of_word: &str = "jungle";
-        let possible_words: Vec<&str> = vec!["jungle"];
-        let expected: Vec<&str> = vec!["jungle"];
-        assert_eq!(expected, find_possible_words(start_of_word, possible_words))
-    }
-
-    #[test]
-    fn test_returns_all_words_that_start_with_input_start_of_word() {
-        let start_of_word: &str = "catamaran";
-        let possible_words: Vec<&str> = vec!["catamaran", "catamarans"];
-        let expected: Vec<&str> = vec!["catamaran", "catamarans"];
-        assert_eq!(expected, find_possible_words(start_of_word, possible_words))
-    }
-
-    #[test]
-    fn test_does_not_return_words_that_do_not_start_with_input_word() {
-        let start_of_word: &str = "disposed";
-        let possible_words: Vec<&str> = vec!["predisposed", "disposed"];
-        let expected: Vec<&str> = vec!["disposed"];
-        assert_eq!(expected, find_possible_words(start_of_word, possible_words))
+    fn test_finds_a_horizontal_word() {
+        let letter_list: Vec<char> = vec!['J', 'A', 'Z', 'Z', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
+        let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
+        let expected: Vec<&str> = vec!["jazz", "zax"];
+        assert_eq!(expected, find_words(letter_list, dictionary))
     }
 }

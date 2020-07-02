@@ -1,5 +1,6 @@
+mod structs;
+mod direction_function_map;
 mod find_possible_words;
-mod create_grid;
 mod std_ext;
 mod generate;
 mod find_words;

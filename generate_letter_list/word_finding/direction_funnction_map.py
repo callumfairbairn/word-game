@@ -36,6 +36,7 @@ direction_function_map = {
     None
     if location['x'] - 1 < 0
     else grid[location['y']][location['x'] - 1],
+
     'upright': lambda location, grid:
     None
     if location['y'] + 1 >= len(grid)
