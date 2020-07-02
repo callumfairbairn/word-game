@@ -2,7 +2,7 @@ use crate::direction_function_map::{DIRECTIONS, Callback, get_direction_function
 use crate::find_possible_words::find_possible_words;
 use std::collections::HashMap;
 use crate::structs::{Grid, Letter};
-use crate::std_ext::is_letter_in_chain;
+use crate::std_ext::{is_letter_in_chain, convert_chain_to_string};
 
 fn find_words<'a>(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<&'a str> {
     let direction_function_map: HashMap<&str, Callback> = get_direction_function_map();
@@ -35,6 +35,7 @@ fn recursively_find_words(
         let next_letter: Letter = optional_next_letter.unwrap();
         if !is_letter_in_chain(&current_chain, &next_letter) {
             current_chain.push(next_letter.clone());
+            let current_chain_as_string = convert_chain_to_string(&current_chain);
         }
     }
 
