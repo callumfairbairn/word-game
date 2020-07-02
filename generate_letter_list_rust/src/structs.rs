@@ -2,6 +2,11 @@ use std::slice::Iter;
 use crate::constants::{X_DIM, Y_DIM};
 use crate::std_ext::lowercase;
 
+#[derive(Clone)]
+pub(crate) struct Callback{
+    pub function: fn(&Location, &Grid) -> Option<Letter>
+}
+
 #[derive(Eq, Ord, PartialOrd, PartialEq, Clone)]
 pub(crate) struct Location {
     pub(crate) x: i32,

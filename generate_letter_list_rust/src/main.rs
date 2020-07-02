@@ -6,9 +6,11 @@ mod generate;
 mod find_words;
 pub mod constants;
 
+extern crate serde_json;
 #[macro_use(c)]
 extern crate cute;
-extern crate serde_json;
+#[macro_use]
+extern crate lazy_static;
 
 use serde::Deserialize;
 
