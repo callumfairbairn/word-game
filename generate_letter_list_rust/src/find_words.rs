@@ -4,9 +4,9 @@ use std::collections::HashMap;
 use crate::structs::{Grid, Letter};
 use crate::std_ext::{is_letter_in_chain, convert_chain_to_string, is_string_in_vec};
 
-fn find_words(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<String> {
+pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: Vec<String>) -> Vec<String> {
     let direction_function_map: HashMap<&str, Callback> = get_direction_function_map();
-    let grid: Grid = Grid::new(letter_list);
+    let grid: Grid = Grid::new(letter_list.clone());
     let mut found_words: Vec<String> = vec![];
 
     for row in grid.iter() {
@@ -64,7 +64,7 @@ mod find_words_tests {
         let letter_list: Vec<char> = vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let dictionary: Vec<String> = vec!["one".to_string(), "two".to_string(), "three".to_string()];
         let expected: Vec<&str> = vec![];
-        assert_eq!(expected, find_words(letter_list, dictionary))
+        assert_eq!(expected, find_words(&letter_list, dictionary))
     }
 
     #[test]
@@ -72,6 +72,6 @@ mod find_words_tests {
         let letter_list: Vec<char> = vec!['J', 'A', 'Z', 'Z', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
         let expected: Vec<&str> = vec!["jazz", "zax"];
-        assert_eq!(expected, find_words(letter_list, dictionary))
+        assert_eq!(expected, find_words(&letter_list, dictionary))
     }
 }

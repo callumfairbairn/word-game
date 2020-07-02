@@ -18,7 +18,7 @@ pub (crate) fn get_direction_function_map() -> HashMap<&'static str, Callback> {
     [
         ("right", get_right_letter as Callback),
         ("downright", get_downright_letter as Callback),
-        ("down", get_right_letter as Callback),
+        ("down", get_down_letter as Callback),
         ("downleft", get_downleft_letter as Callback),
         ("left", get_left_letter as Callback),
         ("upleft", get_upleft_letter as Callback),
