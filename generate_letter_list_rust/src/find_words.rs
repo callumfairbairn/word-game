@@ -2,18 +2,18 @@ use crate::direction_function_map::{DIRECTIONS, Callback, get_direction_function
 use crate::find_possible_words::find_possible_words;
 use std::collections::HashMap;
 use crate::structs::{Grid, Letter};
-use crate::std_ext::{is_letter_in_chain, convert_chain_to_string};
+use crate::std_ext::{is_letter_in_chain, convert_chain_to_string, is_string_in_vec};
 
-fn find_words<'a>(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<&'a str> {
+fn find_words(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<String> {
     let direction_function_map: HashMap<&str, Callback> = get_direction_function_map();
     let grid: Grid = Grid::new(letter_list);
-    let found_words: Vec<&str> = vec![];
+    let mut found_words: Vec<String> = vec![];
 
     for row in grid.iter() {
         for starting_letter in row.iter() {
             for direction in DIRECTIONS.iter() {
-                let possible_words: Vec<&String> = find_possible_words(&starting_letter.character.to_string()[..], &dictionary);
-                recursively_find_words(vec![starting_letter.clone()], &found_words, &possible_words, direction, &grid, &direction_function_map)
+                let possible_words: Vec<String> = find_possible_words(&starting_letter.character.to_string(), &dictionary);
+                recursively_find_words(&mut vec![starting_letter.clone()], &mut found_words, &possible_words, direction, &grid, &direction_function_map)
             }
         }
     }
@@ -22,9 +22,9 @@ fn find_words<'a>(letter_list: Vec<char>, dictionary: Vec<String>) -> Vec<&'a st
 }
 
 fn recursively_find_words(
-    mut current_chain: Vec<Letter>,
-    found_words: &Vec<&str>,
-    possible_words: &Vec<&String>,
+    mut current_chain: &mut Vec<Letter>,
+    found_words: &mut Vec<String>,
+    possible_words: &Vec<String>,
     direction: &str,
     grid: &Grid,
     direction_function_map: &HashMap<&str, Callback>
@@ -36,6 +36,19 @@ fn recursively_find_words(
         if !is_letter_in_chain(&current_chain, &next_letter) {
             current_chain.push(next_letter.clone());
             let current_chain_as_string = convert_chain_to_string(&current_chain);
+            let new_possible_words = find_possible_words(&current_chain_as_string, possible_words);
+
+            if new_possible_words.len() > 0 {
+                if current_chain_as_string.len() > 2 && is_string_in_vec(&new_possible_words, &current_chain_as_string) {
+                    if !is_string_in_vec(found_words, &current_chain_as_string) {
+                        found_words.push(current_chain_as_string.clone())
+                    }
+                }
+
+                for direction in DIRECTIONS.iter() {
+                    recursively_find_words(&mut current_chain, found_words, &new_possible_words, direction, grid, direction_function_map)
+                }
+            }
         }
     }
 

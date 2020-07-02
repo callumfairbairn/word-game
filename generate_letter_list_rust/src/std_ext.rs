@@ -16,6 +16,13 @@ pub(crate) fn is_letter_in_chain(chain: &Vec<Letter>, next_letter: &Letter) -> b
     false
 }
 
+pub(crate) fn is_string_in_vec(vec: &Vec<String>, string: &String) -> bool {
+    for vec_string in vec.iter() {
+        if vec_string == string { return true }
+    };
+    false
+}
+
 pub(crate) fn convert_chain_to_string(chain: &Vec<Letter>) -> String {
     chain.iter().map(|letter| letter.character.to_string()).collect()
 }
