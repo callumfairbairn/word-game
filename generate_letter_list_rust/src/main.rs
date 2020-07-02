@@ -38,7 +38,10 @@ fn main() {
     let dictionary = read_dictionary_from_file("../src/words.json").unwrap();
     let found_words = find_words(&letter_list, dictionary.words);
 
-    println!("{:?}", letter_list);
+    println!("{} {} {} {}", letter_list[0], letter_list[1], letter_list[2], letter_list[3]);
+    println!("{} {} {} {}", letter_list[4], letter_list[5], letter_list[6], letter_list[7]);
+    println!("{} {} {} {}", letter_list[8], letter_list[9], letter_list[10], letter_list[11]);
+    println!("{} {} {} {}", letter_list[12], letter_list[13], letter_list[14], letter_list[15]);
     println!("{:?}", found_words);
 
 }

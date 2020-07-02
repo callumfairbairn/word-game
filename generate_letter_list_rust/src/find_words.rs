@@ -42,10 +42,12 @@ fn recursively_find_words(
                     }
                 }
 
-                for direction in DIRECTIONS.iter() {
-                    recursively_find_words(&mut current_chain, found_words, &new_possible_words, direction, grid)
+                for new_direction in DIRECTIONS.iter() {
+                    recursively_find_words(&mut current_chain, found_words, &new_possible_words, new_direction, grid)
                 }
             }
+
+            current_chain.pop();
         }
     }
 
@@ -61,7 +63,7 @@ mod find_words_tests {
         let letter_list: Vec<char> = vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let dictionary: Vec<String> = vec!["one".to_string(), "two".to_string(), "three".to_string()];
         let expected: Vec<&str> = vec![];
-        assert_eq!(expected, find_words(&letter_list, dictionary))
+        assert_eq!(find_words(&letter_list, dictionary), expected)
     }
 
     #[test]
@@ -69,6 +71,14 @@ mod find_words_tests {
         let letter_list: Vec<char> = vec!['J', 'A', 'Z', 'Z', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
         let expected: Vec<&str> = vec!["jazz", "zax"];
-        assert_eq!(expected, find_words(&letter_list, dictionary))
+        assert_eq!(find_words(&letter_list, dictionary), expected)
+    }
+
+    #[test]
+    fn test_finds_a_vertical_word() {
+        let letter_list: Vec<char> = vec!['J', 'X', 'X', 'X', 'A', 'X', 'X', 'X', 'Z', 'X', 'X', 'X', 'Z', 'X', 'X', 'X'];
+        let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
+        let expected: Vec<&str> = vec!["jazz", "zax"];
+        assert_eq!(find_words(&letter_list, dictionary), expected)
     }
 }
