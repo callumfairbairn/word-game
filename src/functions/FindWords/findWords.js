@@ -12,7 +12,7 @@ export const findWords = (grid, dict) => {
         const possibleWords = findPossibleWords(startingLetter.letter.toLowerCase(), dict.words)
         recursivelyFindWords([startingLetter], foundWords, possibleWords, newDirection, grid)
         newDirection = nextDirectionMap[newDirection]
-      } while (newDirection !== 'up')
+      } while (newDirection !== 'right')
     })
   })
 

@@ -44,4 +44,9 @@ describe('findWords', () => {
     const grid = generateGrid(['S', 'X', 'X', 'X', 'C', 'X', 'X', 'X', 'R', 'X', 'X', 'X', 'Y', 'X', 'X', 'X'])
     expect(findWords(grid, dict)).toEqual(expect.arrayContaining(['scry', 'cry']))
   })
+
+  it('finds a vertical word', () => {
+    const grid = generateGrid(['J', 'X', 'X', 'X', 'A', 'X', 'X', 'X', 'Z', 'X', 'X', 'X', 'Z', 'X', 'X', 'X'])
+    expect(findWords(grid, dict)).toEqual(expect.arrayContaining(['jazz', 'zax']))
+  })
 })
