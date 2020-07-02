@@ -39,15 +39,6 @@ impl Grid {
     }
 }
 
-impl std::ops::Deref for Grid {
-    type Target = [Vec<Letter>];
-
-    fn deref(&self) -> &Self::Target {
-        let Grid(vec) = self;
-        vec.deref()
-    }
-}
-
 impl std::ops::Index<usize> for Grid {
     type Output = Vec<Letter>;
     fn index(&self, i: usize) -> &Vec<Letter> {
