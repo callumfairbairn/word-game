@@ -1,17 +1,16 @@
 use crate::direction_function_map::{DIRECTIONS, DIRECTION_FUNCTION_MAP};
-use crate::find_possible_words::find_possible_words;
 use crate::structs::{Grid, Letter};
 use crate::std_ext::{convert_chain_to_string};
+use crate::{DICTIONARY, TRIE};
 
-pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: Vec<String>) -> Vec<String> {
+pub(crate) fn find_words(letter_list: &Vec<char>) -> Vec<String> {
     let grid: Grid = Grid::new(letter_list.clone());
     let mut found_words: Vec<String> = vec![];
 
     for row in grid.iter() {
         for starting_letter in row.iter() {
             for direction in DIRECTIONS.iter() {
-                let possible_words: Vec<String> = find_possible_words(&starting_letter.character.to_string(), &dictionary);
-                recursively_find_words(&mut vec![starting_letter.clone()], &mut found_words, &possible_words, direction, &grid)
+                recursively_find_words(&mut vec![starting_letter.clone()], &mut found_words, direction, &grid)
             }
         }
     }
@@ -22,7 +21,6 @@ pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: Vec<String>) -> Ve
 fn recursively_find_words(
     mut current_chain: &mut Vec<Letter>,
     found_words: &mut Vec<String>,
-    possible_words: &Vec<String>,
     direction: &str,
     grid: &Grid,
 ) {
@@ -33,17 +31,16 @@ fn recursively_find_words(
         if !current_chain.contains(&next_letter) {
             current_chain.push(next_letter.clone());
             let current_chain_as_string = convert_chain_to_string(&current_chain);
-            let new_possible_words = find_possible_words(&current_chain_as_string, possible_words);
 
-            if new_possible_words.len() > 0 {
-                if current_chain_as_string.len() > 2 && new_possible_words.contains(&current_chain_as_string) {
+            if TRIE.get(&current_chain_as_string).is_some() {
+                if current_chain_as_string.len() > 2 && DICTIONARY.contains(&current_chain_as_string) {
                     if !found_words.contains(&current_chain_as_string) {
                         found_words.push(current_chain_as_string.clone())
                     }
                 }
 
                 for new_direction in DIRECTIONS.iter() {
-                    recursively_find_words(&mut current_chain, found_words, &new_possible_words, new_direction, grid)
+                    recursively_find_words(&mut current_chain, found_words, new_direction, grid)
                 }
             }
 
@@ -61,24 +58,21 @@ mod find_words_tests {
     #[test]
     fn finds_no_words_in_a_letter_list_that_contains_no_words() {
         let letter_list: Vec<char> = vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
-        let dictionary: Vec<String> = vec!["one".to_string(), "two".to_string(), "three".to_string()];
         let expected: Vec<&str> = vec![];
-        assert_eq!(find_words(&letter_list, dictionary), expected)
+        assert_eq!(find_words(&letter_list), expected)
     }
 
     #[test]
     fn test_finds_a_horizontal_word() {
         let letter_list: Vec<char> = vec!['J', 'A', 'Z', 'Z', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
-        let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
         let expected: Vec<&str> = vec!["jazz", "zax"];
-        assert_eq!(find_words(&letter_list, dictionary), expected)
+        assert_eq!(find_words(&letter_list), expected)
     }
 
     #[test]
     fn test_finds_a_vertical_word() {
         let letter_list: Vec<char> = vec!['J', 'X', 'X', 'X', 'A', 'X', 'X', 'X', 'Z', 'X', 'X', 'X', 'Z', 'X', 'X', 'X'];
-        let dictionary: Vec<String> = vec!["jazz".to_string(), "zax".to_string()];
         let expected: Vec<&str> = vec!["jazz", "zax"];
-        assert_eq!(find_words(&letter_list, dictionary), expected)
+        assert_eq!(find_words(&letter_list), expected)
     }
 }

@@ -1,6 +1,5 @@
 mod structs;
 mod direction_function_map;
-mod find_possible_words;
 mod std_ext;
 mod generate;
 mod find_words;
@@ -20,10 +19,13 @@ use std::io::BufReader;
 use std::path::Path;
 use crate::generate::generate_letter_list;
 use crate::find_words::find_words;
+use radix_trie::Trie;
+use std::iter::FromIterator;
+use std::collections::HashSet;
 
 #[derive(Deserialize, Debug)]
 struct Dictionary {
-    words: Vec<String>,
+    words: HashSet<String>,
 }
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
@@ -33,10 +35,13 @@ fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<
     Ok(dict)
 }
 
+lazy_static! { pub (crate) static ref DICTIONARY: HashSet<String> = read_dictionary_from_file("../src/words.json").unwrap().words; }
+
+lazy_static! { pub (crate) static ref TRIE: Trie<String, ()> = Trie::from_iter(DICTIONARY.iter().map(|x| (x.clone(), ()))); }
+
 fn main() {
     let letter_list = generate_letter_list();
-    let dictionary = read_dictionary_from_file("../src/words.json").unwrap();
-    let found_words = find_words(&letter_list, dictionary.words);
+    let found_words = find_words(&letter_list);
 
     println!("{} {} {} {}", letter_list[0], letter_list[1], letter_list[2], letter_list[3]);
     println!("{} {} {} {}", letter_list[4], letter_list[5], letter_list[6], letter_list[7]);
