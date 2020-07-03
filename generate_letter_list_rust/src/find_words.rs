@@ -1,7 +1,7 @@
 use crate::direction_function_map::{DIRECTIONS, DIRECTION_FUNCTION_MAP};
 use crate::find_possible_words::find_possible_words;
 use crate::structs::{Grid, Letter};
-use crate::std_ext::{is_letter_in_chain, convert_chain_to_string, is_string_in_vec};
+use crate::std_ext::{convert_chain_to_string};
 
 pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: Vec<String>) -> Vec<String> {
     let grid: Grid = Grid::new(letter_list.clone());
@@ -30,14 +30,14 @@ fn recursively_find_words(
     let optional_next_letter: Option<Letter> = (DIRECTION_FUNCTION_MAP[direction].function)(&current_letter.location, grid);
     if optional_next_letter.is_some() {
         let next_letter: Letter = optional_next_letter.unwrap();
-        if !is_letter_in_chain(&current_chain, &next_letter) {
+        if !current_chain.contains(&next_letter) {
             current_chain.push(next_letter.clone());
             let current_chain_as_string = convert_chain_to_string(&current_chain);
             let new_possible_words = find_possible_words(&current_chain_as_string, possible_words);
 
             if new_possible_words.len() > 0 {
-                if current_chain_as_string.len() > 2 && is_string_in_vec(&new_possible_words, &current_chain_as_string) {
-                    if !is_string_in_vec(found_words, &current_chain_as_string) {
+                if current_chain_as_string.len() > 2 && new_possible_words.contains(&current_chain_as_string) {
+                    if !found_words.contains(&current_chain_as_string) {
                         found_words.push(current_chain_as_string.clone())
                     }
                 }
