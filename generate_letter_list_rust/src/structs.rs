@@ -1,6 +1,13 @@
 use std::slice::Iter;
 use crate::constants::{X_DIM, Y_DIM};
 use crate::std_ext::lowercase;
+use serde::Deserialize;
+use std::collections::HashSet;
+
+#[derive(Deserialize, Debug)]
+pub(crate) struct Dictionary {
+    pub words: HashSet<String>,
+}
 
 #[derive(Clone)]
 pub(crate) struct Callback{

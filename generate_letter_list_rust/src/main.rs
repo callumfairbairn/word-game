@@ -11,8 +11,6 @@ extern crate cute;
 #[macro_use]
 extern crate lazy_static;
 
-use serde::Deserialize;
-
 use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
@@ -23,11 +21,7 @@ use radix_trie::Trie;
 use std::iter::FromIterator;
 use std::collections::HashSet;
 use crate::std_ext::get_prefixes;
-
-#[derive(Deserialize, Debug)]
-struct Dictionary {
-    words: HashSet<String>,
-}
+use crate::structs::Dictionary;
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
