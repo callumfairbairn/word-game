@@ -67,27 +67,11 @@ mod find_words_tests {
     use std::panic;
     use std::collections::HashSet;
     use radix_trie::Trie;
-    use crate::read_dictionary_from_file;
-    use std::iter::FromIterator;
-    use crate::std_ext::get_prefixes;
-
-    fn setup() -> (HashSet<String>, Trie<String, ()>) {
-        let dictionary = read_dictionary_from_file("src/test_words.json").unwrap().words;
-        let mut trie: Trie<String, ()> = Trie::from_iter(dictionary.iter().map(|x| (x.clone(), ())));
-        for word in dictionary.iter() {
-            for prefix in get_prefixes(word) {
-                trie.insert(prefix, ());
-            }
-        }
-        (
-            dictionary,
-            trie
-        )
-    }
+    use crate::{setup};
 
     #[test]
     fn run_tests_with_setup() {
-        let (dictionary, trie) = setup();
+        let (dictionary, trie) = setup("src/test_words.json");
         finds_no_words_in_a_letter_list_that_contains_no_words(&dictionary, &trie);
         test_finds_a_horizontal_word(&dictionary, &trie);
         test_finds_a_vertical_word(&dictionary, &trie)

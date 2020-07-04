@@ -36,14 +36,19 @@ fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<
     Ok(dict)
 }
 
-fn main() {
-    let dictionary = read_dictionary_from_file("../src/words.json").unwrap().words;
+fn setup(path: &str) -> (HashSet<String>, Trie<String, ()>) {
+    let dictionary = read_dictionary_from_file(path).unwrap().words;
     let mut trie: Trie<String, ()> = Trie::from_iter(dictionary.iter().map(|x| (x.clone(), ())));
     for word in dictionary.iter() {
         for prefix in get_prefixes(word) {
             trie.insert(prefix, ());
         }
     }
+    (dictionary, trie)
+}
+
+fn main() {
+    let (dictionary, trie) = setup("../src/words.json");
 
     let mut letter_list = generate_letter_list();
     let mut found_words = find_words(&letter_list, &dictionary, &trie);
