@@ -13,6 +13,31 @@ pub(crate) fn convert_chain_to_string(chain: &Vec<Letter>) -> String {
     chain.iter().map(|letter| letter.character.to_string()).collect()
 }
 
+pub (crate) fn get_prefixes(string: &String) -> Vec<String> {
+    let mut vec: Vec<String> = vec![];
+    for i in 0..string.len() {
+        vec.push(string[..(i + 1)].to_string())
+    };
+    vec
+}
+
+#[cfg(test)]
+mod get_prefixes_tests {
+    use crate::std_ext::get_prefixes;
+
+    #[test]
+    fn returns_a_for_a() {
+        let string = "a".to_string();
+        assert_eq!(get_prefixes(&string), vec!["a".to_string()])
+    }
+
+    #[test]
+    fn returns_two_items_for_a_string_length_of_2() {
+        let string = "as".to_string();
+        assert_eq!(get_prefixes(&string), vec!["a".to_string(), "as".to_string()])
+    }
+}
+
 #[cfg(test)]
 mod convert_chain_to_string_tests {
     use crate::structs::{Letter, Location};
