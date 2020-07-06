@@ -17,11 +17,11 @@ use std::io::BufReader;
 use std::path::Path;
 use crate::generate::generate_letter_list;
 use crate::find_words::find_words;
-use radix_trie::Trie;
-use std::iter::FromIterator;
 use std::collections::HashSet;
 use crate::std_ext::get_prefixes;
 use crate::structs::Dictionary;
+use fs_trie::Trie;
+use std::fs;
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
@@ -30,19 +30,36 @@ fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<
     Ok(dict)
 }
 
-fn setup(path: &str) -> (HashSet<String>, Trie<String, ()>) {
-    let dictionary = read_dictionary_from_file(path).unwrap().words;
-    let mut trie: Trie<String, ()> = Trie::from_iter(dictionary.iter().map(|x| (x.clone(), ())));
-    for word in dictionary.iter() {
-        for prefix in get_prefixes(word) {
-            trie.insert(prefix, ());
+fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) {
+    let dictionary;
+    let mut trie;
+    if fs::metadata(path_to_dict).is_ok() {
+        println!("Dictionary found, reading in...");
+        dictionary = read_dictionary_from_file(path_to_dict).unwrap().words;
+    } else {
+        println!("Dictionary not found, panicking...");
+        panic!()
+    }
+
+    if fs::metadata(path_to_trie).is_ok() {
+        println!("Trie found, reading in...");
+        trie = fs_trie::Trie::load_from_file(path_to_trie).expect("Couldn't load trie from file");
+    } else {
+        println!("Trie not found, creating from dictionary...");
+        trie = fs_trie::Trie::default();
+        for word in dictionary.iter() {
+            trie.insert(&word, ());
+            for prefix in get_prefixes(word) {
+                trie.insert(&prefix, ());
+            }
         }
+        trie.save_to_file(path_to_trie).expect("Couldn't save trie to file");
     }
     (dictionary, trie)
 }
 
 fn main() {
-    let (dictionary, trie) = setup("../src/words.json");
+    let (dictionary, trie) = setup("../src/words.json", "trie.bin");
 
     let mut letter_list = generate_letter_list();
     let mut found_words = find_words(&letter_list, &dictionary, &trie);

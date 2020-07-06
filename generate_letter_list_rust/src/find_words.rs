@@ -2,9 +2,9 @@ use crate::direction_function_map::{DIRECTIONS, DIRECTION_FUNCTION_MAP};
 use crate::structs::{Grid, Letter};
 use crate::std_ext::{convert_chain_to_string};
 use std::collections::HashSet;
-use radix_trie::Trie;
+use fs_trie::Trie;
 
-pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: &HashSet<String>, trie: &Trie<String, ()>) -> Vec<String> {
+pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: &HashSet<String>, trie: &Trie<()>) -> Vec<String> {
     let grid: Grid = Grid::new(letter_list.clone());
     let mut found_words: Vec<String> = vec![];
 
@@ -32,7 +32,7 @@ fn recursively_find_words(
     direction: &str,
     grid: &Grid,
     dictionary: &HashSet<String>,
-    trie: &Trie<String, ()>
+    trie: &Trie<()>
 ) {
     let current_letter: &Letter = current_chain.last().unwrap();
     let optional_next_letter: Option<Letter> = (DIRECTION_FUNCTION_MAP[direction].function)(&current_letter.location, grid);
@@ -66,30 +66,30 @@ mod find_words_tests {
     use crate::find_words::find_words;
     use std::panic;
     use std::collections::HashSet;
-    use radix_trie::Trie;
     use crate::{setup};
+    use fs_trie::Trie;
 
     #[test]
     fn run_tests_with_setup() {
-        let (dictionary, trie) = setup("src/test_words.json");
+        let (dictionary, trie) = setup("src/test_words.json", "src/test_trie.bin");
         finds_no_words_in_a_letter_list_that_contains_no_words(&dictionary, &trie);
         test_finds_a_horizontal_word(&dictionary, &trie);
         test_finds_a_vertical_word(&dictionary, &trie)
     }
 
-    fn finds_no_words_in_a_letter_list_that_contains_no_words(dictionary: &HashSet<String>, trie: &Trie<String, ()>) {
+    fn finds_no_words_in_a_letter_list_that_contains_no_words(dictionary: &HashSet<String>, trie: &Trie<()>) {
         let letter_list: Vec<char> = vec!['X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let expected: Vec<&str> = vec![];
         assert_eq!(find_words(&letter_list, dictionary, trie), expected)
     }
 
-    fn test_finds_a_horizontal_word(dictionary: &HashSet<String>, trie: &Trie<String, ()>) {
+    fn test_finds_a_horizontal_word(dictionary: &HashSet<String>, trie: &Trie<()>) {
         let letter_list: Vec<char> = vec!['J', 'A', 'Z', 'Z', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X', 'X'];
         let expected: Vec<&str> = vec!["jazz", "zax"];
         assert_eq!(find_words(&letter_list, dictionary, trie), expected)
     }
 
-    fn test_finds_a_vertical_word(dictionary: &HashSet<String>, trie: &Trie<String, ()>) {
+    fn test_finds_a_vertical_word(dictionary: &HashSet<String>, trie: &Trie<()>) {
         let letter_list: Vec<char> = vec!['J', 'X', 'X', 'X', 'A', 'X', 'X', 'X', 'Z', 'X', 'X', 'X', 'Z', 'X', 'X', 'X'];
         let expected: Vec<&str> = vec!["jazz", "zax"];
         assert_eq!(find_words(&letter_list, dictionary, trie), expected)
