@@ -106,7 +106,7 @@ async fn main() {
         .and(trie_filter.clone())
         .and_then(generate_letter_list_and_words);
 
-    println!("Ready to recieve signal...");
+    println!("Ready to receive signal...");
 
     warp::serve(get_letter_list_and_words)
         .run(([127, 0, 0, 1], 3030))
