@@ -2,7 +2,7 @@ use crate::direction_function_map::{DIRECTIONS, DIRECTION_FUNCTION_MAP};
 use crate::structs::{Grid, Letter};
 use crate::std_ext::{convert_chain_to_string};
 use std::collections::HashSet;
-use fs_trie::Trie;
+use crate::trie::Trie;
 
 pub(crate) fn find_words(letter_list: &Vec<char>, dictionary: &HashSet<String>, trie: &Trie<()>) -> Vec<String> {
     let grid: Grid = Grid::new(letter_list.clone());
@@ -67,7 +67,7 @@ mod find_words_tests {
     use std::panic;
     use std::collections::HashSet;
     use crate::{setup};
-    use fs_trie::Trie;
+    use crate::trie::Trie;
 
     #[test]
     fn run_tests_with_setup() {
