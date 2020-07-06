@@ -28,8 +28,10 @@ use std::collections::{HashSet};
 use crate::std_ext::get_prefixes;
 use crate::structs::Dictionary;
 use std::fs;
-use warp::Filter;
+use warp::{http, Filter};
 use crate::trie::Trie;
+use parking_lot::RwLock;
+use std::sync::Arc;
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
@@ -72,11 +74,28 @@ struct CombinedResult {
     found_words: Vec<String>,
 }
 
+#[derive(Clone)]
+struct LettersAndWords {
+    letter_list: Arc<RwLock<Vec<char>>>,
+    found_words: Arc<RwLock<Vec<String>>>
+
+}
+
+impl LettersAndWords {
+    fn new() -> Self {
+        LettersAndWords {
+            letter_list: Arc::new(RwLock::new(Vec::new())),
+            found_words: Arc::new(RwLock::new(Vec::new())),
+        }
+    }
+}
+
 async fn generate_letter_list_and_words(
     dictionary: HashSet<String>,
-    trie: Trie<()>
+    trie: Trie<()>,
+    letters_and_words: LettersAndWords
 ) -> Result<impl warp::Reply, warp::Rejection> {
-    println!("Request recieved...");
+    println!("Update request recieved...");
     let mut letter_list = generate_letter_list();
     let mut found_words = find_words(&letter_list, &dictionary, &trie);
 
@@ -86,13 +105,25 @@ async fn generate_letter_list_and_words(
         found_words = find_words(&letter_list, &dictionary, &trie);
     };
 
-    let combined_result = CombinedResult{ letter_list, found_words };
+    println!("Found grid with {} words", found_words.len());
+    println!("Writing new letter list and found words");
 
-    println!("Posting result...");
-    Ok(warp::reply::json(&combined_result))
+    letters_and_words.letter_list.write().resize(letter_list.len(), 'a');
+    letters_and_words.letter_list.write().swap_with_slice(&mut letter_list);
+    letters_and_words.found_words.write().resize(found_words.len(), "".to_string());
+    letters_and_words.found_words.write().swap_with_slice(&mut found_words);
+
+    Ok(warp::reply::with_status("Updated letter list and found words", http::StatusCode::CREATED))
 }
 
-
+async fn get_letter_list_and_words(
+    letters_and_words: LettersAndWords
+) -> Result<impl warp::Reply, warp::Rejection> {
+    println!("Get request recieved...");
+    println!("Posting result...");
+    
+    Ok(warp::reply::json(&CombinedResult{ letter_list: letters_and_words.letter_list.read().to_vec(), found_words: letters_and_words.found_words.read().to_vec() }))
+}
 
 #[tokio::main]
 async fn main() {
@@ -101,14 +132,25 @@ async fn main() {
     let dictionary_filter = warp::any().map(move || dictionary.clone());
     let trie_filter = warp::any().map(move || trie.clone());
 
-    let get_letter_list_and_words = warp::get()
+    let letters_and_words = LettersAndWords::new();
+    let letters_and_words_filter = warp::any().map(move || letters_and_words.clone());
+
+    let update = warp::get()
+        .and(warp::path("update"))
         .and(dictionary_filter.clone())
         .and(trie_filter.clone())
+        .and(letters_and_words_filter.clone())
         .and_then(generate_letter_list_and_words);
+
+    let get = warp::get()
+        .and(letters_and_words_filter.clone())
+        .and_then(get_letter_list_and_words);
+
+    let routes = update.or(get);
 
     println!("Ready to receive signal...");
 
-    warp::serve(get_letter_list_and_words)
+    warp::serve(routes)
         .run(([127, 0, 0, 1], 3030))
         .await;
 }
