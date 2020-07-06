@@ -22,16 +22,14 @@ use std::error::Error;
 use std::fs::File;
 use std::io::BufReader;
 use std::path::Path;
-use crate::generate::generate_letter_list;
-use crate::find_words::find_words;
 use std::collections::{HashSet};
-use crate::std_ext::get_prefixes;
-use crate::structs::Dictionary;
 use std::fs;
 use warp::{http, Filter};
+use crate::generate::generate_letter_list;
+use crate::find_words::find_words;
+use crate::std_ext::get_prefixes;
+use crate::structs::{Dictionary, CombinedResult, LettersAndWords};
 use crate::trie::Trie;
-use parking_lot::RwLock;
-use std::sync::Arc;
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
@@ -66,28 +64,6 @@ fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) 
         trie.save_to_file(path_to_trie).expect("Couldn't save trie to file");
     }
     (dictionary, trie)
-}
-
-#[derive(Serialize)]
-struct CombinedResult {
-    letter_list: Vec<char>,
-    found_words: Vec<String>,
-}
-
-#[derive(Clone)]
-struct LettersAndWords {
-    letter_list: Arc<RwLock<Vec<char>>>,
-    found_words: Arc<RwLock<Vec<String>>>
-
-}
-
-impl LettersAndWords {
-    fn new() -> Self {
-        LettersAndWords {
-            letter_list: Arc::new(RwLock::new(Vec::new())),
-            found_words: Arc::new(RwLock::new(Vec::new())),
-        }
-    }
 }
 
 async fn generate_letter_list_and_words(

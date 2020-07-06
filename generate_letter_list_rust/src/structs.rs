@@ -1,12 +1,36 @@
 use std::slice::Iter;
 use crate::constants::{X_DIM, Y_DIM};
 use crate::std_ext::lowercase;
-use serde::Deserialize;
+use serde::{Deserialize, Serialize};
 use std::collections::HashSet;
+use std::sync::Arc;
+use parking_lot::RwLock;
 
 #[derive(Deserialize, Debug)]
 pub(crate) struct Dictionary {
     pub words: HashSet<String>,
+}
+
+#[derive(Serialize)]
+pub struct CombinedResult {
+    pub letter_list: Vec<char>,
+    pub found_words: Vec<String>,
+}
+
+#[derive(Clone)]
+pub struct LettersAndWords {
+    pub letter_list: Arc<RwLock<Vec<char>>>,
+    pub found_words: Arc<RwLock<Vec<String>>>
+
+}
+
+impl LettersAndWords {
+    pub fn new() -> Self {
+        LettersAndWords {
+            letter_list: Arc::new(RwLock::new(Vec::new())),
+            found_words: Arc::new(RwLock::new(Vec::new())),
+        }
+    }
 }
 
 #[derive(Clone)]
