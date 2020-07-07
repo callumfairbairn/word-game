@@ -66,7 +66,7 @@ fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) 
     (dictionary, trie)
 }
 
-async fn generate_letter_list_and_words(
+async fn update_letter_list_and_words(
     dictionary: HashSet<String>,
     trie: Trie<()>,
     letters_and_words: LettersAndWords
@@ -101,14 +101,34 @@ async fn get_letter_list_and_words(
     Ok(warp::reply::json(&CombinedResult{ letter_list: letters_and_words.letter_list.read().to_vec(), found_words: letters_and_words.found_words.read().to_vec() }))
 }
 
+fn initialise_letter_list_and_words(
+    dictionary: HashSet<String>,
+    trie: Trie<()>,
+    letters_and_words: LettersAndWords
+) -> () {
+    let mut letter_list = generate_letter_list();
+    let mut found_words = find_words(&letter_list, &dictionary, &trie);
+
+    while found_words.len() < 200 {
+        println!("{}", found_words.len());
+        letter_list = generate_letter_list();
+        found_words = find_words(&letter_list, &dictionary, &trie);
+    };
+
+    letters_and_words.letter_list.write().resize(letter_list.len(), 'a');
+    letters_and_words.letter_list.write().swap_with_slice(&mut letter_list);
+    letters_and_words.found_words.write().resize(found_words.len(), "".to_string());
+    letters_and_words.found_words.write().swap_with_slice(&mut found_words);
+}
+
 #[tokio::main]
 async fn main() {
     let (dictionary, trie) = setup("../src/words.json", "trie.bin");
+    let letters_and_words = LettersAndWords::new();
+    initialise_letter_list_and_words(dictionary.clone(), trie.clone(), letters_and_words.clone());
 
     let dictionary_filter = warp::any().map(move || dictionary.clone());
     let trie_filter = warp::any().map(move || trie.clone());
-
-    let letters_and_words = LettersAndWords::new();
     let letters_and_words_filter = warp::any().map(move || letters_and_words.clone());
 
     let update = warp::get()
@@ -116,7 +136,7 @@ async fn main() {
         .and(dictionary_filter.clone())
         .and(trie_filter.clone())
         .and(letters_and_words_filter.clone())
-        .and_then(generate_letter_list_and_words);
+        .and_then(update_letter_list_and_words);
 
     let get = warp::get()
         .and(letters_and_words_filter.clone())
