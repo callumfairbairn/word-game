@@ -1,6 +1,5 @@
 import { generateFreshHeatMapArray } from '../../functions/calculateHeatMap/generateFreshHeatMapArray'
 import React, { useState } from 'react'
-import { generateRandomLetterList } from '../../functions/LetterListGeneration/generateRandomLetterList'
 import WordDisplay from '../WordDisplay/WordDisplay'
 import { ScoreDisplay } from '../ScoreDisplay/ScoreDisplay'
 import GridWrapper from '../Grid/GridWrapper'
@@ -8,10 +7,12 @@ import { HeatMap } from '../HeatMap/HeatMap'
 import { PossibleWordsDisplay } from '../PossibleWordsDisplay/PossibleWordsDisplay'
 import { generateGrid } from '../../functions/GridGeneration/generateGrid'
 import {
-  drawPathsOnGrid, resetGridMask,
+  drawPathsOnGrid,
+  resetGridMask,
   resetInput,
   resetInputField,
-  updateFoundWords, updateHeatMap,
+  updateFoundWords,
+  updateHeatMap,
   updateScore
 } from './gameHelperFunctions'
 import TimerWrapper from '../Timer/TimerWrapper'
@@ -19,12 +20,11 @@ import calculateWordStatus from '../../functions/WordValidation/calculateWordSta
 import createPaths from '../../functions/PathCreation/createPaths'
 import { InputField } from '../InputField/InputField'
 
-export const Game = ({ letterList, setLetterList, possibleWords }) => {
+export const Game = ({ letterList, possibleWords, setData, gameRunning, setGameRunning }) => {
   const dict = require('../../words')
 
   const [foundWords, setFoundWords] = useState([])
   const [score, setScore] = useState(0)
-  const [gameRunning, setGameRunning] = useState(true)
   const [heatMap, setHeatMap] = useState(generateFreshHeatMapArray())
   const [input, setInput] = useState('')
 
@@ -52,15 +52,11 @@ export const Game = ({ letterList, setLetterList, possibleWords }) => {
   }
 
   const restartGame = () => {
-    setLetterList(generateRandomLetterList())
-    setFoundWords([])
-    setScore(0)
+    setData(null)
     setGameRunning(true)
   }
 
   const stopGame = () => {
-    setInput('')
-    resetInputField()
     setGameRunning(false)
   }
 

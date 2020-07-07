@@ -93,7 +93,7 @@ async fn async_update_letter_list_and_words(
 ) -> Result<impl warp::Reply, warp::Rejection> {
     println!("Update request recieved...");
     update_letter_list_and_words(dictionary, trie, letters_and_words);
-
+    println!("Updated letter list and found words");
     Ok(warp::reply::with_status("Updated letter list and found words", http::StatusCode::CREATED))
 }
 
