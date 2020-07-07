@@ -142,7 +142,11 @@ async fn main() {
         .and(letters_and_words_filter.clone())
         .and_then(get_letter_list_and_words);
 
-    let routes = update.or(get);
+    let routes = update.or(get)
+        .with(warp::reply::with::header(
+        "Access-Control-Allow-Headers", "Content-Type, Accept"))
+        .with(warp::reply::with::header(
+            "Access-Control-Allow-Origin", "*"));
 
     println!("Ready to receive signal...");
 

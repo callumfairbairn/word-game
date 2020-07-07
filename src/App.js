@@ -1,14 +1,13 @@
 import React, { useState } from 'react'
 import './App.scss'
-import { generateRandomLetterList } from './functions/LetterListGeneration/generateRandomLetterList'
 import { generateGrid } from './functions/GridGeneration/generateGrid'
 import { findWords } from './functions/FindWords/findWords'
 import { Game } from './components/Game/Game'
 
-const App = () => {
+const App = (data) => {
   const dict = require('./words')
 
-  const [letterList, setLetterList] = useState(generateRandomLetterList())
+  const [letterList, setLetterList] = useState(data.data['letter_list'])
 
   const possibleWords = findWords(generateGrid(letterList), dict)
 
