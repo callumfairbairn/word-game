@@ -31,6 +31,12 @@ describe('areLettersAdjacent', () => {
     expect(areLettersAdjacent(letter1, letter2)).toEqual(false)
   })
 
+  it('returns true if letters are diagonally adjacent', () => {
+    const letter1 = { x: 0 , y: 1 }
+    const letter2 = { x: 1 , y: 0 }
+    expect(areLettersAdjacent(letter1, letter2)).toEqual(true)
+  })
+
   it('returns false if letters have the same coordinates', () => {
     const letter1 = { x: 0, y: 0 }
     const letter2 = { x: 2, y: 0 }

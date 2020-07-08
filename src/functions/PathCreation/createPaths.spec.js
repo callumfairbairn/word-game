@@ -116,6 +116,12 @@ describe('pathFindingAlgorithm', () => {
     expect(createPaths(grid, input)).toEqual([])
   })
 
+  it('should not highlight anything in another specific situation', () => {
+    const grid = generateGrid(['X', 'E', 'R', 'E', 'S', 'T', 'S', 'T', 'E', 'A', 'R', 'O', 'H', 'L', 'B', 'X'])
+    const input = 'texes'
+    expect(createPaths(grid, input)).toEqual([])
+  })
+
   it('should remove invalid paths back to source', () => {
     const grid = generateGrid(['A', 'U', 'N', 'E', 'R', 'N', 'G', 'H', 'I', 'U', 'K', 'L', 'M', 'A', 'O', 'P'])
     const input = 'rune'

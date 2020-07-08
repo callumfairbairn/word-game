@@ -21,6 +21,18 @@ const createPaths = (grid, input) => {
 
       const fixedAdjacentLetters = removePreviouslyFoundLetters(adjacentLetters, thisPath)
 
+      if (previousLetters.length > 1) {
+        const fixedPreviousLetters = fixLetter(previousLetters, adjacentLetters)
+        if (fixedPreviousLetters !== previousLetters) {
+          thisPath.pop()
+          if (fixedPreviousLetters.length > 1) {
+            thisPath.push(fixedPreviousLetters)
+          } else {
+            thisPath.push(...fixedPreviousLetters)
+          }
+        }
+      }
+
       if (fixedAdjacentLetters.length === 0) {
         startingLetterValid = false
       } else {
@@ -31,6 +43,7 @@ const createPaths = (grid, input) => {
         }
       }
     }
+
     if (startingLetterValid) {
       const fixedPath = fixPath(thisPath)
       paths.push([...fixedPath])
