@@ -13,8 +13,8 @@ export const ApiLayer = () => {
   }, [gameRunning])
 
   return (
-      <div>
-        {data && <App data={data} setData={setData} gameRunning={gameRunning} setGameRunning={setGameRunning} />}
-      </div>
+    <div>
+      {data && <App data={data} setData={setData} gameRunning={gameRunning} setGameRunning={setGameRunning} />}
+    </div>
   )
 }

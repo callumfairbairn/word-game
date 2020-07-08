@@ -4,8 +4,8 @@ import { Game } from './components/Game/Game'
 import axios from 'axios'
 
 const App = ({ data, setData, gameRunning, setGameRunning }) => {
-  const letterList = data['letter_list']
-  const possibleWords = data['found_words']
+  const letterList = data.letter_list
+  const possibleWords = data.found_words
 
   useEffect(() => {
     if (gameRunning) {
@@ -14,7 +14,7 @@ const App = ({ data, setData, gameRunning, setGameRunning }) => {
   }, [gameRunning])
 
   return (
-    <div className='App'>
+    <div className='App' data-testid='app'>
       <Game
         letterList={letterList}
         possibleWords={possibleWords}
