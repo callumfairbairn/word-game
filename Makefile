@@ -1,7 +1,7 @@
 precommit:
 	npm test
 	npm run lint
-	pytest --ignore=node_modules
+	make -C generate_letter_list_rust precommit
 
 format:
 	npm run lint

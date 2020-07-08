@@ -1,0 +1,2 @@
+precommit:
+	cargo test
