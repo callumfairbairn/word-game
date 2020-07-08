@@ -30,6 +30,8 @@ use crate::find_words::find_words;
 use crate::std_ext::get_prefixes;
 use crate::structs::{Dictionary, CombinedResult, LettersAndWords};
 use crate::trie::Trie;
+use std::time::Instant;
+use crate::constants::{MAXIMUM_GENERATION_TIME, MINIMUM_NUMBER_OF_FOUND_WORDS, MINIMUM_NUMBER_OF_FOUND_WORDS_INITIAL};
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
@@ -69,17 +71,42 @@ fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) 
 fn update_letter_list_and_words(
     dictionary: HashSet<String>,
     trie: Trie<()>,
-    letters_and_words: LettersAndWords
+    letters_and_words: LettersAndWords,
+    initial: bool
 ) -> () {
+    println!("Generating new letter list...");
     let mut letter_list = generate_letter_list();
     let mut found_words = find_words(&letter_list, &dictionary, &trie);
+    let mut longest_list: Vec<char> = vec![];
+    let mut longest_list_found_words: Vec<String> = vec![];
+    let min_number_of_words = if initial {
+        MINIMUM_NUMBER_OF_FOUND_WORDS_INITIAL as usize
+    } else {
+        MINIMUM_NUMBER_OF_FOUND_WORDS as usize
+    };
+    let start_time = Instant::now();
 
-    while found_words.len() < 300 {
-        println!("{}", found_words.len());
+
+    while found_words.len() < min_number_of_words {
+        if start_time.elapsed().as_secs() > MAXIMUM_GENERATION_TIME as u64 {
+            println!("Maximum generation time exceeded, updating with {} found words...", longest_list_found_words.len());
+            letters_and_words.letter_list.write().resize(longest_list.len(), 'a');
+            letters_and_words.letter_list.write().swap_with_slice(&mut longest_list);
+            letters_and_words.found_words.write().resize(longest_list_found_words.len(), "".to_string());
+            letters_and_words.found_words.write().swap_with_slice(&mut longest_list_found_words);
+            return ()
+        }
+
         letter_list = generate_letter_list();
         found_words = find_words(&letter_list, &dictionary, &trie);
+
+        if found_words.len() > longest_list_found_words.len() {
+            longest_list = letter_list.clone();
+            longest_list_found_words = found_words.clone();
+        }
     };
 
+    println!("Found list containing {} words", found_words.len());
     letters_and_words.letter_list.write().resize(letter_list.len(), 'a');
     letters_and_words.letter_list.write().swap_with_slice(&mut letter_list);
     letters_and_words.found_words.write().resize(found_words.len(), "".to_string());
@@ -92,7 +119,7 @@ async fn async_update_letter_list_and_words(
     letters_and_words: LettersAndWords
 ) -> Result<impl warp::Reply, warp::Rejection> {
     println!("Update request recieved...");
-    update_letter_list_and_words(dictionary, trie, letters_and_words);
+    update_letter_list_and_words(dictionary, trie, letters_and_words, false);
     println!("Updated letter list and found words");
     Ok(warp::reply::with_status("Updated letter list and found words", http::StatusCode::CREATED))
 }
@@ -110,7 +137,7 @@ async fn get_letter_list_and_words(
 async fn main() {
     let (dictionary, trie) = setup("../src/words.json", "trie.bin");
     let letters_and_words = LettersAndWords::new();
-    update_letter_list_and_words(dictionary.clone(), trie.clone(), letters_and_words.clone());
+    update_letter_list_and_words(dictionary.clone(), trie.clone(), letters_and_words.clone(), true);
 
     let dictionary_filter = warp::any().map(move || dictionary.clone());
     let trie_filter = warp::any().map(move || trie.clone());

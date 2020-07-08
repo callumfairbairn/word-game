@@ -2,6 +2,9 @@ use std::collections::HashMap;
 
 pub(crate) const X_DIM: i32 = 4;
 pub(crate) const Y_DIM: i32 = 4;
+pub(crate) const MAXIMUM_GENERATION_TIME: i32 = 120;
+pub(crate) const MINIMUM_NUMBER_OF_FOUND_WORDS: i32 = 400;
+pub(crate) const MINIMUM_NUMBER_OF_FOUND_WORDS_INITIAL: i32 = 300;
 
 #[cfg(test)]
 pub(crate) const DEFAULT_LETTERS: [char; 16] = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P'];
