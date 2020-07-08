@@ -1,27 +1,37 @@
-use crate::constants::{X_DIM, Y_DIM, ALPHABET, CONSONANTS, VOWELS};
+use crate::constants::{X_DIM, Y_DIM, CONSONANTS, VOWELS, VOWEL_CHANCE, get_weighted_vowels, get_weighted_consonants};
 use rand::Rng;
-use std::collections::HashSet;
+use std::collections::{HashSet, HashMap};
 use std::iter::FromIterator;
 use rand::rngs::ThreadRng;
 
-fn random_letter(mut rng: ThreadRng) -> char {
-    ALPHABET[rng.gen_range(0, 26) as usize]
+fn get_letter_from(set: &HashMap<char, i32>, mut rng: ThreadRng) -> char {
+    let mut vec: Vec<char> = vec![];
+    for (character, frequency) in set {
+        for _ in 0..frequency.to_owned() {
+            vec.push(character.to_owned())
+        }
+    };
+    vec[rng.gen_range(0, vec.len())]
 }
 
-fn random_vowel(mut rng: ThreadRng) -> char {
-    VOWELS[rng.gen_range(0, 5) as usize]
+fn random_letter(mut rng: ThreadRng, weighted_vowels: &HashMap<char, i32>, weighted_consonants: &HashMap<char, i32>) -> char {
+    let is_vowel = rng.gen_range(0, 100) <= VOWEL_CHANCE;
+    if is_vowel { get_letter_from(weighted_vowels, rng) } else { get_letter_from(weighted_consonants, rng) }
 }
 
 pub(crate) fn generate_letter_list() -> Vec<char> {
+    let weighted_vowels: HashMap<char, i32> = get_weighted_vowels();
+    let weighted_consonants: HashMap<char, i32> = get_weighted_consonants();
+
     let vowels_hash_set: HashSet<char> = HashSet::from_iter(VOWELS.iter().cloned());
     let rng = rand::thread_rng();
     let mut letter_list: Vec<char> = vec![];
 
     for i in 0..(X_DIM * Y_DIM) {
         if letter_list.len() == 0 {
-            letter_list.push(random_letter(rng));
+            letter_list.push(random_letter(rng, &weighted_vowels, &weighted_consonants));
         } else {
-            let letter = random_letter(rng);
+            let letter = random_letter(rng, &weighted_vowels, &weighted_consonants);
             if CONSONANTS.contains(&letter) {
                 let neighbors = get_neighbors(letter_list.clone(), i);
                 let neighbors_hash_set: HashSet<char> = HashSet::from_iter(neighbors.iter().cloned());
@@ -29,7 +39,7 @@ pub(crate) fn generate_letter_list() -> Vec<char> {
                 if intersection.len() > 0 {
                     letter_list.push(letter);
                 } else {
-                    letter_list.push(random_vowel(rng))
+                    letter_list.push(get_letter_from(&weighted_vowels, rng))
                 }
             } else {
                 letter_list.push(letter);

@@ -74,7 +74,7 @@ fn update_letter_list_and_words(
     let mut letter_list = generate_letter_list();
     let mut found_words = find_words(&letter_list, &dictionary, &trie);
 
-    while found_words.len() < 200 {
+    while found_words.len() < 300 {
         println!("{}", found_words.len());
         letter_list = generate_letter_list();
         found_words = find_words(&letter_list, &dictionary, &trie);
