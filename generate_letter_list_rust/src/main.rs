@@ -1,5 +1,3 @@
-#![feature(box_patterns)]
-
 mod trie;
 mod structs;
 mod direction_function_map;
@@ -135,7 +133,7 @@ async fn get_letter_list_and_words(
 
 #[tokio::main]
 async fn main() {
-    let (dictionary, trie) = setup("../src/words.json", "trie.bin");
+    let (dictionary, trie) = setup("src/words.json", "src/trie.bin");
     let letters_and_words = LettersAndWords::new();
     update_letter_list_and_words(dictionary.clone(), trie.clone(), letters_and_words.clone(), true);
 

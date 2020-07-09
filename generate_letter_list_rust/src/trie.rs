@@ -22,7 +22,7 @@
 #![deny(missing_docs)]
 
 use std::fs::OpenOptions;
-use std::io::{self, BufReader, BufWriter};
+use std::io::{BufReader, BufWriter};
 use std::collections::HashMap;
 
 use bincode::{serialize_into, deserialize_from, Infinite};
@@ -55,16 +55,6 @@ impl<V> Trie<V> {
         let mut br = BufReader::new(f);
         match deserialize_from(&mut br, Infinite) {
             Ok(x) => Ok(x),
-            Err(box bincode::ErrorKind::IoError(e)) => {
-                if e.kind() == io::ErrorKind::UnexpectedEof {
-                    return Ok(Trie {
-                        key: None,
-                        children: HashMap::new(),
-                        contents: None,
-                    });
-                }
-                Err(Box::new(bincode::ErrorKind::IoError(e)))
-            }
             Err(e) => Err(e),
         }
     }
