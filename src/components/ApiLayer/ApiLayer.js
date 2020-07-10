@@ -1,6 +1,7 @@
 import App from '../../App'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
+import { HOST_IP_ADDRESS } from '../../common/constants'
 
 export const ApiLayer = () => {
   const [gameRunning, setGameRunning] = useState(true)
@@ -9,7 +10,7 @@ export const ApiLayer = () => {
 
   useEffect(() => {
     if (gameRunning) {
-      axios.get(`http://localhost:3030/${Date.now()}`).then(r => setData(r.data))
+      axios.get(`${HOST_IP_ADDRESS}/${Date.now()}`).then(r => setData(r.data))
     }
   }, [gameRunning])
 

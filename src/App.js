@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import './App.scss'
 import { Game } from './components/Game/Game'
 import axios from 'axios'
+import { HOST_IP_ADDRESS } from './common/constants'
 
 const App = ({ data, setData, gameRunning, setGameRunning }) => {
   const letterList = data.letter_list
@@ -9,7 +10,7 @@ const App = ({ data, setData, gameRunning, setGameRunning }) => {
 
   useEffect(() => {
     if (gameRunning) {
-      axios.get(`http://localhost:3030/update/${Date.now()}`)
+      axios.get(`${HOST_IP_ADDRESS}/update/${Date.now()}`)
     }
   }, [gameRunning])
 
