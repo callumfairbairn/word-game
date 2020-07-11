@@ -11,6 +11,7 @@ export const ApiLayer = () => {
   useEffect(() => {
     if (gameRunning) {
       axios.get(`${HOST_IP_ADDRESS}/${Date.now()}`).then(r => setData(r.data))
+      axios.get(`${HOST_IP_ADDRESS}/update/${Date.now()}`)
     }
   }, [gameRunning])
 
