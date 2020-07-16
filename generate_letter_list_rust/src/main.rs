@@ -30,6 +30,7 @@ use crate::structs::{Dictionary, CombinedResult, LettersAndWords};
 use crate::trie::Trie;
 use std::time::Instant;
 use crate::constants::{MAXIMUM_GENERATION_TIME, MINIMUM_NUMBER_OF_FOUND_WORDS, MINIMUM_NUMBER_OF_FOUND_WORDS_INITIAL};
+use std::sync::Arc;
 
 fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<dyn Error>> {
     let file = File::open(path)?;
@@ -38,7 +39,7 @@ fn read_dictionary_from_file<P: AsRef<Path>>(path: P) -> Result<Dictionary, Box<
     Ok(dict)
 }
 
-fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) {
+fn setup(path_to_dict: &str, path_to_trie: &str) -> (Arc<HashSet<String>>, Arc<Trie<()>>) {
     let dictionary;
     let mut trie;
     if fs::metadata(path_to_dict).is_ok() {
@@ -63,12 +64,12 @@ fn setup(path_to_dict: &str, path_to_trie: &str) -> (HashSet<String>, Trie<()>) 
         }
         trie.save_to_file(path_to_trie).expect("Couldn't save trie to file");
     }
-    (dictionary, trie)
+    (Arc::new(dictionary), Arc::new(trie))
 }
 
 fn update_letter_list_and_words(
-    dictionary: HashSet<String>,
-    trie: Trie<()>,
+    dictionary: Arc<HashSet<String>>,
+    trie: Arc<Trie<()>>,
     letters_and_words: LettersAndWords,
     initial: bool
 ) -> () {
@@ -112,8 +113,8 @@ fn update_letter_list_and_words(
 }
 
 async fn async_update_letter_list_and_words(
-    dictionary: HashSet<String>,
-    trie: Trie<()>,
+    dictionary: Arc<HashSet<String>>,
+    trie: Arc<Trie<()>>,
     letters_and_words: LettersAndWords
 ) -> Result<impl warp::Reply, warp::Rejection> {
     println!("Update request recieved...");
@@ -135,10 +136,10 @@ async fn get_letter_list_and_words(
 async fn main() {
     let (dictionary, trie) = setup("src/words.json", "src/trie.bin");
     let letters_and_words = LettersAndWords::new();
-    update_letter_list_and_words(dictionary.clone(), trie.clone(), letters_and_words.clone(), true);
+    update_letter_list_and_words(Arc::clone(&dictionary), Arc::clone(&trie), letters_and_words.clone(), true);
 
-    let dictionary_filter = warp::any().map(move || dictionary.clone());
-    let trie_filter = warp::any().map(move || trie.clone());
+    let dictionary_filter = warp::any().map(move || Arc::clone(&dictionary));
+    let trie_filter = warp::any().map(move || Arc::clone(&trie));
     let letters_and_words_filter = warp::any().map(move || letters_and_words.clone());
 
     let update = warp::get()
