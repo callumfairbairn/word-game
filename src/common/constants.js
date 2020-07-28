@@ -1,4 +1,4 @@
-export const HOST_IP_ADDRESS = 'http://3.219.205.9'
+export const HOST_IP_ADDRESS = 'http://3.219.205.9:8080'
 
 // Determine size of grid
 export const X_DIM = 4

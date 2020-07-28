@@ -162,6 +162,6 @@ async fn main() {
     println!("Ready to receive signal...");
 
     warp::serve(routes)
-        .run(([0, 0, 0, 0], 80))
+        .run(([0, 0, 0, 0], 8080))
         .await;
 }
