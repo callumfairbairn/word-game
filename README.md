@@ -4,10 +4,10 @@ The object of this game is to find as many words in the grid as possible within 
 
 For example, if the grid looked like this:
 
-T U P I
-B R B H
-I A C E
-P N T S
+T U P I  
+B R B H  
+I A C E  
+P N T S  
 
 the word 'put' would be a valid word, as there is a 'P' which is next to a 'U' which is next to a 'T'. However, the word 'hat' would not be valid, as there is no 'A' next to an 'H', even though there is an 'A' next to a 'T'.
 
