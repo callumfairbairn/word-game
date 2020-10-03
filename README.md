@@ -1,68 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Instructions
 
-## Available Scripts
+The object of this game is to find as many words in the grid as possible within the time limit, where the each letter of the word is adjacent to the letter that preceded it.
 
-In the project directory, you can run:
+For example, if the grid looked like this:
 
-### `npm start`
+T U P I
+B R B H
+I A C E
+P N T S
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+the word 'put' would be a valid word, as there is a 'P' which is next to a 'U' which is next to a 'T'. However, the word 'hat' would not be valid, as there is no 'A' next to an 'H', even though there is an 'A' next to a 'T'.
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Type words in the input field, and press enter to submit them. Letters will highlight on the grid as you type, letting you visualise your input. If there are multiple ways to draw your input on the grid, the highlighting will reflect this. If your word is in the grid and in the dictionary, it will highlight green and increase your score depending on the difficulty and length of the word. The word will also appear in the found words box.
 
-### `npm test`
+If you have entered a word but it is not in the dictionary, the letters will flash red. If your input is not on the board, no letters will be highlighted.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+If your input matches a word that you have previously found, the letters will be highlighted in yellow.
 
-### `npm run build`
+Letters cannot be re-used within a word, meaning the the word 'set' would be valid in the grid above, but not 'sets'.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once the time runs out, you will see a list of all the possible words that can be found in the grid, along with a heat map showing your most used letters in a darker shade of blue.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+Refresh the page at any time to get a new grid and start the game again.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Enjoy!
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify

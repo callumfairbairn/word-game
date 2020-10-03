@@ -6,7 +6,6 @@ import { HOST_IP_ADDRESS } from '../../common/constants'
 export const ApiLayer = () => {
   const [gameRunning, setGameRunning] = useState(true)
   const [data, setData] = useState(undefined)
-  console.log(process.env.NODE_ENV)
 
   useEffect(() => {
     if (gameRunning) {
