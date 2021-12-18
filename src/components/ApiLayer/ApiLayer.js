@@ -1,7 +1,7 @@
-import App from './App'
+import App from '../../App'
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { HOST_IP_ADDRESS } from './common/constants'
+import { HOST_IP_ADDRESS } from '../../common/constants'
 
 export const ApiLayer = () => {
   const [gameRunning, setGameRunning] = useState(true)
