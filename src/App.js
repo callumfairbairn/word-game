@@ -9,8 +9,6 @@ const App = ({ gameRunning, setGameRunning }) => {
   const dict = require('./words.json')
   const letterList = generateRandomLetterList()
   const possibleWords = findWords(generateGrid(letterList), dict)
-  console.log(possibleWords)
-
 
   return (
     <div className='App' data-testid='app'>

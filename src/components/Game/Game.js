@@ -52,6 +52,8 @@ export const Game = ({ letterList, possibleWords, setData, gameRunning, setGameR
   }
 
   const restartGame = () => {
+    setFoundWords([])
+    setScore(0)
     setGameRunning(true)
   }
 
