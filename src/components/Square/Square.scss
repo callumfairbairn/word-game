@@ -1,8 +1,8 @@
 .square {
   margin-bottom: 3px;
   margin-right: 3px;
-  width: 20vh;
-  height: 20vh;
+  width: 15vmin;
+  height: 15vmin;
   background-color: #ff7030;
 
   display: flex;
@@ -11,7 +11,7 @@
 
   .letter {
     color: antiquewhite;
-    font-size: 10vh;
+    font-size: 8vmin;
   }
 }
 
